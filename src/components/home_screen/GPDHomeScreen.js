@@ -11,6 +11,7 @@ class GPDHomeScreen extends Component {
                         <a href="#">Course Information</a>
                         <a href="#">Course Offerings</a>
                         <a href="#">Student Data</a>
+                        <a href="#">Grades</a>
                     </div>
                     </div>
                         <button>Add Student</button>
