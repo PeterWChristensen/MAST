@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class GPDHomeScreen extends Component {
     render() {
@@ -14,7 +15,7 @@ class GPDHomeScreen extends Component {
                         <a href="#">Grades</a>
                     </div>
                     </div>
-                        <button>Add Student</button>
+                        <Link to={{pathname: '/addStudent'}}><button>Add Student</button></Link>
                         <button>Delete All Student Data</button>
                     </div>
         );
