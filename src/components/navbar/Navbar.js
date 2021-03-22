@@ -9,7 +9,7 @@ class Navbar extends React.Component {
     return (
       <nav id="navbar" className="banner">
         <div className="container">
-          <b className="brand-logo">MAST</b>
+          <b id="logo">MAST</b>
           {links}
         </div>
       </nav>

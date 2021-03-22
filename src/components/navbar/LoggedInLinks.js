@@ -4,7 +4,10 @@ import { NavLink } from 'react-router-dom'
 class LoggedInLinks extends React.Component {
   render() {
     return (
-        <button><NavLink to="/">Log Out</NavLink></button>
+      <div className="right">
+          <NavLink to="/"><button id="homeButton" className="navBarButtons">Home</button></NavLink>
+          <NavLink to="/"><button id="logOutButton" className="navBarButtons">Log Out</button></NavLink>
+      </div>
     );
   };
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ModalDialog from './ModalDialogPopUp'
+import ModalDialog from '../modal/ModalWindow'
 
 class AddStudentScreen extends Component {
     constructor(props){
@@ -58,8 +58,8 @@ class AddStudentScreen extends Component {
             <div>
                 {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} /> : null}
                 <div id="addStudentForm">
-                    <h3 id="item_heading">&nbsp;&nbsp;&nbsp;&nbsp;Student Information</h3>
-                    <div id="item_form_container">
+                    <h2 id="addStudentFormHeader">Student Information</h2>
+                    <div>
                         <div className="addStudent_prompt">First Name:</div>
                         <input className="addStudent_input" type="input" />
                         <div className="addStudent_prompt">Last Name:</div>
@@ -70,19 +70,19 @@ class AddStudentScreen extends Component {
                         <input  className="addStudent_input" type="input" />
 
                         <div className="addStudent_prompt">Department:</div>
-                        <select id="departmentSelect" onChange={changeSelectOptionHandler}>
+                        <select id="departmentSelect" className="dropdownSelect" onChange={changeSelectOptionHandler}>
                             <option value="AMS">AMS</option>
                             <option value="BMI">BMI</option>
                             <option value="ESE">ESE</option>
                             <option value="CSE">CSE</option>
                         </select>
                         <div className="addStudent_prompt">Track:</div>
-                        <select id="semesterSelect">
+                        <select id="semesterSelect" className="dropdownSelect">
                             {options}
                         </select>
 
                         <div className="addStudent_prompt">Entry Semester:</div>
-                        <select id="semesterSelect">
+                        <select id="semesterSelect" className="dropdownSelect">
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
@@ -90,7 +90,7 @@ class AddStudentScreen extends Component {
                         </select>
                     </div>
                         <div className="addStudent_prompt">Entry Year:</div>
-                        <select id="entryYearSelect">
+                        <select id="entryYearSelect" className="dropdownSelect">
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
@@ -125,8 +125,8 @@ class AddStudentScreen extends Component {
                             <option value="1990">1990</option>
                         </select>
                         <br></br><br></br>
-                        <button id="addStudentForm_submit_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("add")}>Add Student</button>
-                        <button id="addStudentForm_cancel_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("cancel")}>Cancel</button>
+                        <button id="addStudentForm_submit_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("addStudent")}>Add Student</button>
+                        <button id="addStudentForm_cancel_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("cancelAddStudent")}>Cancel</button>
                 </div>
             </div>
         )
