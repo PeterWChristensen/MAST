@@ -5,9 +5,16 @@ class AddStudentScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
-            selected: "AMS",         //selected is state variable which will hold the value of currently selected dropdown
+            department: "AMS",         //selected is state variable which will hold the value of currently selected dropdown
             showModalDialogPopup: false,
-            modalType: "none"
+            modalType: "none",
+            firstName: "",
+            lastName: "",
+            id: "",
+            email: "",
+            track : "",
+            entrySemester: "",
+            entryYear: ""
         }    
     }
 
@@ -20,11 +27,36 @@ class AddStudentScreen extends Component {
         this.setState({showModalDialogPopup: false});
     }
 
+
     render() {
+
         // Function that will set different values to state variable based on department selected
-        const changeSelectOptionHandler = (event) => { 
-            this.setState({selected: event.target.value}); 
+        const changeDepartmentOptionHandler = (event) => { 
+            this.setState({department: event.target.value}); 
         }; 
+        const changeFirstNameHandler = (event) => { 
+            this.setState({firstName: event.target.value}); 
+        }; 
+        const changeLastNameHandler = (event) => { 
+            this.setState({lastName: event.target.value}); 
+        }; 
+        const changeSBUIDHandler = (event) => { 
+            this.setState({id: event.target.value}); 
+        }; 
+        const changeEmailHandler = (event) => { 
+            this.setState({email: event.target.value}); 
+        }; 
+        const changeTrackOptionHandler = (event) => { 
+            this.setState({track: event.target.value}); 
+        }; 
+        const changeEntrySemesterOptionHandler = (event) => { 
+            this.setState({entrySemester: event.target.value}); 
+        }; 
+        const changeEntryYearOptionHandler = (event) => { 
+            this.setState({entryYear: event.target.value}); 
+        }; 
+
+
         // Different arrays for different dropdowns 
         const ams = [ "Computational Applied Mathematics", "Computational Biology", 
             "Operations Research", "Statistics", "Quantitative Finance"]; 
@@ -39,13 +71,13 @@ class AddStudentScreen extends Component {
         let options = null; 
         
         // Setting Type variable according to dropdown
-        if (this.state.selected === "AMS") { 
+        if (this.state.department === "AMS") { 
             type = ams; 
-        } else if (this.state.selected === "BMI") { 
+        } else if (this.state.department === "BMI") { 
             type =bmi; 
-        } else if (this.state.selected === "ESE") { 
+        } else if (this.state.department === "ESE") { 
             type = ese; 
-        } else if (this.state.selected === "CSE") { 
+        } else if (this.state.department === "CSE") { 
             type = cse; 
         } 
         
@@ -61,28 +93,28 @@ class AddStudentScreen extends Component {
                     <h2 id="addStudentFormHeader">Student Information</h2>
                     <div>
                         <div className="addStudent_prompt">First Name:</div>
-                        <input className="addStudent_input" type="input" />
+                        <input className="addStudent_input" type="input" onChange={changeFirstNameHandler}/>
                         <div className="addStudent_prompt">Last Name:</div>
-                        <input className="addStudent_input" type="input"/>
+                        <input className="addStudent_input" type="input" onChange={changeLastNameHandler}/>
                         <div className="addStudent_prompt">SBU ID:</div>
-                        <input  className="addStudent_input" type="input" />
+                        <input  className="addStudent_input" type="input" onChange={changeSBUIDHandler}/>
                         <div className="addStudent_prompt">Email:</div>
-                        <input  className="addStudent_input" type="input" />
+                        <input  className="addStudent_input" type="input" onChange={changeEmailHandler}/>
 
                         <div className="addStudent_prompt">Department:</div>
-                        <select id="departmentSelect" className="dropdownSelect" onChange={changeSelectOptionHandler}>
+                        <select id="departmentSelect" className="dropdownSelect" onChange={changeDepartmentOptionHandler}>
                             <option value="AMS">AMS</option>
                             <option value="BMI">BMI</option>
                             <option value="ESE">ESE</option>
                             <option value="CSE">CSE</option>
                         </select>
                         <div className="addStudent_prompt">Track:</div>
-                        <select id="semesterSelect" className="dropdownSelect">
+                        <select id="semesterSelect" className="dropdownSelect" onChange={changeTrackOptionHandler}>
                             {options}
                         </select>
 
                         <div className="addStudent_prompt">Entry Semester:</div>
-                        <select id="semesterSelect" className="dropdownSelect">
+                        <select id="semesterSelect" className="dropdownSelect" onChange={changeEntrySemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
@@ -90,7 +122,7 @@ class AddStudentScreen extends Component {
                         </select>
                     </div>
                         <div className="addStudent_prompt">Entry Year:</div>
-                        <select id="entryYearSelect" className="dropdownSelect">
+                        <select id="entryYearSelect" className="dropdownSelect" onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>

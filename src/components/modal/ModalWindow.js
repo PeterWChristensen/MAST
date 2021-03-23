@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 class ModalWindow extends React.Component {  
 
     render() {
+ 
         // Type variable to store modal to display
         let modalContents = null; 
 
@@ -26,7 +27,7 @@ class ModalWindow extends React.Component {
                 <p id="modalDialogMessage">
                 Do you want to add this student?
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Yes</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.hideModalDialogPopUp} >Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
             </div>;
