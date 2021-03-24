@@ -48,6 +48,76 @@
     color:#797979
   }
 
+/*LOGIN SCREEN */
+#loginBanner{
+  position: relative;
+  top: -6%;
+  left: -0.3%;
+  text-align: center;
+  font-size: 40px;
+  height: 50px;
+}
+
+#loginScreen {
+  position: absolute;
+  left: 5%;
+  top: 6.5%;
+  width: 90%;
+  height: 90%;
+  background: rgb(255, 255, 255);
+  font: black;
+  z-index: -1;
+}
+
+#loginBox{
+  position: absolute;
+  left: 5%;
+  top: 15%;
+  width: 50%;
+  height: 70%;
+  background: rgb(216, 216, 216);
+  color: black;
+  z-index: 1;
+}
+
+#loginTextHeading{
+  position: relative;
+  font-size: 50px;
+  top: 70px; 
+  left: 40%;
+}
+
+.loginBoxText{
+  position: relative;
+  font-size: 35px;
+  top: 100px; 
+  left: 5%;
+}
+
+.loginInput{
+  position: relative;
+  font-size: 30px;
+  top: 100px; 
+  left: 5%;
+  margin-top: 2%;
+}
+
+#email{
+  left: 13%;
+}
+
+#loginButton{
+  position: relative;
+  font-size: 30px;
+  top: 130px;
+  left: 72.5%; 
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 /*GPD HOMEPAGE SCREEN */
 #GPDHomepageScreen {
   position: absolute;
