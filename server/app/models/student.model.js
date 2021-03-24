@@ -46,6 +46,12 @@ const Student = sequelize.define("Student", {
     },
     hasGraduated: {
         type: Sequelize.BOOLEAN
+    },
+    email: {
+        type: Sequelize.STRING
+    },
+    departmentID: {
+        type: Sequelize.STRING
     }
 }, { 
     tableName: 'Student',
