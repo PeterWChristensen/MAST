@@ -12,9 +12,9 @@ const papaparseOptions = {
 class ModalWindow extends React.Component {  
     constructor(props){
         super(props)
-        /* These state objects will hold the parsed info from files to be uploaded upon pressing import button */
         this.state = {
             isRedirectToHome: this.props.isRedirectToHome,
+            /* These state objects will hold the parsed info from files to be uploaded upon pressing import button */
             degreeRequirements: "none",
             courseInformation: "none",
             courseOfferings: "none",
@@ -22,6 +22,12 @@ class ModalWindow extends React.Component {
             studentDataCoursePlans: "none",
             grades: "none"
         }
+        this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
+        this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
+        this.handleImportCourseOfferingsFile = this.handleImportCourseOfferingsFile.bind(this);  
+        this.handleImportStudentDataFile = this.handleImportStudentDataFile.bind(this);
+        this.handleImportStudentDataCoursePlansFile = this.handleImportStudentDataCoursePlansFile.bind(this);
+        this.handleImportGradesFile = this.handleImportGradesFile.bind(this);
         this.handleImportDegreeRequirements = this.handleImportDegreeRequirements.bind(this);
         this.handleImportCourseInformation = this.handleImportCourseInformation.bind(this);
         this.handleImportCourseOfferings = this.handleImportCourseOfferings.bind(this);  
@@ -31,30 +37,56 @@ class ModalWindow extends React.Component {
     }
 
     /* Following functions handle data from files */
-    handleImportDegreeRequirements(){
+    handleImportDegreeRequirementsFile(){
         
+    }
+
+    handleImportCourseInformationFile(){
+        
+    }
+
+    handleImportCourseOfferingsFile = function(data, fileInfo) {
+        this.setState({courseOfferings: data});
+    }
+
+    handleImportStudentDataFile = function(data, fileInfo) {
+        this.setState({studentData: data});
+    }
+
+    handleImportStudentDataCoursePlansFile = function(data, fileInfo) {
+        this.setState({studentDataCoursePlans: data});
+    }
+
+    handleImportGradesFile = function(data, fileInfo) {
+        this.setState({grades: data});
+    }
+    
+
+    /* Following functions upload data to the database */
+    handleImportDegreeRequirements(){
+    
     }
 
     handleImportCourseInformation(){
         
     }
 
-    handleImportCourseOfferings = function(data, fileInfo) {
-        this.setState({courseOfferings: data});
+    handleImportCourseOfferings(){
+
     }
 
-    handleImportStudentData = function(data, fileInfo) {
-        this.setState({studentData: data});
+    handleImportStudentData(){
+
     }
 
-    handleImportStudentDataCoursePlans = function(data, fileInfo) {
-        this.setState({studentDataCoursePlans: data});
+    handleImportStudentDataCoursePlans() {
+
     }
 
-    handleImportGrades = function(data, fileInfo) {
-        this.setState({grades: data});
+    handleImportGrades() {
+
     }
-    
+
     render() {
  
         // Type variable to store modal to display
@@ -67,7 +99,7 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     Add file import for pdf
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportDegreeRequirements, this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
@@ -79,7 +111,7 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     Add file import for XML/JSON
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseInformation, this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
@@ -91,12 +123,12 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     <CSVReader
                         label="Choose file to import: "
-                        onFileLoaded={this.handleImportCourseOfferings}
+                        onFileLoaded={this.handleImportCourseOfferingsFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
                 <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
+                <button className="modalButton" modal="close" onClick={this.handleImportCourseOfferings, this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importStudentData"){
@@ -106,14 +138,14 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     <CSVReader
                         label="Choose student profile file to import: "
-                        onFileLoaded={this.handleImportStudentData}
+                        onFileLoaded={this.handleImportStudentDataFile}
                         parserOptions={papaparseOptions}/>
                     <CSVReader
                         label="Choose student course plan file to import: "
-                        onFileLoaded={this.handleImportStudentDataCoursePlans}
+                        onFileLoaded={this.handleImportStudentDataCoursePlansFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportStudentData, this.handleImportStudentDataCoursePlans, this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
@@ -125,10 +157,10 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     <CSVReader
                         label="Choose file to import: "
-                        onFileLoaded={this.handleImportGrades}
+                        onFileLoaded={this.handleImportGradesFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportGrades, this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;

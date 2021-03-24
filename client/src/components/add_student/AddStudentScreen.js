@@ -7,7 +7,7 @@ class AddStudentScreen extends Component {
         super(props)
         this.state = {
             isRedirectToHome: true,
-            department: "AMS",         //selected is state variable which will hold the value of currently selected dropdown
+            department: "AMS",         
             showModalDialogPopup: false,
             modalType: "none",
             firstName: "",
