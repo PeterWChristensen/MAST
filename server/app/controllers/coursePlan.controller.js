@@ -1,5 +1,5 @@
 const db = require("../models");
-const CoursePlan = db.coursePlans;
+const CoursePlan = db.coursePlan;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new CoursePlan
@@ -20,6 +20,8 @@ exports.create = (req, res) => {
     };
   
     // Save CoursePlan in the database
+    console.log("CoursePlan is==")
+    console.log(coursePlan);
     CoursePlan.create(coursePlan)
       .then(data => {
         res.send(data);

@@ -7,17 +7,15 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false  
       },
       courseOfferingID: {
-        type: Sequelize.STRING(45),
+        type: Sequelize.STRING,
         primaryKey: true,
         allowNull: false  
       },
       grade: {
-        type: Sequelize.STRING(2)
+        type: Sequelize.STRING
       }
-  }, { 
-      tableName: 'CoursePlan',
-      timestamps: false
-  });
-    
+
+    });
+  
     return CoursePlan;
   };

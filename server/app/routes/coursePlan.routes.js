@@ -1,19 +1,19 @@
 module.exports = app => {
-    const coursePlans = require("../controllers/coursePlan.controller.js");
+    const coursePlan = require("../controllers/coursePlan.controller.js");
   
     var router = require("express").Router();
   
     // Create a new coursePlan
-    router.post("/", coursePlans.create);
+    router.post("/", coursePlan.create);
   
     // Retrieve all Tutorials
-    router.get("/", coursePlans.findAll);
+    router.get("/", coursePlan.findAll);
   
     // Retrieve a single Tutorial with id
-    router.get("/:id", coursePlans.findOne);
+    router.get("/:id", coursePlan.findOne);
   
     // Update a Tutorial with id
-    router.put("/:id", coursePlans.update);
+    router.put("/:id", coursePlan.update);
   
-    app.use('/importGrade', router);
+    app.use('/', router);
   };

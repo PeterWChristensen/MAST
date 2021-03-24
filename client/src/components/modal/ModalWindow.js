@@ -122,10 +122,43 @@ class ModalWindow extends React.Component {
 
     }
 
+
     handleImportGrades() {
+        this.state.grades.forEach(function (info) {
 
+          
+            let offeringCourseID = info.department + info.course_num;
+            let courseOfferingIDNum = offeringCourseID + info.semester + info.year + info.section;
+            console.log("courseOfferingIDNum& studentID=");
+            console.log(courseOfferingIDNum);
+            console.log(info.sbu_id);
+            console.log(info.grade);
+            var data = {
+                studentID: info.sbu_id,
+                courseOfferingID: courseOfferingIDNum,
+                grade: info.grade
+            };
+            console.log("Before create service");            
+            GradeService.create(data)
+            .then(response => {
+                this.setState({
+                    studentID: response.data.studentID,
+                    courseOfferingID: response.data.courseOfferingID,
+                    grade: response.data.grade
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+                console.log("Error create service");
+            });
+    
+
+            //actually after this. I need to update courseOffering with all the new info such as section etc.
+        });
+
+        this.props.hideModalDialogPopUp();
     }
-
     render() {
  
         // Type variable to store modal to display
@@ -199,7 +232,7 @@ class ModalWindow extends React.Component {
                         onFileLoaded={this.handleImportGradesFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportGrades, this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportGrades} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;

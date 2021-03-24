@@ -28,7 +28,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   
   db.courseOffering = require("./courseOffering.model.js")(sequelize, Sequelize);
 
-  db.coursePlans = require("./coursePlan.model.js")(sequelize, Sequelize);
+  db.coursePlan = require("./coursePlan.model.js")(sequelize, Sequelize);
 
 
   module.exports = db;
