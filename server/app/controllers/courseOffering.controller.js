@@ -10,9 +10,6 @@ exports.create = (req, res) => {
         return;
     }
 
-    console.log(req.body);
-    console.log("here");
-
     const courseOffering = {
         courseOfferingID: req.body.courseOfferingID,
         courseID: req.body.courseID,
@@ -24,6 +21,7 @@ exports.create = (req, res) => {
         endTime: req.body.endTime
     };
 
+    console.log(courseOffering);
     const newCourseOffering = CourseOffering.create(courseOffering)
         .then(data => {
             res.send(newCourseOffering);

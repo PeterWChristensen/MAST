@@ -11,7 +11,12 @@ module.exports = (sequelize, Sequelize) => {
     departmentName: {
       type: Sequelize.STRING(45)
     }
-  });
+  
+}, { 
+  tableName: 'Department',
+  timestamps: false
+});
+
 
   return Department;
 };

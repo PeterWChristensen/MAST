@@ -14,8 +14,10 @@ module.exports = (sequelize, Sequelize) => {
       grade: {
         type: Sequelize.STRING(2)
       }
-
-    });
-  
+  }, { 
+      tableName: 'CoursePlan',
+      timestamps: false
+  });
+    
     return CoursePlan;
   };

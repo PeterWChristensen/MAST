@@ -2,20 +2,20 @@
 module.exports = (sequelize, Sequelize) => {
     const Course = sequelize.define("Course", {
       courseID: {
-      type: Sequelize.STRING(6),
+      type: Sequelize.STRING,
       primaryKey: true,
       allowNull: false,
       unique: true
     },      
       departmentID: {
-      type: Sequelize.STRING(3),
+      type: Sequelize.STRING,
       allowNull: false,
     },
       name: {
-        type: Sequelize.STRING(45)
+        type: Sequelize.STRING
     },
       description: {
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING
     },
       credit: {
         type: Sequelize.INTEGER
@@ -23,7 +23,9 @@ module.exports = (sequelize, Sequelize) => {
       courseNum: {
         type: Sequelize.INTEGER
     }
-    });
-  
+}, { 
+      tableName: 'Course',
+      timestamps: false
+});
     return Course;
-  };
+};

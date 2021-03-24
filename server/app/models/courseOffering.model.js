@@ -8,7 +8,11 @@ const CourseOffering = sequelize.define("CourseOffering", {
     },
     courseID: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'Course',
+            key: "courseID"
+        }
     },
     semester: {
         type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
