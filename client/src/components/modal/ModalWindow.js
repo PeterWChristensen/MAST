@@ -187,6 +187,17 @@ class ModalWindow extends React.Component {
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
         }
+        else if(this.props.modalType === "deleteAllStudents"){
+            modalContents =
+            <div className="modal" id="deleteAllStudents" header="Cancel"  >
+                <p id="modalDialogMessage">
+                Delete all students?
+                <br></br><br></br></p>
+                <Link to="/"><button className="modalButton" onClick={this.props.deleteAllStudents}>Yes</button></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
+            </div>
+        }
         return (  
         <div>
             <div id = "modal_background">

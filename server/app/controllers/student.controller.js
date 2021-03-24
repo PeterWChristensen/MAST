@@ -38,3 +38,20 @@ exports.create = (req, res) => {
         });
     
 };
+
+exports.deleteAll = (req, res) => {
+    Student.destroy({
+        where: {},
+        truncate: false
+    })
+    .then(nums => {
+        res.send({message: `${nums} All students sucessfully deleted!`});
+        console.log("All students deleted")
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "An error occurred while deleting all students"
+        });
+    });
+};

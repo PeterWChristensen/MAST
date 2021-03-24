@@ -3,7 +3,9 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    router.post("/", student.create);
+    router.post("/addStudent", student.create);
 
-    app.use('/addStudent', router);
+    router.delete("/", student.deleteAll);
+
+    app.use('/', router);
 }

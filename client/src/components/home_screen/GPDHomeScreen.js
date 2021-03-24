@@ -21,10 +21,22 @@ class GPDHomeScreen extends Component {
         this.setState({showModalDialogPopup: false});
     }
 
+    deleteAllStudents() {
+        StudentService.deleteAll()
+        .then(response => {
+            console.log(response.data);
+            this.setState({showModalDialogPopup: false});
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+
+
     render() {
         return (
             <div>
-                 {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} /> : null} 
+                 {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} deleteAllStudents={this.deleteAllStudents.bind(this)}/> : null} 
                 <div id="GPDHomepageScreen">
                 <div class="dropdown">
                     <button class="dropbtn">Import</button>
@@ -37,7 +49,7 @@ class GPDHomeScreen extends Component {
                     </div>
                     </div>
                         <a href='/addStudent'><Link to={{pathname: '/addStudent'}}><button className="GPDHomepageButton">Add Student</button></Link></a>
-                        <button className="GPDHomepageButton">Delete All Student Data</button>
+                        <button className="GPDHomepageButton" onClick={() => this.showModalDialogPopUp("deleteAllStudents")}> Delete All Student Data</button>
                 </div>
             </div>
         );
