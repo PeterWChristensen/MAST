@@ -1,27 +1,37 @@
-// In our project, we dont need this bc we have our teble already in DB. Sequelize supports all of CRUD functions. 
 module.exports = (sequelize, Sequelize) => {
-    const CourseOffering = sequelize.define("CourseOffering", {
-      courseOfferingID: {
-        type: Sequelize.STRING(45),
+const CourseOffering = sequelize.define("CourseOffering", {
+    courseOfferingID: {
+        type: Sequelize.STRING,
         primaryKey: true,
         allowNull: false,
         unique: true
-  
-      },
-      courseID: {
-      type: Sequelize.STRING(6),
-      allowNull: false,
-    },      
-      semester: {
-      type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2'),
     },
-      year: {
+    courseID: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    semester: {
+        type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
+    },
+    year: {
         type: Sequelize.INTEGER
     },
-      section: {
-        type: Sequelize.STRING(3)
+    section: {
+        type: Sequelize.STRING
+    },
+    day: {
+        type: Sequelize.STRING
+    },
+    startTime: {
+        type: Sequelize.STRING
+    },
+    endTime: {
+        type: Sequelize.STRING
     }
-    });
+}, { 
+    tableName: 'CourseOffering',
+    timestamps: false
+});
   
     return CourseOffering;
-  };
+};
