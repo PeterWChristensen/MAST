@@ -1,7 +1,6 @@
 import React from 'react';    
 import { Link } from 'react-router-dom';
 import CSVReader from "react-csv-reader";
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import CourseOfferingsService from "../../services/courseOfferings.service";
 
 const papaparseOptions = {
@@ -14,7 +13,6 @@ class ModalWindow extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            isRedirectToHome: this.props.isRedirectToHome,
             /* These state objects will hold the parsed info from files to be uploaded upon pressing import button */
             degreeRequirements: "none",
             courseInformation: "none",
@@ -95,7 +93,6 @@ class ModalWindow extends React.Component {
                 startTime: startTimeString,
                 endTime: endTimeString
             };
-
             CourseOfferingsService.create(data)
             .then(response => {
                 this.setState({
@@ -114,6 +111,7 @@ class ModalWindow extends React.Component {
                 console.log(e);
             });
         });
+        this.props.hideModalDialogPopUp();
     }
 
     handleImportStudentData(){
@@ -167,9 +165,9 @@ class ModalWindow extends React.Component {
                         onFileLoaded={this.handleImportCourseOfferingsFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseOfferings} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button className="modalButton" modal="close" onClick={this.handleImportCourseOfferings, this.props.hideModalDialogPopUp} >Cancel</button>    
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importStudentData"){
