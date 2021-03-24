@@ -1,68 +1,37 @@
 const db = require("../models");
-const CourseOffering = db.courseOfferings;
+const CourseOffering = db.courseOffering;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new courseOffering
 exports.create = (req, res) => {
-    // Validate request
-    if (!req.body.courseOfferingID  ) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
+    if (!req.body.courseOfferingID) {
+        res.status(400).send({
+            message: "CourseOfferingID must be specified!"
+        });
+        return;
     }
-  
-    // Create a CourseOffering
+
+    console.log(req.body);
+    console.log("here");
+
     const courseOffering = {
-      courseOfferingID: req.body.courseOfferingID,
-      courseID: req.body.courseID,
-      semester: req.body.semester,
-      year: req.body.year,
-      section: req.body.section
-    
+        courseOfferingID: req.body.courseOfferingID,
+        courseID: req.body.courseID,
+        semester: req.body.semester,
+        year: req.body.year,
+        section: req.body.section,
+        day: req.body.day,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime
     };
-  
-    // Save CourseOffering in the database
-    CourseOffering.create(courseOffering)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the CourseOffering."
-        });
-      });
-  };
 
-// Retrieve all CourseOffering from the database.
-exports.findAll = (req, res) => {
-    const courseOfferingID = req.query.courseOfferingID;
-    var condition = courseOfferingID ? { courseOfferingID: { [Op.like]: `%${courseOfferingID}%` } } : null;
-  
-    CourseOffering.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving courseOfferingID."
+    const newCourseOffering = CourseOffering.create(courseOffering)
+        .then(data => {
+            res.send(newCourseOffering);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Error has occured while importing Course Offering"
+            });
         });
-      });
-  };
-
-// Find a single courseOfferingID with an id
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-  
-    CourseOffering.findByPk(id)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving CourseOffering with id=" + id
-        });
-      });
-  };
+    
+};
