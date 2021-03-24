@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CSVReader from "react-csv-reader";
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import CourseOfferingsService from "../../services/courseOfferings.service";
 
 const papaparseOptions = {
   header: true,
@@ -73,7 +74,46 @@ class ModalWindow extends React.Component {
     }
 
     handleImportCourseOfferings(){
+        this.state.courseOfferings.forEach(function (offering) {
 
+            let timeslot = offering.timeslot;
+            let timeslotSplit = timeslot.split(' ');
+            let timeSplit = timeslotSplit[1].split('-');
+            let dayString = timeslotSplit[0];
+            let startTimeString = timeSplit[0];
+            let endTimeString = timeSplit[1];
+            
+            let offeringCourseID = offering.department + offering.course_num;
+            let courseOfferingIDNum = offeringCourseID + offering.semester + offering.year + offering.section;
+            var data = {
+                courseOfferingID: courseOfferingIDNum,
+                courseID: offeringCourseID,
+                semester: offering.semester,
+                year: offering.year,
+                section: offering.section,
+                day: dayString,
+                startTime: startTimeString,
+                endTime: endTimeString
+            };
+
+            CourseOfferingsService.create(data)
+            .then(response => {
+                this.setState({
+                    courseOfferingID: response.data.courseOfferingID,
+                    courseID: response.data.courseID,
+                    semester: response.data.semester,
+                    year: response.year,
+                    section: response.section, 
+                    day: response.day,
+                    startTime: response.startTime,
+                    endTime: response.endTime
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        });
     }
 
     handleImportStudentData(){
