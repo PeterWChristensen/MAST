@@ -53,6 +53,7 @@ class ModalWindow extends React.Component {
 
     handleImportGrades = function(data, fileInfo) {
         this.setState({grades: data});
+        console.log(data)
     }
     
     render() {
