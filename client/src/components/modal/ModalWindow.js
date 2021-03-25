@@ -343,7 +343,7 @@ class ModalWindow extends React.Component {
 
         if(this.props.modalType === "importDegreeRequirements"){
             modalContents =
-            <div className="modal" id="modalDegreeRequirements" header="Import" >
+            <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
                     
@@ -403,7 +403,7 @@ class ModalWindow extends React.Component {
                             <option value="1991">1991</option>
                             <option value="1990">1990</option>
                         </select>
-                    </p><br></br>
+                    </p>
                     <p>Select one or all departments to scrape: 
                     <select id="scrapeCourseInfoDepartmentSelection" className="dropdownSelect" onChange={selectDepartmentToParseCourseInfoHandler}>
                             {optionsForDepartment}
@@ -418,11 +418,11 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "importCourseOfferings"){
             modalContents =
-            <div className="modal" id="modalCourseOfferings" header="Import" >
+            <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
-                    <p>Choose file to import: </p> <br></br>
                     <CSVReader
+                        label="Choose file to import: "
                         onFileLoaded={this.handleImportCourseOfferingsFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
@@ -433,18 +433,15 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "importStudentData"){
             modalContents =
-            <div className="modal" id="modalStudentData" header="Import" >
+            <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
-                    <p>Choose student profile file to import:</p>
-                    <br></br>
                     <CSVReader
+                        label="Choose student profile file to import: "
                         onFileLoaded={this.handleImportStudentDataFile}
                         parserOptions={papaparseOptions}/>
-                    <br></br>
-                    <p>Choose student course plan file to import:</p>
-                    <br></br>
                     <CSVReader
+                        label="Choose student course plan file to import: "
                         onFileLoaded={this.handleImportStudentDataCoursePlansFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
@@ -455,12 +452,11 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "importGrades"){
             modalContents =
-            <div className="modal" id="modalGrades" header="Import" >
+            <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
-                    <p>Choose file to import: </p>
-                    <br></br>
                     <CSVReader
+                        label="Choose file to import: "
                         onFileLoaded={this.handleImportGradesFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
@@ -471,8 +467,7 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "addStudent"){
             modalContents =
-            <div className="modal" id="modalAddStudent" header="Add" >
-                <br></br>
+            <div className="modal" id="addStudent" header="Add" >
                 <p id="modalDialogMessage">
                 Do you want to add this student?
                 <br></br><br></br></p>
@@ -483,8 +478,7 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "cancelAddStudent"){
             modalContents =
-            <div className="modal" id="modalCancelAddStudent" header="Cancel"  >
-                <br></br>
+            <div className="modal" id="cancelAddStudent" header="Cancel"  >
                 <p id="modalDialogMessage">
                 Cancel adding student?
                 <br></br><br></br></p>
@@ -495,11 +489,10 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "deleteAllStudents"){
             modalContents =
-            <div className="modal" id="modalDeleteAllStudents" header="Cancel"  >
-                <br></br><br></br><br></br>
+            <div className="modal" id="deleteAllStudents" header="Cancel"  >
                 <p id="modalDialogMessage">
                 Delete all students?
-                </p><br></br><br></br>
+                <br></br><br></br></p>
                 <Link to="/"><button className="modalButton" onClick={this.props.deleteAllStudents}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
