@@ -31,7 +31,8 @@ class ModalWindow extends React.Component {
             grades: "none",
             departmentToParse: "AMS, BMI, CSE, ESE",
             departmentToParseSemester: "Fall",
-            departmentToParseYear: "2021"
+            departmentToParseYear: "2021",
+            courseInfoFile: null
         }
         this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
         this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
@@ -80,6 +81,10 @@ class ModalWindow extends React.Component {
     
     }
 
+    onFileChange = event => {
+        this.setState({courseInfoFile: event.target.files[0]});
+    }
+
     handleImportCourseInformation(){
         var department = [];
         /* Get departments to look for from user specification */
@@ -94,6 +99,13 @@ class ModalWindow extends React.Component {
         }
         console.log(department);
         /* Search file for each department in the array */
+
+        var content = " ";
+        let fileReader = new FileReader();
+        fileReader.readAsText(this.state.courseInfoFile);
+        fileReader.onloadend = function(e) {
+            content = fileReader.result;
+        }
 
 
         this.props.hideModalDialogPopUp();
@@ -287,7 +299,7 @@ class ModalWindow extends React.Component {
                 <p id="modalDialogMessage">
                     <br></br>
                     Choose .txt file to import:</p><br></br>
-                    <input type="file" accept=".txt" id="scrapeCourseInfoFileButton"/>
+                    <input type="file" accept=".txt" id="scrapeCourseInfoFileButton" onChange={this.onFileChange}/>
                     <br></br><br></br>
                     <p>Specify semester/year:
                         <select id="semesterSelectCourseScrape" className="dropdownSelect" onChange={changeSemesterOptionHandler}>
