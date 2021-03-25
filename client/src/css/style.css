@@ -262,8 +262,6 @@ background-color: #343434;
   position: absolute;
   top: 29%;
   left: 36%;
-  width: 370px; 
-  height: 250px; 
   z-index: 10;
   background-color: #ffffff;
   border: #000000;
@@ -284,8 +282,44 @@ background-color: #343434;
   padding: 5px;
 }
 
+#modalDegreeRequirements{
+  width: 400px; 
+  height: 250px; 
+}
+
 #modalCourseInfo{
-  width: 400px;
+  width: 440px; 
+  height: 300px; 
+}
+
+#modalCourseOfferings{
+  width: 400px; 
+  height: 250px; 
+}
+
+#modalStudentData{
+  width: 400px; 
+  height: 310px;
+}
+
+#modalGrades{
+  width: 400px; 
+  height: 250px;
+}
+
+#modalAddStudent{
+  width: 400px; 
+  height: 150px;
+}
+
+#modalCancelAddStudent{
+  width: 400px; 
+  height: 150px;
+}
+
+#modalDeleteAllStudents{
+  width: 400px; 
+  height: 200px;
 }
 
 #fileToImport{
