@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http from "../http-commons";
 
 class GradeService {
   getAll() {
@@ -10,7 +10,7 @@ class GradeService {
   }
 
   create(data) {
-    return http.post("/", data);
+    return http.put("/", data);
   }
 
   update(id, data) {

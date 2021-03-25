@@ -39,7 +39,6 @@ class AddStudentScreen extends Component {
             entrySemester: this.state.entrySemester,
             entryYear: this.state.entryYear
         };
-        console.log(data);
         StudentService.create(data)
             .then(response => {
                 this.setState({
