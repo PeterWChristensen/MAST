@@ -106,10 +106,12 @@ class ModalWindow extends React.Component {
         fileReader.onloadend = function(e) {
             content = fileReader.result;
             department.forEach(function(dep){
-            var regexp = new RegExp(dep + '\\s*\\d{3}:[^\\r]*\\r[^\\r]*\\r[^\\r]*\\r[^\\r]*', 'g');
-            var data = [...content.matchAll(regexp)];
-            console.log(data);
-            })
+                var regexp = new RegExp(dep + '\\s*\\d{3}:[^\\r]*\\r[^\\r]*\\r[^\\r]*\\r[^\\r]*', 'g');
+                const data = [...content.matchAll(regexp)];
+                data.forEach(function(course){
+                    console.log(course[0].split("\r"));
+                });
+            }); 
         }
         
         this.props.hideModalDialogPopUp();
