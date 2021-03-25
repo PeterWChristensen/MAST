@@ -30,5 +30,6 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
   db.coursePlan = require("./coursePlan.model.js")(sequelize, Sequelize);
 
+  db.prerequisite = require("./prerequisite.model.js")(sequelize, Sequelize);
 
   module.exports = db;
