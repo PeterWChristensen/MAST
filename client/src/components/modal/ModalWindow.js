@@ -97,9 +97,9 @@ class ModalWindow extends React.Component {
         else{
             department.push(this.state.departmentToParse);
         }
-        console.log(department);
         /* Search file for each department in the array */
-
+        var semester = this.state.departmentToParseSemester;
+        var year = this.state.departmentToParseYear;
         var content = " ";
         let fileReader = new FileReader();
         fileReader.readAsText(this.state.courseInfoFile);
@@ -109,11 +109,68 @@ class ModalWindow extends React.Component {
                 var regexp = new RegExp(dep + '\\s*\\d{3}:[^\\r]*\\r[^\\r]*\\r[^\\r]*\\r[^\\r]*', 'g');
                 const data = [...content.matchAll(regexp)];
                 data.forEach(function(course){
-                    console.log(course[0].split("\r"));
+                    let courseInfo = course[0].split("\r");
+                    let coursenameSplit = courseInfo[0].split(":");
+                    let courseIdSplit = coursenameSplit[0].split(" ");
+                    let courseID = courseIdSplit[0] + courseIdSplit[1];
+                    let courseName = coursenameSplit[1].trim();
+                    let courseNum = courseIdSplit[1];
+                    let regexps = new RegExp('\\d*\\scredits|\\d*\-?\–?\\d*\\s*credits', 'g'); //for credits
+                    let regexpr = new RegExp('[A-Z]{3}\\s\\d{3}|[A-Z]{3}\\d{3}', 'g'); //for prereq
+                    let credits = ""
+                    let preReqs = null
+                    let preReqsArray = []
+                    if(courseInfo[2].includes("credits")){
+                        let creditRow = courseInfo[2].match(regexps);
+                        let creditSplit = creditRow[0].split(" ");
+                        credits = creditSplit[0];
+                    }
+                    if(courseInfo[2].includes("Prerequisites")){
+                        let prereqRow = [courseInfo[2].match(regexpr)];
+                        if(prereqRow!=null){
+                            preReqsArray = prereqRow;
+                        }
+                    }
+                    var courseData = {
+                        courseID: courseID,
+                        departID: dep,
+                        name: courseName,
+                        description: courseInfo[1],
+                        credits: credits,
+                        courseNum: courseNum,
+                        semester: semester,
+                        year: year
+                    };
+                    //console.log(courseData);
+                    // CourseService.create(courseData)
+                    // .then(response => {
+                    //     this.setState({
+                    //         courseID: response.courseData.courseID,
+                    //         departID: response.courseData.departID,
+                    //         name: response.courseData.name,
+                    //         description: response.courseData.description,
+                    //         credits: response.courseData.credits,
+                    //         courseNum: response.courseData.courseNum,
+                    //         semester: response.courseData.semester,
+                    //         year: response.courseData.year
+                    //     });
+                    //     console.log(response.data);
+                    // })
+                    // .catch(e => {
+                    //     console.log(e);
+                    // });
+                    preReqsArray.forEach(function(prereq) {
+                        let prereqInfo = prereq[0].split(" ");
+                        let prerequisiteID = prereqInfo[0] + prereqInfo[1];
+                        var prereqData = {
+                            courseID: courseData.courseID,
+                            prerequisiteID: prerequisiteID
+                        };
+                        //console.log(prereqData);
+                    })
                 });
             }); 
         }
-        
         this.props.hideModalDialogPopUp();
     }
 
