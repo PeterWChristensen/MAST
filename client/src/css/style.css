@@ -284,6 +284,10 @@ background-color: #343434;
   padding: 5px;
 }
 
+#modalCourseInfo{
+  width: 400px;
+}
+
 #fileToImport{
   position: relative;
   left: 10%;
