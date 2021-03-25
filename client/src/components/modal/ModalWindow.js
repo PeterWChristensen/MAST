@@ -12,6 +12,13 @@ const papaparseOptions = {
   skipEmptyLines: true,
 };
 
+const departmentSelectionOptions =  ["This Project", "All Departments", "AAS", "ACC", "AFH", "AFS", "AMS", "ANT", "ARH", "ARS", "BCB", "BDA", "BEE", "BGE", 
+        "BIO", "BME", "BMI", "BNB", "BSB", "BUS", "CAR", "CHE", "CHI", "CIV", "CLT", "CME", "CSE", "CSM", "CST", "CWL", "DAN", "DCS", "DPA", "ECO", 
+        "EGL", "EHM", "EMP", "ESE", "ESL", "ESM", "ESS", "EST", "EUR", "EXT", "FIN", "FLA", "FLM", "FRN", "FSY", "GEO", "GER", "GRD", "GSS", "HAX", 
+        "HBA", "HBH", "HBM", "HBP", "HBY", "HCB", "HDO", "HIS", "HPD", "HPH", "HWC", "IAP", "IDC", "ISE", "ITL", "JPN", "JRN", "KOR", "LAT", "LIN", 
+        "MAE", "MAR", "MAR-S", "MAT", "MBA", "MCB", "MEC", "MKT", "MST", "MUS", "NET", "NEU", "NUR", "OAE", "PHI", "PHY", "POL", "POR", "PSY",
+         "RUS", "SCI", "SLV", "SOC", "SPN", "SUS", "TAF", "THR", "TMP", "VIP", "WNS", "WRT", "WST"];
+
 class ModalWindow extends React.Component {  
     constructor(props){
         super(props)
@@ -22,7 +29,8 @@ class ModalWindow extends React.Component {
             courseOfferings: "none",
             studentData: "none",
             studentDataCoursePlans: "none",
-            grades: "none"
+            grades: "none",
+            departmentToParse: "This Project"
         }
         this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
         this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
@@ -72,7 +80,22 @@ class ModalWindow extends React.Component {
     }
 
     handleImportCourseInformation(){
-        
+        var department = [];
+        /* Get departments to look for from user specification */
+        if (this.state.departmentToParse === "This Project"){
+            department = ["AMS, BMI, CSE, ECE"]
+        }
+        else if(this.state.departmentToParse === "All Departments"){
+            department = departmentSelectionOptions.slice(2);
+        }
+        else{
+            department.push(this.state.departmentToParse);
+        }
+        console.log(department);
+        /* Search file for each department in the array */
+
+
+        this.props.hideModalDialogPopUp();
     }
 
     handleImportCourseOfferings(){
@@ -197,8 +220,6 @@ class ModalWindow extends React.Component {
 
     handleImportGrades() {
         this.state.grades.forEach(function (info) {
-
-          
             let offeringCourseID = info.department + info.course_num;
             let courseOfferingIDNum = offeringCourseID + info.semester + info.year + info.section;
             console.log("courseOfferingIDNum& studentID=");
@@ -224,15 +245,19 @@ class ModalWindow extends React.Component {
                 console.log(e);
                 console.log("Error create service");
             });
-    
-
             //actually after this. I need to update courseOffering with all the new info such as section etc.
         });
-
         this.props.hideModalDialogPopUp();
     }
-    render() {
- 
+
+    render(){
+
+        let optionsForDepartment = departmentSelectionOptions.map((el) => <option key={el}>{el}</option>);
+
+        const selectDepartmentToParseCourseInfoHandler = (event) => { 
+            this.setState({departmentToParse: event.target.value}); 
+        };
+
         // Type variable to store modal to display
         let modalContents = null; 
 
@@ -241,8 +266,8 @@ class ModalWindow extends React.Component {
             <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
-                    Add file import for pdf
-                <br></br><br></br></p>
+                    
+                <br></br></p>
                 <Link to="/"><button className="modalButton" onClick={this.handleImportDegreeRequirements, this.props.hideModalDialogPopUp} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
@@ -252,10 +277,18 @@ class ModalWindow extends React.Component {
             modalContents =
             <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
+                    <br></br>
+                    Choose .txt file to import:</p><br></br>
+                    <input type="file" accept=".txt" id="scrapeCourseInfoFileButton"/>
                     <br></br><br></br>
-                    Add file import for XML/JSON
-                <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseInformation, this.props.hideModalDialogPopUp} >Import</button></Link>
+                    <p>Select one or all departments to scrape: 
+                    <select id="scrapeCourseInfoDepartmentSelection" className="dropdownSelect" onChange={selectDepartmentToParseCourseInfoHandler}>
+                            {optionsForDepartment}
+                    </select>
+                    </p>
+                               
+                <br></br>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseInformation} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
