@@ -89,7 +89,7 @@ class ModalWindow extends React.Component {
         var department = [];
         /* Get departments to look for from user specification */
         if (this.state.departmentToParse === "AMS, BMI, CSE, ESE"){
-            department = ["AMS, BMI, CSE, ECE"]
+            department = ["AMS", "BMI", "CSE", "ECE"]
         }
         else if(this.state.departmentToParse === "All Departments"){
             department = departmentSelectionOptions.slice(2);
