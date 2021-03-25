@@ -22,9 +22,9 @@ exports.create = (req, res) => {
     // Save CoursePlan in the database
     console.log("CoursePlan is==")
     console.log(coursePlan);
-    CoursePlan.create(coursePlan)
+    const newCoursePlan = CoursePlan.create(coursePlan)
       .then(data => {
-        res.send(data);
+        res.send(newCoursePlan);
       })
       .catch(err => {
         res.status(500).send({
