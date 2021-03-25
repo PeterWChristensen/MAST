@@ -271,11 +271,12 @@ class ModalWindow extends React.Component {
         }
 
         var plan = this.state.studentDataCoursePlans
+        console.log(plan)
         
         var i
         for (i = 0; i < plan.length; i++) {
 
-            let offeringCourseID = plan[i].department + plan[i].course_num;
+            let offeringCourseID = plan[i].department + plan[i].course_num + plan[i].semester + plan[i].year + plan[i].section;
 
             var data_plan = {
                 studentID: plan[i].sbu_id,
