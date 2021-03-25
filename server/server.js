@@ -24,6 +24,7 @@ require("./app/routes/courseOffering.routes")(app);
 require("./app/routes/coursePlan.routes")(app);
 require("./app/routes/prerequisite.routes")(app);
 require("./app/routes/department.routes")(app);
+require("./app/routes/course.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

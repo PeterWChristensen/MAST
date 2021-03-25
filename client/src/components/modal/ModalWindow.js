@@ -4,6 +4,7 @@ import CSVReader from "react-csv-reader";
 import CourseOfferingsService from "../../services/courseOfferings.service";
 import StudentService from "../../services/student.service";
 import CoursePlanService from "../../services/coursePlan.service";
+import CourseService from "../../services/course.service";
 
 const papaparseOptions = {
   header: true,
@@ -112,13 +113,11 @@ class ModalWindow extends React.Component {
                     let courseInfo = course[0].split("\r");
                     let coursenameSplit = courseInfo[0].split(":");
                     let courseIdSplit = coursenameSplit[0].split(" ");
-                    let courseID = courseIdSplit[0] + courseIdSplit[1];
+                    let courseID = courseIdSplit[0] + courseIdSplit[2];
                     let courseName = coursenameSplit[1].trim();
-                    let courseNum = courseIdSplit[1];
                     let regexps = new RegExp('\\d*\\scredits|\\d*\-?\–?\\d*\\s*credits', 'g'); //for credits
                     let regexpr = new RegExp('[A-Z]{3}\\s\\d{3}|[A-Z]{3}\\d{3}', 'g'); //for prereq
                     let credits = ""
-                    let preReqs = null
                     let preReqsArray = []
                     if(courseInfo[2].includes("credits")){
                         let creditRow = courseInfo[2].match(regexps);
@@ -137,28 +136,26 @@ class ModalWindow extends React.Component {
                         name: courseName,
                         description: courseInfo[1],
                         credits: credits,
-                        courseNum: courseNum,
                         semester: semester,
                         year: year
                     };
                     //console.log(courseData);
-                    // CourseService.create(courseData)
-                    // .then(response => {
-                    //     this.setState({
-                    //         courseID: response.courseData.courseID,
-                    //         departID: response.courseData.departID,
-                    //         name: response.courseData.name,
-                    //         description: response.courseData.description,
-                    //         credits: response.courseData.credits,
-                    //         courseNum: response.courseData.courseNum,
-                    //         semester: response.courseData.semester,
-                    //         year: response.courseData.year
-                    //     });
-                    //     console.log(response.data);
-                    // })
-                    // .catch(e => {
-                    //     console.log(e);
-                    // });
+                    CourseService.create(courseData)
+                     .then(response => {
+                         this.setState({
+                             courseID: response.courseData.courseID,
+                             departID: response.courseData.departID,
+                             name: response.courseData.name,
+                             description: response.courseData.description,
+                             credits: response.courseData.credits,
+                             semester: response.courseData.semester,
+                             year: response.courseData.year
+                         });
+                         console.log(response.data);
+                     })
+                     .catch(e => {
+                         console.log(e);
+                     });
                     preReqsArray.forEach(function(prereq) {
                         let prereqInfo = prereq[0].split(" ");
                         let prerequisiteID = prereqInfo[0] + prereqInfo[1];

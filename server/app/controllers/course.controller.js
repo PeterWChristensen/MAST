@@ -15,11 +15,10 @@ exports.create = (req, res) => {
     // Create a Tutorial
     const course = {
       courseID: req.body.courseID,
-      departID: req.body.description,
+      departID: req.body.departID,
       name: req.body.name,
       description: req.body.description,
       credits: req.body.credits,
-      courseNum: req.body.courseNum,
       semester: req.body.semester,
       year: req.body.year
 

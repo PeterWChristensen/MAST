@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         allowNull: false
     },     
-      departmentID: {
+      departID: {
         type: Sequelize.STRING,
         allowNull: false,
     },
@@ -30,9 +30,6 @@ module.exports = (sequelize, Sequelize) => {
       credits: {
         type: Sequelize.STRING
     },
-      courseNum: {
-        type: Sequelize.INTEGER
-    }
 }, { 
       tableName: 'Course',
       timestamps: false
