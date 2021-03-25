@@ -11,7 +11,7 @@ const papaparseOptions = {
   skipEmptyLines: true,
 };
 
-const departmentSelectionOptions =  ["This Project", "All Departments", "AAS", "ACC", "AFH", "AFS", "AMS", "ANT", "ARH", "ARS", "BCB", "BDA", "BEE", "BGE", 
+const departmentSelectionOptions =  ["AMS, BMI, CSE, ESE", "All Departments", "AAS", "ACC", "AFH", "AFS", "AMS", "ANT", "ARH", "ARS", "BCB", "BDA", "BEE", "BGE", 
         "BIO", "BME", "BMI", "BNB", "BSB", "BUS", "CAR", "CHE", "CHI", "CIV", "CLT", "CME", "CSE", "CSM", "CST", "CWL", "DAN", "DCS", "DPA", "ECO", 
         "EGL", "EHM", "EMP", "ESE", "ESL", "ESM", "ESS", "EST", "EUR", "EXT", "FIN", "FLA", "FLM", "FRN", "FSY", "GEO", "GER", "GRD", "GSS", "HAX", 
         "HBA", "HBH", "HBM", "HBP", "HBY", "HCB", "HDO", "HIS", "HPD", "HPH", "HWC", "IAP", "IDC", "ISE", "ITL", "JPN", "JRN", "KOR", "LAT", "LIN", 
@@ -29,7 +29,9 @@ class ModalWindow extends React.Component {
             studentData: "none",
             studentDataCoursePlans: "none",
             grades: "none",
-            departmentToParse: "This Project"
+            departmentToParse: "AMS, BMI, CSE, ESE",
+            departmentToParseSemester: "Fall",
+            departmentToParseYear: "2021"
         }
         this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
         this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
@@ -81,7 +83,7 @@ class ModalWindow extends React.Component {
     handleImportCourseInformation(){
         var department = [];
         /* Get departments to look for from user specification */
-        if (this.state.departmentToParse === "This Project"){
+        if (this.state.departmentToParse === "AMS, BMI, CSE, ESE"){
             department = ["AMS, BMI, CSE, ECE"]
         }
         else if(this.state.departmentToParse === "All Departments"){
@@ -257,6 +259,13 @@ class ModalWindow extends React.Component {
             this.setState({departmentToParse: event.target.value}); 
         };
 
+        const changeSemesterOptionHandler = (event) => { 
+            this.setState({departmentToParseSemester: event.target.value}); 
+        }; 
+        const changeYearOptionHandler = (event) => { 
+            this.setState({departmentToParseYear: event.target.value}); 
+        }; 
+
         // Type variable to store modal to display
         let modalContents = null; 
 
@@ -274,12 +283,55 @@ class ModalWindow extends React.Component {
         }
         else if(this.props.modalType === "importCourseInformation"){
             modalContents =
-            <div className="modal" id="import" header="Import" >
+            <div id="modalCourseInfo" className="modal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br>
                     Choose .txt file to import:</p><br></br>
                     <input type="file" accept=".txt" id="scrapeCourseInfoFileButton"/>
                     <br></br><br></br>
+                    <p>Specify semester/year:
+                        <select id="semesterSelectCourseScrape" className="dropdownSelect" onChange={changeSemesterOptionHandler}>
+                            <option value="Fall">Fall</option>
+                            <option value="Winter">Winter</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Summer">Summer1</option>
+                            <option value="Summer">Summer2</option>
+                        </select>
+                        <select id="yearSelectCourseScrape" className="dropdownSelect" onChange={changeYearOptionHandler}>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                            <option value="2009">2009</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2005">2005</option>
+                            <option value="2004">2004</option>
+                            <option value="2003">2003</option>
+                            <option value="2002">2002</option>
+                            <option value="2001">2001</option>
+                            <option value="2000">2000</option>
+                            <option value="1999">1999</option>
+                            <option value="1998">1998</option>
+                            <option value="1997">1997</option>
+                            <option value="1996">1996</option>
+                            <option value="1995">1995</option>
+                            <option value="1994">1994</option>
+                            <option value="1993">1993</option>
+                            <option value="1992">1992</option>
+                            <option value="1991">1991</option>
+                            <option value="1990">1990</option>
+                        </select>
+                    </p>
                     <p>Select one or all departments to scrape: 
                     <select id="scrapeCourseInfoDepartmentSelection" className="dropdownSelect" onChange={selectDepartmentToParseCourseInfoHandler}>
                             {optionsForDepartment}
