@@ -1,5 +1,5 @@
 const db = require("../models");
-const Department = db.departments;
+const Department = db.department;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new department
