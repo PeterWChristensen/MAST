@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
     },
       credits: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
       courseNum: {
         type: Sequelize.INTEGER
