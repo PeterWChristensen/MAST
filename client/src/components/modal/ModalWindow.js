@@ -89,7 +89,7 @@ class ModalWindow extends React.Component {
         var department = [];
         /* Get departments to look for from user specification */
         if (this.state.departmentToParse === "AMS, BMI, CSE, ESE"){
-            department = ["AMS", "BMI", "CSE", "ECE"]
+            department = ["AMS", "BMI", "CSE", "ESE"]
         }
         else if(this.state.departmentToParse === "All Departments"){
             department = departmentSelectionOptions.slice(2);
@@ -105,9 +105,13 @@ class ModalWindow extends React.Component {
         fileReader.readAsText(this.state.courseInfoFile);
         fileReader.onloadend = function(e) {
             content = fileReader.result;
+            department.forEach(function(dep){
+            var regexp = new RegExp(dep + '\\s*\\d{3}:[^\\r]*\\r[^\\r]*\\r[^\\r]*', 'g');
+            var data = [...content.matchAll(regexp)];
+            console.log(data);
+            })
         }
-
-
+        
         this.props.hideModalDialogPopUp();
     }
 
