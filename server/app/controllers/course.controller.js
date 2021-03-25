@@ -19,8 +19,10 @@ exports.create = (req, res) => {
       name: req.body.name,
       description: req.body.description,
       credits: req.body.credits,
-      courseNum: req.body.courseNum
-    
+      courseNum: req.body.courseNum,
+      semester: req.body.semester,
+      year: req.body.year
+
     };
   
     // Save Course in the database

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CSVReader from "react-csv-reader";
 import CourseOfferingsService from "../../services/courseOfferings.service";
-import GradeService from "../../services/importGrade.service";
 import StudentService from "../../services/student.service";
 import CoursePlanService from "../../services/coursePlan.service";
 
@@ -178,7 +177,7 @@ class ModalWindow extends React.Component {
             console.log(data_plan.courseOfferingID)
             console.log(data_plan.grade)
 
-            GradeService.create(data_plan)
+            CoursePlanService.create(data_plan)
             .then(response => {
                 this.setState({
                     studentID: response.data_plan.studentID,
@@ -211,7 +210,7 @@ class ModalWindow extends React.Component {
                 grade: info.grade
             };
             console.log("Before create service");            
-            GradeService.create(data)
+            CoursePlanService.create(data)
             .then(response => {
                 this.setState({
                     studentID: response.data.studentID,
