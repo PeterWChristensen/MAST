@@ -5,6 +5,7 @@ import CourseOfferingsService from "../../services/courseOfferings.service";
 import StudentService from "../../services/student.service";
 import CoursePlanService from "../../services/coursePlan.service";
 import CourseService from "../../services/course.service";
+import PrerequisiteService from "../../services/prerequisite.service";
 
 const papaparseOptions = {
   header: true,
@@ -163,8 +164,19 @@ class ModalWindow extends React.Component {
                             courseID: courseData.courseID,
                             prerequisiteID: prerequisiteID
                         };
-                        //console.log(prereqData);
-                    })
+                        console.log(prereqData);
+                        PrerequisiteService.create(prereqData)
+                        .then(response => {
+                            this.setState({
+                                courseID: response.prereqData.courseID,
+                                prerequisiteID: response.prereqData.prerequisiteID
+                            });
+                            console.log(response.data);
+                        }) 
+                        .catch(e => {
+                            console.log(e);
+                        });
+                    });
                 });
             }); 
         }
