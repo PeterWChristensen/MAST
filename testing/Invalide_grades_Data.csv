@@ -1,5 +1,5 @@
 ﻿sbu_id,department,course_num,section,semester,year,grade
-112209780,CSE,416,2,Fall,2021,A
-112209780,CSE,320,1,Fall,2020,B
+,CSE,416,2,Fall,2021,A
+112209780,,320,1,Fall,2020,B
 112209780,CSE,316,1,Spring,2021,C
 112209780,CSE,305,1,Fall,2020,D
