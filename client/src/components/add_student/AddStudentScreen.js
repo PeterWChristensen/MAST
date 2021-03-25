@@ -6,7 +6,6 @@ class AddStudentScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isRedirectToHome: true,
             department: "AMS",         
             showModalDialogPopup: false,
             modalType: "none",
@@ -15,8 +14,8 @@ class AddStudentScreen extends Component {
             id: "",
             email: "",
             track : "",
-            entrySemester: "",
-            entryYear: ""
+            entrySemester: "Fall",
+            entryYear: "2021"
         }    
     }
 
@@ -34,23 +33,31 @@ class AddStudentScreen extends Component {
             studentID: this.state.id,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            nSemestersInProgram: 0
+            nSemestersInProgram: 0,
+            email: this.state.email,
+            departmentID: this.state.department,
+            entrySemester: this.state.entrySemester,
+            entryYear: this.state.entryYear
         };
-
+        console.log(data);
         StudentService.create(data)
             .then(response => {
                 this.setState({
                     studentID: response.data.studentID,
                     firstName: response.data.firstName,
                     lastName: response.data.lastName,
-                    nSemestersInProgram: response.nSemestersInProgram
+                    nSemestersInProgram: response.nSemestersInProgram,
+                    email: response.data.email,
+                    departmentID: response.data.departmentID,
+                    entrySemester: response.data.entrySemester,
+                    entryYear: response.data.entryYear
+
                 });
                 console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
-        //this.setState({showModalDialogPopup: false});
    }
 
 
@@ -145,7 +152,8 @@ class AddStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer</option>
+                            <option value="Summer">Summer1</option>
+                            <option value="Summer">Summer2</option>
                         </select>
                     </div>
                         <div className="addStudent_prompt">Entry Year:</div>
