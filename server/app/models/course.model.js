@@ -17,11 +17,17 @@ module.exports = (sequelize, Sequelize) => {
       description: {
         type: Sequelize.STRING
     },
-      credit: {
-        type: Sequelize.INTEGER
+      credits: {
+        type: Sequelize.STRING
     },
       courseNum: {
         type: Sequelize.INTEGER
+    },
+    semester: {
+      type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
+    },
+    year: {
+      type: Sequelize.INTEGER
     }
 }, { 
       tableName: 'Course',

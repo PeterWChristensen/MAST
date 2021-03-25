@@ -2,21 +2,20 @@
 module.exports = (sequelize, Sequelize) => {
   const Department = sequelize.define("department", {
     departmentID: {
-      type: Sequelize.STRING(3),
+      type: Sequelize.STRING,
       primaryKey: true,
       allowNull: false,
       unique: true
 
     },
     departmentName: {
-      type: Sequelize.STRING(45)
+      type: Sequelize.STRING
     }
   
 }, { 
   tableName: 'Department',
   timestamps: false
 });
-
 
   return Department;
 };
