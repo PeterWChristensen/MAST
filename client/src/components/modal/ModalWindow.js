@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CSVReader from "react-csv-reader";
 import CourseOfferingsService from "../../services/courseOfferings.service";
 import GradeService from "../../services/importGrade.service";
+import StudentService from "../../services/student.service";
+import CoursePlanService from "../../services/coursePlan.service";
 
 const papaparseOptions = {
   header: true,
@@ -32,7 +34,7 @@ class ModalWindow extends React.Component {
         this.handleImportCourseInformation = this.handleImportCourseInformation.bind(this);
         this.handleImportCourseOfferings = this.handleImportCourseOfferings.bind(this);  
         this.handleImportStudentData = this.handleImportStudentData.bind(this);
-        this.handleImportStudentDataCoursePlans = this.handleImportStudentDataCoursePlans.bind(this);
+        //this.handleImportStudentDataCoursePlans = this.handleImportStudentDataCoursePlans.bind(this);
         this.handleImportGrades = this.handleImportGrades.bind(this);
     }
 
@@ -51,15 +53,16 @@ class ModalWindow extends React.Component {
 
     handleImportStudentDataFile = function(data, fileInfo) {
         this.setState({studentData: data});
+
     }
 
     handleImportStudentDataCoursePlansFile = function(data, fileInfo) {
         this.setState({studentDataCoursePlans: data});
+
     }
 
     handleImportGradesFile = function(data, fileInfo) {
         this.setState({grades: data});
-        console.log(data)
     }
     
 
@@ -116,13 +119,81 @@ class ModalWindow extends React.Component {
     }
 
     handleImportStudentData(){
+        var data = this.state.studentData
+        var i
+        for (i = 0; i < data.length; i++) {
+            var data_temp = {
+                studentID: data[i].sbu_id,
+                firstName: data[i].first_name,
+                lastName: data[i].last_name,
+                email: data[i].email,
+                department: data[i].department,
+                track: data[i].track,
+                entrySemester: data[i].entry_semester,
+                entryYear: data[i].entry_year,
+                requirementVersionSemester: data[i].requirement_version_semester,
+                requirementVersionYear: data[i].requirement_version_year,
+                graduationSemester: data[i].graduation_semester,
+                graduationYear: data[i].graduation_year,
+                password: data[i].password
+            };
+            console.log(data_temp)
+            StudentService.create(data_temp)
+            .then(response => {
+                this.setState({
+                    studentID: response.data_temp.studentID,
+                    firstName: response.data_temp.firstName,
+                    lastName: response.data_temp.lastName,
+                    email: response.data_temp.email,
+                    department: response.data_temp.department,
+                    track: response.data_temp.track,
+                    entrySemester: response.data_temp.entrySemester,
+                    entryYear: response.data_temp.entryYear,
+                    requirementVersionSemester: response.data_temp.requirementVersionSemester,
+                    requirementVersionYear: response.data_temp.requirementVersionYear,
+                    graduationSemester: response.data_temp.graduationSemester,
+                    graduationYear: response.data_temp.graduationYear,
+                    password: response.data_temp.password
+                });
+                console.log(response.data_temp);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
 
+        var plan = this.state.studentDataCoursePlans
+        
+        var i
+        for (i = 0; i < plan.length; i++) {
+
+            let offeringCourseID = plan[i].department + plan[i].course_num;
+
+            var data_plan = {
+                studentID: plan[i].sbu_id,
+                courseOfferingID: offeringCourseID,
+                grade: plan[i].grade
+            };
+            console.log(data_plan.studentID)
+            console.log(data_plan.courseOfferingID)
+            console.log(data_plan.grade)
+
+            GradeService.create(data_plan)
+            .then(response => {
+                this.setState({
+                    studentID: response.data_plan.studentID,
+                    courseOfferingID: response.data_plan.courseOfferingID,
+                    grade: response.data_plan.grade
+                });
+                console.log(response.data_plan);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+
+        this.props.hideModalDialogPopUp();
     }
-
-    handleImportStudentDataCoursePlans() {
-
-    }
-
 
     handleImportGrades() {
         this.state.grades.forEach(function (info) {
@@ -218,7 +289,7 @@ class ModalWindow extends React.Component {
                         onFileLoaded={this.handleImportStudentDataCoursePlansFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportStudentData, this.handleImportStudentDataCoursePlans, this.props.hideModalDialogPopUp} >Import</button></Link>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportStudentData} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
