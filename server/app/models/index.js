@@ -22,13 +22,14 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   //place for database tables
   db.student = require("./student.model.js")(sequelize, Sequelize);
 
-  db.courses = require("./course.model.js")(sequelize, Sequelize);
+  db.course = require("./course.model.js")(sequelize, Sequelize);
 
-  db.departments = require("./department.model.js")(sequelize, Sequelize);
+  db.department = require("./department.model.js")(sequelize, Sequelize);
   
   db.courseOffering = require("./courseOffering.model.js")(sequelize, Sequelize);
 
   db.coursePlan = require("./coursePlan.model.js")(sequelize, Sequelize);
 
+  db.prerequisite = require("./prerequisite.model.js")(sequelize, Sequelize);
 
   module.exports = db;

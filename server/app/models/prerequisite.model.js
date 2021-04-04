@@ -1,21 +1,18 @@
 // In our project, we dont need this bc we have our teble already in DB. Sequelize supports all of CRUD functions. 
 module.exports = (sequelize, Sequelize) => {
-  const Department = sequelize.define("department", {
-    departmentID: {
+    const Prerequisite = sequelize.define("Prerequisite", {
+      courseID: {
       type: Sequelize.STRING,
       primaryKey: true,
       allowNull: false,
-      unique: true
-
-    },
-    departmentName: {
-      type: Sequelize.STRING
+    },      
+      prerequisiteID: {
+      type: Sequelize.STRING,
+      allowNull: false,
     }
-  
 }, { 
-  tableName: 'Department',
-  timestamps: false
+      tableName: 'Prerequisite',
+      timestamps: false
 });
-
-  return Department;
+    return Prerequisite;
 };

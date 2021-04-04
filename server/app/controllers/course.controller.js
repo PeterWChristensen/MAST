@@ -1,5 +1,5 @@
 const db = require("../models");
-const Course = db.courses;
+const Course = db.course;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -15,12 +15,13 @@ exports.create = (req, res) => {
     // Create a Tutorial
     const course = {
       courseID: req.body.courseID,
-      departID: req.body.description,
+      departID: req.body.departID,
       name: req.body.name,
       description: req.body.description,
       credits: req.body.credits,
-      courseNum: req.body.courseNum
-    
+      semester: req.body.semester,
+      year: req.body.year
+
     };
   
     // Save Course in the database

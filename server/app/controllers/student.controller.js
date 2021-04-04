@@ -15,18 +15,20 @@ exports.create = (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         //requirementID: req.body.requirementID,
-        //entrySemester: req.body.entrySemester,
-        //entryYear: req.body.entryYear,
+        entrySemester: req.body.entrySemester,
+        entryYear: req.body.entryYear,
         //gradSemester: req.body.gradSemester,
         //gradYear: req.body.gradYear,
-        nSemestersInProgram: req.body.nSemestersInProgram
+        nSemestersInProgram: req.body.nSemestersInProgram,
         //gpa: req.body.gpa,
         //totalCredits: req.body.totalCredits,
         //projectOption: req.body.projectOption,
         //advisor: req.body.advisor,
         //hasGraduated: req.body.hasGraduated
+        email: req.body.email,
+        departmentID: req.body.departmentID
     };
-
+    console.log(student);
     const newStudent = Student.create(student)
         .then(data => {
             res.send(newStudent);
