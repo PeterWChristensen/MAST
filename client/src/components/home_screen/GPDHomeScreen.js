@@ -8,7 +8,8 @@ class GPDHomeScreen extends Component {
         super(props)
         this.state = {
             showModalDialogPopup: false,
-            modalType: "none"
+            modalType: "none",
+            students: []
         }    
     }
 
@@ -30,6 +31,17 @@ class GPDHomeScreen extends Component {
         .catch(e => {
             console.log(e);
         });
+    }
+
+    componentDidMount() {
+        StudentService.getAll()
+            .then(response => {
+                console.log(response.data);
+                this.setState({students: response.data});
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
 
