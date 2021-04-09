@@ -19,6 +19,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import PageView from '@material-ui/icons/Pageview';
 import { forwardRef } from 'react';
 
 const tableIcons = {
@@ -38,7 +39,8 @@ const tableIcons = {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+    PageView: forwardRef((props, ref) => <PageView {...props} ref={ref} />)
   };
 
 
@@ -61,7 +63,7 @@ class GPDHomeScreen extends Component {
                 {
                     title: "Last Name",
                     field: "lastName"
-                }
+                },
             ]
         }    
     }
@@ -99,7 +101,7 @@ class GPDHomeScreen extends Component {
 
 
     render() {
-        
+
         return (
             <Box>
                 <Box>
@@ -118,7 +120,17 @@ class GPDHomeScreen extends Component {
                             <a href='/addStudent'><Link to={{pathname: '/addStudent'}}><button className="GPDHomepageButton">Add Student</button></Link></a>
                             <button className="GPDHomepageButton" onClick={() => this.showModalDialogPopUp("deleteAllStudents")}> Delete All Student Data</button>
                         <Box m={5}>
-                            <MaterialTable title="Students" icons={tableIcons} options={{zIndex:0, maxBodyHeight: '650px', search:true, headerSelectionProps: {color: "primary"}}} columns={this.state.columns} data={this.state.students}/>
+                            <MaterialTable title="Students" icons={tableIcons} 
+                                options={{headerStyle: {backgroundColor: '#000000',color: '#FFF'},
+                                zIndex:0, maxBodyHeight: '650px', search:true, headerSelectionProps: {color: "primary"}}}
+                                columns={this.state.columns} data={this.state.students}
+                                actions = {[
+                                    {
+                                        icon: () => <PageView/>,
+                                        tooltip: 'View Student',
+                                        onClick: (event, rowData) => alert("Should link to view student")
+                                    }
+                                ]}/>
                         </Box>
                     </Box>
                 </Box>
