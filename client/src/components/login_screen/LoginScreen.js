@@ -86,10 +86,6 @@ export default class LoginScreen extends Component {
 render() {
   return (
     <div id="loginScreen">
-      <div id="loginBanner" className="banner">
-          MAST  |  Master's Student Tracking<br />
-      </div>
-
       <div id="loginBox">
         <div className="row">
           <Form onSubmit={this.handleLogin} 
@@ -97,7 +93,7 @@ render() {
             this.form = c;
           }} className="col s4 white">
 
-          <b id="loginTextHeading">MAST</b>
+          <b id="loginTextHeading"></b>
             <h5 className="loginBoxText">Login</h5>
             
           <div className="input-field">
@@ -116,12 +112,6 @@ render() {
 
           <div className="input-field">
             <button type="submit" id="loginButton">Login</button>
-            <button disabled={this.state.loading}>
-              {this.state.loading && (
-                <span></span>
-              )}
-              <span>Login</span>
-            </button>
           </div>
 
            

@@ -123,7 +123,6 @@ class GPDHomeScreen extends Component {
             });
     }
 
-
     render() {
 
         return (
