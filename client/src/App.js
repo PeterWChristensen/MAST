@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Link  } from 'react-router-dom';
+import { Switch, Route, Link  } from 'react-router-dom';
 
 
 //Import Components
@@ -56,7 +56,7 @@ class App extends Component{
           <div class="container">
             <b class="brand-logo">MAST</b>
             <div className="nav-wrapper">
-              <ul id="nav-mobile" className="right">
+              <div id="nav-mobile" className="right">
                 {/* <li>
                   <Link to={"/"} className="navBarButtons">
                     Home
@@ -65,43 +65,33 @@ class App extends Component{
 
                 
                 {showGPDcomponent && (
-                  <li>
-                    <Link to={"/gpd"} className="navBarButtons">
-                      gpdHome
-                    </Link>
-                  </li>
+                  <Link to={"/gpd"} className="navBarButtons">
+                    Home
+                  </Link>
                 )}
 
                 {currentUser && (
-                      <li>
-                        <Link to={"/profile"} className="navBarButtons">
-                          Profile
-                        </Link>
-                      </li>
+                  <Link to={"/profile"} className="navBarButtons">
+                    Profile
+                  </Link>
                 )}
                 
                 {showStudentcomponent && currentUser && (
-                  <li>
-                    <Link to={"/student"} className="navBarButtons">
-                      Profile
-                    </Link>
-                  </li>
+                  <Link to={"/student"} className="navBarButtons">
+                    Profile
+                  </Link>
                 )}            
 
                 {currentUser ? (
-                  <li>
                     <a href="/" className="navBarButtons" onClick={this.logOut}>
                       LogOut
                     </a>
-                  </li>
                 ) : (
-                  <li>
                     <Link to={"/login"} className="navBarButtons">
                       Login
                     </Link>
-                  </li>
                 )}    
-              </ul>
+              </div>
             </div>       
           </div>          
         </nav>  
