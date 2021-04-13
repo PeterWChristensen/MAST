@@ -34,7 +34,7 @@
   .navBarButtons{
     position: relative;
     top: -42px;
-    left: 85%;
+    left: 80%;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     background-color: transparent;
@@ -146,7 +146,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 71.3%;  
+    left: 2.3%;  
     top: 1%;
   }
   
@@ -188,7 +188,7 @@ background-color: #343434;
   .GPDHomepageButton{
     position: relative;
     top: 1%;
-    left: 71.6%;
+    left: 2.59%;
     margin-right: 0.3%;
   }
 
