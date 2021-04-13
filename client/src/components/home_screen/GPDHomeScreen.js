@@ -64,6 +64,18 @@ class GPDHomeScreen extends Component {
                     title: "Last Name",
                     field: "lastName"
                 },
+                {
+                    title: "Email",
+                    field: "email"
+                },
+                {
+                    title: "Entry Semester",
+                    field: "entrySemester"
+                },
+                {
+                    title: "Entry Year",
+                    field: "entryYear"
+                }
             ]
         }    
     }
@@ -121,7 +133,7 @@ class GPDHomeScreen extends Component {
                             <button className="GPDHomepageButton" onClick={() => this.showModalDialogPopUp("deleteAllStudents")}> Delete All Student Data</button>
                         <Box m={5}>
                             <MaterialTable title="Students" icons={tableIcons} 
-                                options={{headerStyle: {backgroundColor: '#000000',color: '#FFF'},
+                                options={{headerStyle: {backgroundColor: '#707070',color: '#FFF'},
                                 zIndex:0, maxBodyHeight: '650px', search:true, headerSelectionProps: {color: "primary"}}}
                                 columns={this.state.columns} data={this.state.students}
                                 actions = {[
