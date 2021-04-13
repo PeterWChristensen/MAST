@@ -6,7 +6,7 @@ class LoggedInLinks extends React.Component {
     return (
       <div className="right">
           <NavLink to="/"><button id="homeButton" className="navBarButtons">Home</button></NavLink>
-          <NavLink to="/"><button id="logOutButton" className="navBarButtons">Log Out</button></NavLink>
+          <NavLink to="/login"><button id="logOutButton" className="navBarButtons">Log Out</button></NavLink>
       </div>
     );
   };
