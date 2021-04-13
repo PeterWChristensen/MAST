@@ -7,5 +7,7 @@ module.exports = app => {
 
     router.delete("/", student.deleteAll);
 
+    router.get("/getStudents", student.getAll);
+
     app.use('/', router);
 }

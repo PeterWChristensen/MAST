@@ -123,30 +123,34 @@ class AddStudentScreen extends Component {
             <div>
                 {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} addStudent={this.addStudent.bind(this)}/> : null}
                 <div id="addStudentForm">
+                    <br></br><br></br><br></br>
                     <h2 id="addStudentFormHeader">Student Information</h2>
                     <div>
-                        <div className="addStudent_prompt">First Name:</div>
-                        <input className="addStudent_input" type="input" onChange={changeFirstNameHandler}/>
-                        <div className="addStudent_prompt">Last Name:</div>
-                        <input className="addStudent_input" type="input" onChange={changeLastNameHandler}/>
-                        <div className="addStudent_prompt">SBU ID:</div>
-                        <input  className="addStudent_input" type="input" onChange={changeSBUIDHandler}/>
-                        <div className="addStudent_prompt">Email:</div>
+                        <br></br><br></br>
+                        <p className="addStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp; Last Name:
+                        <br></br><input className="addStudent_input" type="input" onChange={changeFirstNameHandler}/>
+                        <input className="addStudent_input" label="First Name" type="input" onChange={changeLastNameHandler}/>
+                        </p><br></br>                        
+                        <p className="addStudent_prompt">SBU ID: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Email:
+                        <br></br><input  className="addStudent_input" type="input" onChange={changeSBUIDHandler}/>
                         <input  className="addStudent_input" type="input" onChange={changeEmailHandler}/>
-
-                        <div className="addStudent_prompt">Department:</div>
+                        </p>
+                        <br></br>
+                        <p className="addStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;Track:
+                        <br></br>
                         <select id="departmentSelect" className="dropdownSelect" onChange={changeDepartmentOptionHandler}>
                             <option value="AMS">AMS</option>
                             <option value="BMI">BMI</option>
                             <option value="ESE">ESE</option>
                             <option value="CSE">CSE</option>
                         </select>
-                        <div className="addStudent_prompt">Track:</div>
                         <select id="semesterSelect" className="dropdownSelect" onChange={changeTrackOptionHandler}>
                             {options}
                         </select>
-
-                        <div className="addStudent_prompt">Entry Semester:</div>
+                        </p>
+                        <br></br>
+                        <p className="addStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Entry Year:
+                        <br></br>
                         <select id="semesterSelect" className="dropdownSelect" onChange={changeEntrySemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
@@ -154,8 +158,7 @@ class AddStudentScreen extends Component {
                             <option value="Summer">Summer1</option>
                             <option value="Summer">Summer2</option>
                         </select>
-                    </div>
-                        <div className="addStudent_prompt">Entry Year:</div>
+
                         <select id="entryYearSelect" className="dropdownSelect" onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
@@ -190,9 +193,11 @@ class AddStudentScreen extends Component {
                             <option value="1991">1991</option>
                             <option value="1990">1990</option>
                         </select>
-                        <br></br><br></br>
+                        </p>
+                        <br></br><br></br><br></br><br></br><br></br>
                         <button id="addStudentForm_submit_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("addStudent")}>Add Student</button>
                         <button id="addStudentForm_cancel_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("cancelAddStudent")}>Cancel</button>
+                        </div>
                 </div>
             </div>
         )

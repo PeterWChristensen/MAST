@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Route, Link  } from 'react-router-dom';
 
 //Import Components
 import LoginScreen from './components/login_screen/LoginScreen.js';
-import GPDHomeScreen from './components/home_screen/GPDHome.component.js';
+import GPDHomeScreen from './components/home_screen/GPDHomeScreen.js';
 import AddStudentScreen from './components/add_student/AddStudentScreen.js';
 // import Navbar from './components/navbar/Navbar.js';
 import Profile from "./components/Student_Prof/ProfileScreen.js";
 import HomeScreen from "./components/home_screen/Home.component";
-
+import MSViewStudent from "./components/ms_student_screen/ViewStudentScreen.js";
 import AuthService from './services/auth.service';
 
 
@@ -79,6 +79,14 @@ class App extends Component{
                         </Link>
                       </li>
                 )}
+                
+                {showStudentcomponent && currentUser && (
+                  <li>
+                    <Link to={"/student"} className="navBarButtons">
+                      Profile
+                    </Link>
+                  </li>
+                )}            
 
                 {currentUser ? (
                   <li>
@@ -95,17 +103,6 @@ class App extends Component{
                 )}    
               </ul>
             </div>       
-
-
-              {/* {showStudentcomponent && (
-                <li className="nav-item">
-                  <Link to={"/student"} className="nav-link">
-                    studentHome
-                  </Link>
-                </li>
-              )}             */}
-
-
           </div>          
         </nav>  
           
@@ -116,6 +113,7 @@ class App extends Component{
                 <Route exact path="/" component={HomeScreen} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/addStudent" component={AddStudentScreen} />
+                <Route exact path="/student" component={MSViewStudent} /> 
               </Switch>
             </div>
        </div>

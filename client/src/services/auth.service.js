@@ -33,7 +33,7 @@ class AuthService {
   }
 // get stored user information (including JWT)
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
 

@@ -8,6 +8,10 @@ class StudentService {
     deleteAll() {
         return http.delete(`/`);
     }
+
+    getAll() {
+        return http.get("/getStudents");
+    }
 }
 
 export default new StudentService();

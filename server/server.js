@@ -34,6 +34,7 @@ require("./app/routes/course.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 
+require("./app/routes/msStudent.route")(app);
 
 
 const PORT = process.env.PORT || 8080;
