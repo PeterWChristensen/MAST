@@ -75,6 +75,18 @@ class GPDHomeScreen extends Component {
                 {
                     title: "Entry Year",
                     field: "entryYear"
+                },
+                {
+                    title: "Grad Semester",
+                    field: "gradSemester"
+                },
+                {
+                    title: "Grad Year",
+                    field: "gradYear"
+                },
+                {
+                    title: "Semesters in Program",
+                    field: "nSemestersInProgram"
                 }
             ]
         }    
