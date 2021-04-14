@@ -401,3 +401,9 @@ background-color: #343434;
   font-size: 16px;
   font-family: 'Times New Roman', Times, serif;
 }
+
+#editStudent{
+  top: 35%;
+  width: 370px; 
+  height: 150px; 
+}
