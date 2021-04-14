@@ -11,13 +11,18 @@ class ViewStudentScreen extends Component {
             student: [],
             firstName: "",
             lastName: "",
-            id: "",
-            department: "",
-            track : "",
-            advisor: "",
+            email: "",
+            password: "",
+            gpa: "",
             entrySemester: "",
             expectedGraduation: "",
-            gpa: "",
+            hasGraduated: "",
+            department: "",
+            track : "",
+            nSemestersInProgram: "", 
+            advisor: "",
+            projectOption: "",
+            requirementsVersion: "",
             coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
             coursePlanColumns: [
                 {
@@ -52,20 +57,33 @@ class ViewStudentScreen extends Component {
                     <div>
                         <br></br><br></br>
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
-                        <br></br><input className="viewStudent_input" type="input" defaultValue="First Name" disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue="Last Name" disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue="ID" disabled/>
-                        </p><br></br>                        
-                        <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Advisor:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue="Department" disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue="Track" disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue="Advisor" disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.id} disabled/>
                         </p>
                         <br></br>
-                        <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; GPA:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue="Semester" disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue="Graduation Semester" disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue="GPA" disabled/>
+                        <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.email} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.password} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.gpa} disabled/>
+                        </p>
+                        <br></br>
+                        <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Graduated:
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.expectedGraduation} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated} disabled/>
+                        </p>                        
+                        <br></br>                        
+                        <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; # Semesters In Program:
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.department} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} disabled/>
+                        </p>
+                        <br></br>
+                        <p className="viewStudent_prompt">Advisor:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Project: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Requirements Version:
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementsVersion} disabled/>
                         </p>
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
