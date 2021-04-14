@@ -20,7 +20,9 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("info");
   }
+
 
     // Use it for addStudent later.
   register(username, userID, password) {
