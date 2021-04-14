@@ -11,6 +11,8 @@ import Profile from "./components/Student_Prof/ProfileScreen.js";
 import HomeScreen from "./components/home_screen/Home.component";
 import MSViewStudent from "./components/ms_student_screen/TestViewStu.js";
 import MSEditStudent from "./components/ms_student_screen/TestViewStu.js";
+import ViewStudentScreen from './components/student_screens/ViewStudentScreen.js';
+import EditStudentScreen from './components/student_screens/EditStudentScreen.js';
 import AuthService from './services/auth.service';
 
 
@@ -111,6 +113,8 @@ class App extends Component{
                 <Route exact path="/" component={HomeScreen} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/addStudent" component={AddStudentScreen} />
+                <Route exact path="/viewStudent" component={ViewStudentScreen} />
+                <Route exact path="/editStudent" component={EditStudentScreen} />
                 <Route exact path="/student" component={MSViewStudent} /> 
                 <Route exact path="/student/edit" component={MSEditStudent} /> 
               </Switch>

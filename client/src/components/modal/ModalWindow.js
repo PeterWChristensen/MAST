@@ -511,6 +511,22 @@ class ModalWindow extends React.Component {
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
         }
+        else if(this.props.modalType === "editCourse"){
+            var course = <input className="viewStudent_input" type="input" defaultValue={this.props.courseToEdit.courseOfferingID} onChange={this.props.changeCourseHandler} disabled/>
+            if(!this.props.courseToEdit.grade){
+                course = <input className="viewStudent_input" type="input" defaultValue={this.props.courseToEdit.courseOfferingID} onChange={this.props.changeCourseHandler}/>
+            }
+            modalContents =
+            <div className="modal" id="editCourse">
+                <p id="modalDialogMessage"><br></br>
+                {course}
+                <input className="viewStudent_input" type="input" defaultValue={this.props.courseToEdit.grade} onChange={this.props.changeCourseGradeHandler}/>
+                <br></br><br></br></p>
+                <Link to="/editStudent"><button className="modalButton" onClick={this.props.editCourse} >Yes</button></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
+            </div>;
+        }
         else if(this.props.modalType === "editStudent"){
             modalContents =
             <div className="modal" id="editStudent" header="Add" >
