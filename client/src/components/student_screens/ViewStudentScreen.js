@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MaterialTable from "material-table";
 
 class ViewStudentScreen extends Component {
@@ -97,8 +98,8 @@ class ViewStudentScreen extends Component {
                             />
                         </div>                   
                         <br></br>
-                        <button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button>
-                        <button id="viewStudentForm_return_button" className="viewStudent_button">Return</button>
+                        <Link to={{pathname: '/editStudent', state: {studentID: this.props.studentID}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
+                        <Link to="/"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
                         </div>
                 </div>
             </div>

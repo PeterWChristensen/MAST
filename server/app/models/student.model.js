@@ -52,6 +52,15 @@ const Student = sequelize.define("Student", {
     },
     departmentID: {
         type: Sequelize.STRING
+    },
+    track: {
+        type: Sequelize.STRING
+    },
+    requirementVersionSemester: {
+        type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
+    },
+    requirementVersionYear: {
+        type: Sequelize.INTEGER
     }
 }, { 
     tableName: 'Student',

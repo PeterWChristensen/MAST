@@ -54,7 +54,8 @@ class GPDHomeScreen extends Component {
             columns: [
                 {
                     title: "ID",
-                    field: "studentID"
+                    field: "studentID",
+                    render: rowData => <Link to={{pathname: '/viewStudent', state: {studentID: rowData.studentID}}}>{rowData.studentID}</Link>
                 },
                 {
                     title: "First Name",
@@ -151,7 +152,7 @@ class GPDHomeScreen extends Component {
                                     {
                                         icon: () => <PageView/>,
                                         tooltip: 'View Student',
-                                        onClick: (event, rowData) => alert("Should link to view student")
+                                        onClick: (event, rowData) => console.log(rowData)
                                     }
                                 ]}/>
                         </Box>
