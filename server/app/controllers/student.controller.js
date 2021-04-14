@@ -26,7 +26,10 @@ exports.create = (req, res) => {
         //advisor: req.body.advisor,
         //hasGraduated: req.body.hasGraduated
         email: req.body.email,
-        departmentID: req.body.departmentID
+        departmentID: req.body.departmentID,
+        track: req.body.track,
+        requirementVersionSemester: req.body.requirementVersionSemester,
+        requirementVersionYear: req.body.requirementVersionYear
     };
     console.log(student);
     const newStudent = Student.create(student)
