@@ -8,7 +8,7 @@ class ViewStudentScreen extends Component {
             showModalDialogPopup: false,
             modalType: "none",
             student: [],
-            firstName: "",
+            firstName: "jinwooseolS",
             lastName: "",
             id: "",
             department: "",
@@ -52,7 +52,7 @@ class ViewStudentScreen extends Component {
                     <div>
                         <br></br><br></br>
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
-                        <br></br><input className="viewStudent_input" type="input" defaultValue="First name" disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={firstName} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue="Last Name" disabled/>
                         <input  className="viewStudent_input" type="input" defaultValue="ID" disabled/>
                         </p><br></br>                        

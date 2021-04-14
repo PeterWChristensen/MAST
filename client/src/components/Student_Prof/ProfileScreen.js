@@ -4,30 +4,67 @@ import AuthService from "../../services/auth.service";
 import MSStudentService from "../../services/msStudent.service";
 
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentUser: AuthService.getCurrentUser(),
-    };
+      studentID: "",
+      firstName: "",
+      lastName: "",
+      //requirementID: "",
+      entrySemester: "",
+      entryYear: "",
+      //gradSemester: "",
+      //gradYear: "",
+      nSemestersInProgram: "",
+      //gpa: "",
+      //totalCredits: "",
+      //projectOption: "",
+      //advisor: "",
+      //hasGraduated: ""
+      email: "",
+      departmentID: ""
+    }
   }
 
 
+componentDidMount(){
+  console.log("didMount Function");
+  MSStudentService.getinfo(AuthService.getCurrentUser().username);
+  var info=MSStudentService.getStudentInfo();
 
-
+  this.setState({
+    studentID: info.studentID,
+    firstName: info.firstName,
+    lastName: info.lastName,
+    //requirementID: info.requirementID,
+    entrySemester: info.entrySemester,
+    entryYear: info.entryYear,
+    //gradSemester: info.gradSemester,
+    //gradYear: info.gradYear,
+    nSemestersInProgram: info.nSemestersInProgram,
+    //gpa: info.gpa,
+    //totalCredits: info.totalCredits,
+    //projectOption: info.projectOption,
+    //advisor: info.advisor,
+    //hasGraduated: info.hasGraduated
+    email: info.email,
+    departmentID: info.departmentID
+  });
+}
 
   render() {
-    
-    const { currentUser } = this.state;
-    const { student } = MSStudentService.getinfo(AuthService.getCurrentUser().username);
+    const { currentUser, firstName } = this.state;
+
+
 
     console.log("currentUser is :")
     console.log(currentUser);
-    console.log("student is :")
-    console.log(student);
-    console.log(MSStudentService.getinfo(AuthService.getCurrentUser().username));
+    console.log("firstName is :")
+    console.log(firstName);
 
+    
     return (
       <div>
         <header>
@@ -53,12 +90,14 @@ export default class Profile extends Component {
           <strong>Email:</strong>{" "}
           {currentUser.roles}
         </p>
-        {/* <p>
+        <p>
           <strong>firstname:</strong>{" "}
-          {student.firstName}
-        </p> */}
+          {firstName}
+        </p>
 
       </div>
     );
   }
 }
+
+export default Profile;

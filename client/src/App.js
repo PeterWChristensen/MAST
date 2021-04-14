@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link  } from 'react-router-dom';
+import { Switch, Route, Link ,Redirect  } from 'react-router-dom';
 
 
 //Import Components
@@ -9,7 +9,8 @@ import AddStudentScreen from './components/add_student/AddStudentScreen.js';
 // import Navbar from './components/navbar/Navbar.js';
 import Profile from "./components/Student_Prof/ProfileScreen.js";
 import HomeScreen from "./components/home_screen/Home.component";
-import MSViewStudent from "./components/ms_student_screen/ViewStudentScreen.js";
+import MSViewStudent from "./components/ms_student_screen/TestViewStu.js";
+import MSEditStudent from "./components/ms_student_screen/TestViewStu.js";
 import AuthService from './services/auth.service';
 
 
@@ -21,7 +22,8 @@ class App extends Component{
     this.state = {
       showGPDcomponent: false,
       showStudentcomponent: false,
-      currentUser: undefined
+      currentUser: undefined,
+      setpath: ""
     };
   }
 
@@ -33,6 +35,7 @@ class App extends Component{
         currentUser: user,
         showGPDcomponent: user.roles.includes("gpd"),
         showStudentcomponent: user.roles.includes("student"),
+        setpath: "/"+user.roles
       });
     }
   }
@@ -47,7 +50,7 @@ class App extends Component{
 
 
   render() {
-    const { currentUser, showGPDcomponent, showStudentcomponent } = this.state;
+    const { currentUser, showGPDcomponent, showStudentcomponent, setpath } = this.state;
 
     return (
       <div className="App">
@@ -78,7 +81,12 @@ class App extends Component{
                 
                 {showStudentcomponent && currentUser && (
                   <Link to={"/student"} className="navBarButtons">
-                    Profile
+                    view
+                  </Link>
+                )}            
+                {showStudentcomponent && currentUser && (
+                  <Link to={"/student/edit"} className="navBarButtons">
+                    edit
                   </Link>
                 )}            
 
@@ -98,12 +106,17 @@ class App extends Component{
           
             <div>
               <Switch>
+              {/* <Route exact path="/">
+                {currentUser ? <Redirect to={setpath} /> : <LoginScreen />}
+              </Route> */}
+
                 <Route exact path="/login" component={LoginScreen} />
                 <Route exact path="/gpd" component={GPDHomeScreen} />
                 <Route exact path="/" component={HomeScreen} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/addStudent" component={AddStudentScreen} />
                 <Route exact path="/student" component={MSViewStudent} /> 
+                <Route exact path="/student/edit" component={MSEditStudent} /> 
               </Switch>
             </div>
        </div>
