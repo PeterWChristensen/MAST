@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
-import { Redirect } from "react-router-dom";
-
-
-import AuthService from "../../services/auth.service";
-import MSStudentService from "../../services/msStudent.service";
-
+import { forwardRef } from 'react';
 
 class EditStudentScreen extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            currentUser: AuthService.getCurrentUser(),    
+        this.state = {    
             showModalDialogPopup: false,
             modalType: "none",
-            courseToEdit: "none",
-            courseEditingID: "none",
-            courseEditingGrade: "none",
             addComment: false,
             commentToAddDate: null,
             commentToAddComment: null,
@@ -40,7 +32,7 @@ class EditStudentScreen extends Component {
             projectOption: null,
             requirementVersionSemester: null,
             requirementVersionYear: null,
-            coursePlans: [{courseOfferingID: "CSE503", grade: "A"}, {courseOfferingID: "CSE504", grade: ""}],
+            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -64,43 +56,6 @@ class EditStudentScreen extends Component {
             ]
         }    
     }
-
-
-
-    async componentDidMount(){
-        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        await MSStudentService.getinfo(this.props.location.state.email);
- 
-        var stuInfo= await MSStudentService.getStudentInfo();
-        console.log(stuInfo);
-            
-        this.setState({
-            firstName: stuInfo.firstName,
-            lastName: stuInfo.lastName,
-            sid: stuInfo.studentID,
-            hasGraduated: stuInfo.hasGraduated,
-            email: stuInfo.email,
-            gpa: stuInfo.gpa,
-            entrySemester: stuInfo.entrySemester,
-            //entryYear: stuInfo.entryYear,
-            //gradSemester: stuInfo.gradSemester,
-            expectedGraduation: stuInfo.gradYear,
-            nSemestersInProgram: stuInfo.nSemestersInProgram,
-            //totalCredits: stuInfo.totalCredits,
-            projectOption: stuInfo.projectOption,
-            advisor: stuInfo.advisor,
-            hasGraduated: stuInfo.hasGraduated,
-            department: stuInfo.departmentID,
-            track:stuInfo.track,
-            requirementsVersion: stuInfo.requirementsVersion           
-        });    
-        <Redirect to="/viewStudent" />
-
-    }
-     
-
-
-
 
     //Displays or Hides the Modal Dialog PopUp 
     showModalDialogPopUp = (type) => {
@@ -132,26 +87,18 @@ class EditStudentScreen extends Component {
         this.setState({coursePlans: courseArr, showModalDialogPopup: false})
     }
 
-    //add service here.
     editStudent() {
         var data = {
+            studentID: this.state.id,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             department: this.state.department,
             advisor: this.state.advisor,
             track: this.state.track,
-            hasGraduated: this.state.hasGraduated,
             entrySemester: this.state.entrySemester,
             expectedGraduation: this.state.expectedGraduation,
-            gpa: this.state.gpa,
-            projectOption: this.state.projectOption,
-            requirementsVersion: this.state.requirementsVersion,
-            nSemestersInProgram: this.state.nSemestersInProgram
+            gpa: this.state.gpa
         };
-
-        MSStudentService.updateinfo( this.state.email ,data).then( ()=>{
-            <Redirect to= '/viewStudent' />
-        });
     }
 
     render() {
@@ -271,6 +218,67 @@ class EditStudentScreen extends Component {
             options = type.map((el) => <option key={el}>{el}</option>); 
         }          
         
+        var courseTable = [];
+        var semester = new Map(); //map semester with course
+
+        const createCourseEntry = (course) => {
+            var divId = "course" + course.index;
+            if (!course.grade){ //Grade is null so can edit course or grade
+                return <div id={divId}>
+                <input className="coursePlan" defaultValue={course.courseName} onChange={(event) => editCourseHandlerCourse(event, course)}/>
+                <input className="coursePlan" defaultValue={course.grade} onChange={(event) => editCourseHandlerGrade(event, course)}/>
+                </div>;
+            }
+            else{
+                return <div id={divId}>
+                <input className="coursePlan" defaultValue={course.courseName} disabled/>
+                <input className="coursePlan" defaultValue={course.grade} onChange={(event) => editCourseHandlerGrade(event, course)}/>
+                </div>;
+            }
+        }
+
+        const editCourseHandlerCourse = (event, course) => {
+            var newCoursePlanAr = this.state.coursePlans;
+            var editedEntry = {courseOfferingID: course.courseOfferingID, courseName: event.target.value, semester: course.semester, grade: course.grade};
+            newCoursePlanAr[course.index] = editedEntry;
+            this.setState({coursePlans: newCoursePlanAr})  
+        }
+
+        const editCourseHandlerGrade = (event, course) => {
+            var newCoursePlanAr = this.state.coursePlans;
+            var editedEntry = {courseOfferingID: course.courseOfferingID, courseName: course.courseName, semester: course.semester, grade: event.target.value};
+            newCoursePlanAr[course.index] = editedEntry;
+            this.setState({coursePlans: newCoursePlanAr})  
+        }
+
+        const createCourseTables = () => {  
+            console.log(this.state.coursePlans);   
+            var course = this.state.coursePlans;
+            //Get Semesters and courses 
+            for (let i = 0; i < course.length; i++){
+                if (semester.has(course[i].semester) == false){
+                    semester.set(course[i].semester, [{courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i}]);
+                }
+                else{
+                    let courseArr = semester.get(course[i].semester);
+                    courseArr.push({courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i});
+                    semester.set(course[i].semester, courseArr);
+                }
+            }
+            let semestersSorted = new Map([...semester].sort((a, b) => String(a[0]).localeCompare(b[0])));
+            //Note: Create new sort method to display semesters in correct order
+            semestersSorted.forEach( function(courseArray, semester){
+                courseTable.push(<div>
+                <input className="semesterTableHeader" value={semester} disabled/>
+                </div>)
+                for(let i = 0; i < courseArray.length; i++){
+                    courseTable.push(createCourseEntry(courseArray[i]));
+                }
+                courseTable.push(<br></br>);
+            });
+            return courseTable;
+        }
+
         var commentTable = [];
 
         const alertAddComment = () => {
@@ -524,10 +532,8 @@ class EditStudentScreen extends Component {
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-
-
+                        {createCourseTables()}
                         </div>
-                        <br></br>
                         <br></br>
 
                         <h2 id="viewStudentFormHeader">Comments 

@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { Link  } from 'react-router-dom';
-
-import AuthService from "../../services/auth.service";
-import MSStudentService from "../../services/msStudent.service";
-
-
+import { Link } from 'react-router-dom';
+import MaterialTable from "material-table";
 
 class ViewStudentScreen extends Component {
     constructor(props){
-        super(props);
+        super(props)
         this.state = {    
-            currentUser: AuthService.getCurrentUser(),
             showModalDialogPopup: false,
             modalType: "none",
             student: [],
@@ -33,7 +28,7 @@ class ViewStudentScreen extends Component {
             projectOption: null,
             requirementVersionSemester: null,
             requirementVersionYear: null,
-            coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
+            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -58,42 +53,45 @@ class ViewStudentScreen extends Component {
         }    
     }
 
-  
-    
-    async componentDidMount(){
-        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        await MSStudentService.getinfo(this.props.location.state.email);
- 
-        var stuInfo= await MSStudentService.getStudentInfo();
-        console.log(stuInfo);
-            
-        this.setState({
-            firstName: stuInfo.firstName,
-            lastName: stuInfo.lastName,
-            sid: stuInfo.studentID,
-            hasGraduated: stuInfo.hasGraduated,
-            email: stuInfo.email,
-            gpa: stuInfo.gpa,
-            entrySemester: stuInfo.entrySemester,
-            //entryYear: stuInfo.entryYear,
-            //gradSemester: stuInfo.gradSemester,
-            expectedGraduation: stuInfo.gradYear,
-            nSemestersInProgram: stuInfo.nSemestersInProgram,
-            //totalCredits: stuInfo.totalCredits,
-            projectOption: stuInfo.projectOption,
-            advisor: stuInfo.advisor,
-            hasGraduated: stuInfo.hasGraduated,
-            department: stuInfo.departmentID,
-            track: stuInfo.track,
-            requirementsVersion: stuInfo.requirementsVersion           
-
-        });    
-    }
-     
-
-
-
     render() {
+        var courseTable = [];
+        var semester = new Map(); //map semester with course
+
+        const createCourseEntry = (course) => {
+            var divId = "course" + course.index;
+            return <div id={divId}>
+            <input className="coursePlan" value={course.courseName} disabled/>
+            <input className="coursePlan" value={course.grade} disabled/>
+            </div>;
+        }
+
+        const createCourseTables = () => {  
+            var course = this.state.coursePlans;
+            //Get Semesters and courses 
+            for (let i = 0; i < course.length; i++){
+                if (semester.has(course[i].semester) == false){
+                    semester.set(course[i].semester, [{courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i}]);
+                }
+                else{
+                    let courseArr = semester.get(course[i].semester);
+                    courseArr.push({courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i});
+                    semester.set(course[i].semester, courseArr);
+                }
+            }
+            let semestersSorted = new Map([...semester].sort((a, b) => String(a[0]).localeCompare(b[0])));
+            //Note: Create new sort method to display semesters in correct order
+            semestersSorted.forEach( function(courseArray, semester){
+                courseTable.push(<div>
+                <input className="semesterTableHeader" value={semester} disabled/>
+                </div>)
+                for(let i = 0; i < courseArray.length; i++){
+                    courseTable.push(createCourseEntry(courseArray[i]));
+                }
+                courseTable.push(<br></br>);
+            });
+            return courseTable;
+        }
+
         var commentTable = [];
         const createEntry = (comment) => {
             var divId = "comment" + comment.index;
@@ -125,7 +123,7 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.sid} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.id} disabled/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
@@ -167,7 +165,7 @@ class ViewStudentScreen extends Component {
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-                            
+                        {createCourseTables()}
                         </div>
                         <br></br>
                         <br></br>
