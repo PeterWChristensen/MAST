@@ -29,7 +29,10 @@ class EditStudentScreen extends Component {
             password: "",
             gpa: "",
             entrySemester: "",
+            entryYear: "",
+            gradSemester: "",
             expectedGraduation: "",
+            totalCredits: "",
             hasGraduated: "",
             department: "",
             track : "",
@@ -37,6 +40,7 @@ class EditStudentScreen extends Component {
             advisor: "",
             projectOption: "",
             requirementsVersion: "",
+            requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: ""}],
             coursePlanColumns: [
                 {
@@ -65,8 +69,12 @@ class EditStudentScreen extends Component {
 
 
     async componentDidMount(){
-        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        await MSStudentService.getinfo(this.props.location.state.email);
+        await console.log("componentDidMount at Student_screens/EditStudentScreen.js");
+        if(localStorage.getItem('info')){
+            await MSStudentService.getinfo( MSStudentService.getStudentInfo().email);
+        }else{
+            await MSStudentService.getinfo(this.props.location.state.email);
+        }
  
         var stuInfo= await MSStudentService.getStudentInfo();
         console.log(stuInfo);
@@ -79,19 +87,20 @@ class EditStudentScreen extends Component {
             email: stuInfo.email,
             gpa: stuInfo.gpa,
             entrySemester: stuInfo.entrySemester,
-            //entryYear: stuInfo.entryYear,
-            //gradSemester: stuInfo.gradSemester,
+            entryYear: stuInfo.entryYear,
+            gradSemester: stuInfo.gradSemester,
             expectedGraduation: stuInfo.gradYear,
             nSemestersInProgram: stuInfo.nSemestersInProgram,
-            //totalCredits: stuInfo.totalCredits,
+            totalCredits: stuInfo.totalCredits,
             projectOption: stuInfo.projectOption,
             advisor: stuInfo.advisor,
-            hasGraduated: stuInfo.hasGraduated,
             department: stuInfo.departmentID,
             track:stuInfo.track,
-            requirementsVersion: stuInfo.requirementsVersion           
+            requirementsVersion: stuInfo.requirementVersionYear,
+            requirementVersionSemester: stuInfo.requirementVersionSemester
+           
         });    
-        <Redirect to="/viewStudent" />
+        // <Redirect to="/viewStudent" />
 
     }
      
@@ -130,25 +139,33 @@ class EditStudentScreen extends Component {
     }
 
     //add service here.
-    editStudent() {
+    async editStudent() {
         var data = {
+            studentID: this.state.sid,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            department: this.state.department,
-            advisor: this.state.advisor,
-            track: this.state.track,
-            hasGraduated: this.state.hasGraduated,
-            entrySemester: this.state.entrySemester,
-            expectedGraduation: this.state.expectedGraduation,
             gpa: this.state.gpa,
+            entrySemester: this.state.entrySemester,
+            entryYear: this.state.entryYear,
+            gradSemester: this.state.gradSemester,
+            gradYear: this.state.expectedGraduation,
+            hasGraduated: this.state.hasGraduated,
+            departmentID: this.state.department,
+            track: this.state.track,
+            nSemestersInProgram: this.state.nSemestersInProgram,
+            advisor: this.state.advisor,
             projectOption: this.state.projectOption,
-            requirementsVersion: this.state.requirementsVersion,
-            nSemestersInProgram: this.state.nSemestersInProgram
+            requirementVersionYear: this.state.requirementsVersion,
+            email: this.state.email,
+            totalCredits: this.state.totalCredits,            
+            requirementVersionSemester: this.state.requirementVersionSemester
         };
 
-        MSStudentService.updateinfo( this.state.email ,data).then( ()=>{
-            <Redirect to= '/viewStudent' />
-        });
+        console.log("update info");
+        console.log("states");
+        console.log(this.state);        
+        await MSStudentService.updateinfo( this.state.email ,data);
+        await MSStudentService.getinfo(this.state.email);
     }
 
     render() {

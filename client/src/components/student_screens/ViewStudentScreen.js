@@ -22,14 +22,18 @@ class ViewStudentScreen extends Component {
             password: "password",
             gpa: "",
             entrySemester: "",
+            entryYear: "",
+            gradSemester: "",
             expectedGraduation: "",
             hasGraduated: "",
             department: "",
             track : "",
             nSemestersInProgram: "", 
             advisor: "",
+            totalCredits: "",
             projectOption: "",
             requirementsVersion: "",
+            requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
             coursePlanColumns: [
                 {
@@ -58,9 +62,14 @@ class ViewStudentScreen extends Component {
   
     
     async componentDidMount(){
-        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        await MSStudentService.getinfo(this.props.location.state.email);
- 
+        await console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+        if(localStorage.getItem('info')){
+            await MSStudentService.getinfo( MSStudentService.getStudentInfo().email);
+        }else{
+            await MSStudentService.getinfo(this.props.location.state.email);
+        }
+        await MSStudentService.getStudentInfo();
+        await MSStudentService.getStudentInfo();
         var stuInfo= await MSStudentService.getStudentInfo();
         console.log(stuInfo);
             
@@ -72,17 +81,17 @@ class ViewStudentScreen extends Component {
             email: stuInfo.email,
             gpa: stuInfo.gpa,
             entrySemester: stuInfo.entrySemester,
-            //entryYear: stuInfo.entryYear,
-            //gradSemester: stuInfo.gradSemester,
+            entryYear: stuInfo.entryYear,
+            gradSemester: stuInfo.gradSemester,
             expectedGraduation: stuInfo.gradYear,
             nSemestersInProgram: stuInfo.nSemestersInProgram,
-            //totalCredits: stuInfo.totalCredits,
             projectOption: stuInfo.projectOption,
             advisor: stuInfo.advisor,
-            hasGraduated: stuInfo.hasGraduated,
             department: stuInfo.departmentID,
             track: stuInfo.track,
-            requirementsVersion: stuInfo.requirementsVersion           
+            requirementsVersion: stuInfo.requirementVersionYear,
+            requirementVersionSemester: stuInfo.requirementVersionSemester,
+            totalCredits: stuInfo.totalCredits
 
         });    
     }

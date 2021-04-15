@@ -33,7 +33,9 @@ exports.getinfo = (req, res) => {
                 email: user.email,
                 departmentID: user.departmentID,
                 track: user.track,
-                requirementsVersion: user.requirementVersionYear
+                requirementVersionYear: user.requirementVersionYear,
+                requirementVersionSemester: user.requirementVersionSemester
+                
             };  
             res.status(200).send(student);  
         })
@@ -50,43 +52,50 @@ exports.updateinfo = (req, res) => {
   console.log(req.body);
   Student.update(
       {
+      studentID: req.body.data.studentID,
       firstName:req.body.data.firstName,
       lastName: req.body.data.lastName,
       entrySemester: req.body.data.entrySemester,
-      // entryYear: req.body.data.entryYear,
-      // gradSemester: req.body.data.gradSemester,
-      gradYear: req.body.data.expectedGraduation,
+      entryYear: req.body.data.entryYear,
+      gradSemester: req.body.data.gradSemester,
+      gradYear: req.body.data.gradYear,
       nSemestersInProgram: req.body.data.nSemestersInProgram,
       gpa: req.body.data.gpa,
-      // totalCredits: req.body.data.totalCredits,
+      totalCredits: req.body.data.totalCredits,
       projectOption: req.body.data.projectOption,
       advisor: req.body.data.advisor,
       hasGraduated: req.body.data.hasGraduated,
-      // email: req.body.data.email,
+      email: req.body.data.email,
       track: req.body.data.track,
-      departmentID: req.body.data.department,
-      requirementsVersion: req.body.data.requirementsVersion
+      departmentID: req.body.data.departmentID,
+      requirementVersionYear: req.body.data.requirementVersionYear,
+      requirementVersionSemester: req.body.data.requirementVersionSemester
     },
       {where: { email: req.body.username }}
       ).then(user => {
           if (!user) {
               return res.status(404).send({ message: "Student Not found." });
-            }     
+            }   
+            
           const student = {
-              firstName: req.body.data.firstName,
-              lastName: req.body.data.lastName,
-              entrySemester: req.body.data.entrySemester,
-              entryYear: req.body.data.entryYear,
-              gradSemester: req.body.data.gradSemester,
-              gradYear: req.body.data.gradYear,
-              nSemestersInProgram: req.body.data.nSemestersInProgram,
-              gpa: req.body.data.gpa,
-              totalCredits: req.body.data.totalCredits,
-              projectOption: req.body.data.projectOption,
-              advisor: req.body.data.advisor,
-              hasGraduated: req.body.data.hasGraduated,
-              email: req.body.data.email,
-              departmentID: req.body.data.departmentID
+            studentID: req.body.data.studentID,
+            firstName:req.body.data.firstName,
+            lastName: req.body.data.lastName,
+            entrySemester: req.body.data.entrySemester,
+            entryYear: req.body.data.entryYear,
+            gradSemester: req.body.data.gradSemester,
+            gradYear: req.body.data.gradYear,
+            nSemestersInProgram: req.body.data.nSemestersInProgram,
+            gpa: req.body.data.gpa,
+            totalCredits: req.body.data.totalCredits,
+            projectOption: req.body.data.projectOption,
+            advisor: req.body.data.advisor,
+            hasGraduated: req.body.data.hasGraduated,
+            email: req.body.data.email,
+            track: req.body.data.track,
+            departmentID: req.body.data.departmentID,
+            requirementVersionYear: req.body.data.requirementVersionYear,
+            requirementVersionSemester: req.body.data.requirementVersionSemester
           };  
           res.status(200).send(student);  
       })
