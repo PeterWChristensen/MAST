@@ -21,6 +21,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import PageView from '@material-ui/icons/Pageview';
 import { forwardRef } from 'react';
+import MSStudentService from "../../services/msStudent.service";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -54,7 +55,8 @@ class GPDHomeScreen extends Component {
             columns: [
                 {
                     title: "ID",
-                    field: "studentID"
+                    field: "studentID",
+                    render: rowData => <Link to={{pathname: '/viewStudent', state: {email: rowData.email}}}>{rowData.studentID}</Link>
                 },
                 {
                     title: "First Name",
@@ -121,6 +123,8 @@ class GPDHomeScreen extends Component {
             .catch(e => {
                 console.log(e);
             });
+
+    MSStudentService.logout();
     }
 
     render() {
@@ -151,7 +155,7 @@ class GPDHomeScreen extends Component {
                                     {
                                         icon: () => <PageView/>,
                                         tooltip: 'View Student',
-                                        onClick: (event, rowData) => alert("Should link to view student")
+                                        onClick: (event, rowData) => console.log(rowData)
                                     }
                                 ]}/>
                         </Box>

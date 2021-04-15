@@ -284,15 +284,20 @@ class ModalWindow extends React.Component {
                 firstName: data[i].first_name,
                 lastName: data[i].last_name,
                 email: data[i].email,
-                department: data[i].department,
+                departmentID: data[i].department,
                 track: data[i].track,
                 entrySemester: data[i].entry_semester,
                 entryYear: data[i].entry_year,
                 requirementVersionSemester: data[i].requirement_version_semester,
                 requirementVersionYear: data[i].requirement_version_year,
-                graduationSemester: data[i].graduation_semester,
-                graduationYear: data[i].graduation_year,
-                password: data[i].password
+                gradSemester: data[i].graduation_semester,
+                gradYear: data[i].graduation_year,
+                password: data[i].password,
+                gpa: null,
+                totalCredits: null,
+                projectOption: null,
+                advisor: null,
+                hasGraduated: null
             };
             console.log(data_temp)
             StudentService.create(data_temp)
@@ -302,15 +307,20 @@ class ModalWindow extends React.Component {
                     firstName: response.data_temp.firstName,
                     lastName: response.data_temp.lastName,
                     email: response.data_temp.email,
-                    department: response.data_temp.department,
+                    departmentID: response.data_temp.departmentID,
                     track: response.data_temp.track,
                     entrySemester: response.data_temp.entrySemester,
                     entryYear: response.data_temp.entryYear,
                     requirementVersionSemester: response.data_temp.requirementVersionSemester,
                     requirementVersionYear: response.data_temp.requirementVersionYear,
-                    graduationSemester: response.data_temp.graduationSemester,
-                    graduationYear: response.data_temp.graduationYear,
-                    password: response.data_temp.password
+                    gradSemester: response.data_temp.gradSemester,
+                    gradYear: response.data_temp.gradYear,
+                    password: response.data_temp.password,
+                    gpa: response.data_temp.gpa,
+                    totalCredits: response.data_temp.totalCredits,
+                    projectOption: response.data_temp.projectOption,
+                    advisor: response.data_temp.advisor,
+                    hasGraduated: response.data_temp.hasGraduated
                 });
                 console.log(response.data_temp);
             })
@@ -326,10 +336,13 @@ class ModalWindow extends React.Component {
         for (i = 0; i < plan.length; i++) {
 
             let offeringCourseID = plan[i].department + plan[i].course_num + plan[i].semester + plan[i].year + plan[i].section;
-
+            let courseName = plan[i].department + " " + plan[i].course_num;
+            let semester = plan[i].semester + " " + plan[i].year 
             var data_plan = {
                 studentID: plan[i].sbu_id,
                 courseOfferingID: offeringCourseID,
+                courseName: courseName,
+                semester: semester,
                 grade: plan[i].grade
             };
             console.log(data_plan.studentID)
@@ -341,6 +354,8 @@ class ModalWindow extends React.Component {
                 this.setState({
                     studentID: response.data_plan.studentID,
                     courseOfferingID: response.data_plan.courseOfferingID,
+                    courseName: response.data_plan.courseName,
+                    semester: response.data_plan.semester,
                     grade: response.data_plan.grade
                 });
                 console.log(response.data_plan);
@@ -564,6 +579,29 @@ class ModalWindow extends React.Component {
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
         }
+        else if(this.props.modalType === "editStudent"){
+            modalContents =
+            <div className="modal" id="editStudent" header="Add" >
+                <p id="modalDialogMessage"><br></br>
+                Confirm edits to student?
+                <br></br><br></br></p>
+                <Link to="/viewStudent"><button className="modalButton" onClick={this.props.editStudent} >Yes</button></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
+            </div>;
+        }
+        else if(this.props.modalType === "cancelEditStudent"){
+            modalContents =
+            <div className="modal" id="editStudent" header="Cancel"  >
+                <p id="modalDialogMessage"> <br></br>
+                Cancel editing student?
+                <br></br><br></br></p>
+                <Link to="/viewStudent"><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
+            </div>
+        }
+
         return (  
         <div>
             <div id = "modal_background">

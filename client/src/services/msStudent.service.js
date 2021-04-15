@@ -9,13 +9,34 @@ class MSStudentService {
             username
           })
           .then(response => {
-            console.log("return value from service");
-            console.log(response.data);            
+            localStorage.setItem("info", JSON.stringify(response.data));
             return response.data;
           }).catch(err => console.error(err));
       }
-    }    
 
+      updateinfo(username,data) {
+        return axios
+        .put("/updateinfo", {
+              username,
+              data
+            })
+            .then(response => {
+              localStorage.setItem("info", JSON.stringify(response.data));
+              return response.data;
+            }).catch(err => console.error(err));
+        }
+
+      logout() {
+        localStorage.removeItem("info");
+      }
+      
+      
+    
+      getStudentInfo() {
+        return JSON.parse(localStorage.getItem('info'));
+      }
+
+}   
 export default new MSStudentService();
 
 

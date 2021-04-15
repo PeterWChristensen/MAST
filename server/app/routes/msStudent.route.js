@@ -6,5 +6,7 @@ module.exports = app => {
 
     router.post("/getinfo", student.getinfo);
 
+    router.put("/updateinfo", student.updateinfo);
+
     app.use('/', router);
 }

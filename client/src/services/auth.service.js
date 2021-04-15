@@ -20,7 +20,9 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("info");
   }
+
 
     // Use it for addStudent later.
   register(username, userID, password) {
@@ -33,7 +35,7 @@ class AuthService {
   }
 // get stored user information (including JWT)
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('user'));;
   }
 }
 

@@ -45,13 +45,22 @@ const Student = sequelize.define("Student", {
         type: Sequelize.STRING
     },
     hasGraduated: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
     },
     email: {
         type: Sequelize.STRING
     },
     departmentID: {
         type: Sequelize.STRING
+    },
+    track: {
+        type: Sequelize.STRING
+    },
+    requirementVersionSemester: {
+        type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
+    },
+    requirementVersionYear: {
+        type: Sequelize.INTEGER
     }
 }, { 
     tableName: 'Student',
