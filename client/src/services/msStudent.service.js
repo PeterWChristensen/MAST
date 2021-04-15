@@ -26,7 +26,7 @@ class MSStudentService {
             }).catch(err => console.error(err));
         }
 
-      logout() {
+      removeInfo() {
         localStorage.removeItem("info");
       }
       

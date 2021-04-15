@@ -13,7 +13,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    MSStudentService.logout();
+    MSStudentService.removeInfo();
 
     UserService.getPublicContent().then(
       response => {

@@ -14,7 +14,7 @@ class ViewStudentScreen extends Component {
             firstName: "",
             lastName: "",
             email: "",
-            sid: "",
+            studentID: "",
             password: "password",
             gpa: "",
             entrySemester: "",
@@ -22,13 +22,13 @@ class ViewStudentScreen extends Component {
             gradSemester: "",
             gradYear: "",
             hasGraduated: "",
-            department: "",
+            departmentID: "",
             track : "",
             nSemestersInProgram: "", 
             advisor: "",
             totalCredits: "",
             projectOption: "",
-            requirementsVersionYear: "",
+            requirementVersionYear: "",
             requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
@@ -58,32 +58,37 @@ class ViewStudentScreen extends Component {
   
     
     async componentDidMount(){
-        await console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+
+        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+
+        var stuInfo;
         if(localStorage.getItem('info')){
-            await MSStudentService.getinfo( MSStudentService.getStudentInfo().email);
+            console.log("if at view");
+            await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
+            stuInfo= await MSStudentService.getStudentInfo();
         }else{
+            console.log("else at view");
             await MSStudentService.getinfo(this.props.location.state.email);
+            stuInfo= await MSStudentService.getStudentInfo();
         }
-        await MSStudentService.getStudentInfo();
-        await MSStudentService.getStudentInfo();
-        var stuInfo= await MSStudentService.getStudentInfo();
+
         console.log(stuInfo);
             
         this.setState({
             firstName: stuInfo.firstName,
             lastName: stuInfo.lastName,
-            sid: stuInfo.studentID,
+            studentID: stuInfo.studentID,
             hasGraduated: stuInfo.hasGraduated,
             email: stuInfo.email,
             gpa: stuInfo.gpa,
             entrySemester: stuInfo.entrySemester,
             entryYear: stuInfo.entryYear,
             gradSemester: stuInfo.gradSemester,
-            expectedGraduation: stuInfo.gradYear,
+            gradYear: stuInfo.gradYear,
             nSemestersInProgram: stuInfo.nSemestersInProgram,
             projectOption: stuInfo.projectOption,
             advisor: stuInfo.advisor,
-            department: stuInfo.departmentID,
+            departmentID: stuInfo.departmentID,
             track: stuInfo.track,
             requirementVersionYear: stuInfo.requirementVersionYear,
             requirementVersionSemester: stuInfo.requirementVersionSemester,
@@ -163,7 +168,7 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.id} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.studentID} disabled/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
@@ -179,7 +184,7 @@ class ViewStudentScreen extends Component {
                         </p>                        
                         <br></br>                        
                         <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; # Semesters In Program:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.department} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.departmentID} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track} disabled/>
                         <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} disabled/>
                         </p>

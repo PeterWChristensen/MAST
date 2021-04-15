@@ -17,7 +17,7 @@ class EditStudentScreen extends Component {
             student: [],
             firstName: "",
             lastName: "",
-            sid: "",
+            studentID: "",
             email: "",
             password: "",
             gpa: "",
@@ -27,7 +27,7 @@ class EditStudentScreen extends Component {
             gradYear: "",
             totalCredits: "",
             hasGraduated: "",
-            department: "",
+            departmentID: "",
             track : "",
             nSemestersInProgram: "", 
             advisor: "",
@@ -62,24 +62,26 @@ class EditStudentScreen extends Component {
 
 
     async componentDidMount(){
-        await console.log("componentDidMount at Student_screens/EditStudentScreen.js");
+        console.log("componentDidMount at Student_screens/EditStudentScreen.js");
+        var stuInfo;
         if(localStorage.getItem('info')){
-            await MSStudentService.getinfo( MSStudentService.getStudentInfo().email);
-        }else{
-            await MSStudentService.getinfo(this.props.location.state.email);
-        }
- 
-        await MSStudentService.getStudentInfo();
-        await MSStudentService.getStudentInfo();
-        var stuInfo= await MSStudentService.getStudentInfo();
+            console.log("this is working IF.");
+            await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
+            stuInfo= await MSStudentService.getStudentInfo();
 
+        }else{
+            console.log("this is working ELSE.");
+            await MSStudentService.getinfo(this.props.location.state.email);
+            stuInfo= await MSStudentService.getStudentInfo();
+
+        }
         console.log(stuInfo);
 
         
         this.setState({
             firstName: stuInfo.firstName,
             lastName: stuInfo.lastName,
-            sid: stuInfo.studentID,
+            studentID: stuInfo.studentID,
             hasGraduated: stuInfo.hasGraduated,
             email: stuInfo.email,
             gpa: stuInfo.gpa,
@@ -91,18 +93,14 @@ class EditStudentScreen extends Component {
             totalCredits: stuInfo.totalCredits,
             projectOption: stuInfo.projectOption,
             advisor: stuInfo.advisor,
-            department: stuInfo.departmentID,
+            departmentID: stuInfo.departmentID,
             track:stuInfo.track,
             requirementVersionYear: stuInfo.requirementVersionYear,
             requirementVersionSemester: stuInfo.requirementVersionSemester
            
         });    
-        // <Redirect to="/viewStudent" />
-
     }
      
-
-
 
 
     //Displays or Hides the Modal Dialog PopUp 
@@ -135,10 +133,9 @@ class EditStudentScreen extends Component {
         this.setState({coursePlans: courseArr, showModalDialogPopup: false})
     }
 
-    //add service here.
     async editStudent() {
         var data = {
-            studentID: this.state.sid,
+            studentID: this.state.studentID,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             gpa: this.state.gpa,
@@ -147,7 +144,7 @@ class EditStudentScreen extends Component {
             gradSemester: this.state.gradSemester,
             gradYear: this.state.gradYear,
             hasGraduated: this.state.hasGraduated,
-            departmentID: this.state.department,
+            departmentID: this.state.departmentID,
             track: this.state.track,
             nSemestersInProgram: this.state.nSemestersInProgram,
             advisor: this.state.advisor,
@@ -157,13 +154,14 @@ class EditStudentScreen extends Component {
             totalCredits: this.state.totalCredits,            
             requirementVersionSemester: this.state.requirementVersionSemester
         };
-
-        console.log("update info");
-        console.log("states");
-        console.log(this.state);        
         await MSStudentService.updateinfo( this.state.email ,data);
         await MSStudentService.getinfo(this.state.email);
+        console.log("this is editstudent() at EditStudentScreen");
+        console.log("update info");
+        console.log("states");
+        console.log(await MSStudentService.getinfo(this.state.email));               
     }
+
 
     render() {
         const changeFirstNameHandler = (event) => { 
@@ -173,7 +171,7 @@ class EditStudentScreen extends Component {
             this.setState({lastName: event.target.value}); 
         }; 
         const changeSBUIDHandler = (event) => { 
-            this.setState({sid: event.target.value}); 
+            this.setState({studentID: event.target.value}); 
         }; 
 
         const changeEmailOptionHandler = (event) => { 
@@ -415,7 +413,7 @@ class EditStudentScreen extends Component {
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} onChange={changeFirstNameHandler}/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} onChange={changeLastNameHandler}/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.sid} onChange={changeSBUIDHandler}/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.studentID} onChange={changeSBUIDHandler}/>
                         </p><br></br>                        
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.email} onChange={changeEmailOptionHandler}/>

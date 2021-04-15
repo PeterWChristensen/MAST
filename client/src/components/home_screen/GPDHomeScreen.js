@@ -124,7 +124,7 @@ class GPDHomeScreen extends Component {
                 console.log(e);
             });
 
-    MSStudentService.logout();
+    MSStudentService.removeInfo();
     }
 
     render() {
