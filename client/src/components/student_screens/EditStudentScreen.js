@@ -425,14 +425,14 @@ class EditStudentScreen extends Component {
                         <br></br>
                         <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Graduated:
                         <br></br>
-                        <select id="semesterSelect" className="dropdownSelect" onChange={changeEntrySemesterOptionHandler}>
+                        <select id="semesterSelect" className="dropdownSelect" defaultValue={this.state.entrySemester} onChange={changeEntrySemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer1</option>
                             <option value="Summer">Summer2</option>
                         </select>
-                        <select id="entryYearSelect" className="dropdownSelectYear" onChange={changeEntryYearOptionHandler}>
+                        <select id="entryYearSelect" className="dropdownSelectYear" defaultValue={this.state.entryYear} onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
@@ -466,14 +466,14 @@ class EditStudentScreen extends Component {
                             <option value="1991">1991</option>
                             <option value="1990">1990</option>
                         </select>
-                        <select id="gradSemesterSelect" className="dropdownSelect" onChange={changeExpectedGraduationSemesterOptionHandler}>
+                        <select id="gradSemesterSelect" className="dropdownSelect" defaultValue={this.state.gradSemester} onChange={changeExpectedGraduationSemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer1</option>
                             <option value="Summer">Summer2</option>
                         </select>
-                        <select id="gradYearSelect" className="dropdownSelectYear" onChange={changeExpectedGraduationYearOptionHandler}>
+                        <select id="gradYearSelect" className="dropdownSelectYear" defaultValue={this.state.gradYear} onChange={changeExpectedGraduationYearOptionHandler}>
                             <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
@@ -511,7 +511,7 @@ class EditStudentScreen extends Component {
                             <option value="1991">1991</option>
                             <option value="1990">1990</option>
                         </select> &nbsp;
-                        <select id="graduatedSelect" className="viewStudent_input" onChange={changeGraduatedOptionHandler}>
+                        <select id="graduatedSelect" className="viewStudent_input" defaultValue={this.state.hasGraduated} onChange={changeGraduatedOptionHandler}>
                             <option value="False">False</option>
                             <option value="True">True</option>
                         </select>
@@ -519,13 +519,13 @@ class EditStudentScreen extends Component {
                         <br></br>                        
                         <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; # Semesters In Program:
                         <br></br>
-                        <select id="departmentSelect" className="viewStudent_input" onChange={changeDepartmentOptionHandler}>
+                        <select id="departmentSelect" className="viewStudent_input" defaultValue={this.state.departmentID} onChange={changeDepartmentOptionHandler}>
                             <option value="AMS">AMS</option>
                             <option value="BMI">BMI</option>
                             <option value="ESE">ESE</option>
                             <option value="CSE">CSE</option>
                         </select>&nbsp;
-                        <select id="semesterSelect" className="viewStudent_input" onChange={changeTrackOptionHandler}>
+                        <select id="semesterSelect" className="viewStudent_input" defaultValue={this.state.track} onChange={changeTrackOptionHandler}>
                             {options}
                         </select>&nbsp;
                         <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} onChange={changeNumSemestersOptionHandler}/>
@@ -534,14 +534,14 @@ class EditStudentScreen extends Component {
                         <p className="viewStudent_prompt">Advisor:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Project: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Requirements Version:
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} onChange={changeAdvisorHandler}/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} onChange={changeProjectOptionHandler}/>
-                        <select id="reqsemesterSelect" className="dropdownSelect" onChange={changeReqVersionSemesterOptionHandler}>
+                        <select id="reqsemesterSelect" className="dropdownSelect" defaultValue={this.state.requirementVersionSemester} onChange={changeReqVersionSemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer1</option>
                             <option value="Summer">Summer2</option>
                         </select>
-                        <select id="reqYearSelect" className="dropdownSelectYear" onChange={changeReqVersionYearOptionHandler}>
+                        <select id="reqYearSelect" className="dropdownSelectYear" defaultValue={this.state.requirementVersionYear} onChange={changeReqVersionYearOptionHandler}>
                             <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>

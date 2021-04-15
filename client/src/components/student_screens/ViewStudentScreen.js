@@ -173,8 +173,8 @@ class ViewStudentScreen extends Component {
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Graduated:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.expectedGraduation} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester + " " + this.state.entryYear} disabled/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.gradSemester + " " + this.state.gradYear} disabled/>
                         <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated} disabled/>
                         </p>                        
                         <br></br>                        
@@ -187,7 +187,7 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt">Advisor:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Project: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Requirements Version:
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementsVersion} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementVersionSemester + " " + this.state.requirementVersionYear} disabled/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Total Credits: 
