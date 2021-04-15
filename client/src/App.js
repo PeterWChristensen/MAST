@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Switch, Route, Link ,Redirect  } from 'react-router-dom';
 
@@ -71,7 +72,7 @@ class App extends Component{
                 
                 {showGPDcomponent && (
                   <Link to={"/gpd"} className="navBarButtons">
-                    Home
+                    TASK
                   </Link>
                 )}
 {/* 
@@ -124,4 +125,3 @@ class App extends Component{
   }
 }
 export  default App;
-

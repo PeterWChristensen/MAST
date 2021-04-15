@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import MaterialTable from "material-table";
+
+import AuthService from "../../services/auth.service";
+import MSStudentService from "../../services/msStudent.service";
+
+
 
 class ViewStudentScreen extends Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {    
+            currentUser: AuthService.getCurrentUser(),
             showModalDialogPopup: false,
             modalType: "none",
             student: [],
             firstName: "",
             lastName: "",
             email: "",
-            password: "",
+            sid: "",
+            password: "password",
             gpa: "",
             entrySemester: "",
             expectedGraduation: "",
@@ -48,7 +55,47 @@ class ViewStudentScreen extends Component {
         }    
     }
 
+  
+    
+    async componentDidMount(){
+        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+        await MSStudentService.getinfo(this.props.location.state.email);
+ 
+        var stuInfo= await MSStudentService.getStudentInfo();
+        console.log(stuInfo);
+            
+        this.setState({
+            firstName: stuInfo.firstName,
+            lastName: stuInfo.lastName,
+            sid: stuInfo.studentID,
+            hasGraduated: stuInfo.hasGraduated,
+            email: stuInfo.email,
+            gpa: stuInfo.gpa,
+            entrySemester: stuInfo.entrySemester,
+            //entryYear: stuInfo.entryYear,
+            //gradSemester: stuInfo.gradSemester,
+            expectedGraduation: stuInfo.gradYear,
+            nSemestersInProgram: stuInfo.nSemestersInProgram,
+            //totalCredits: stuInfo.totalCredits,
+            projectOption: stuInfo.projectOption,
+            advisor: stuInfo.advisor,
+            hasGraduated: stuInfo.hasGraduated,
+            department: stuInfo.departmentID,
+            track: stuInfo.track,
+            requirementsVersion: stuInfo.requirementsVersion           
+
+        });    
+    }
+     
+
+
+
     render() {
+        // const { firstName, lastName, email,sid,password,gpa,entrySemester,expectedGraduation,
+        //     hasGraduated,department,track,nSemestersInProgram,advisor,projectOption,requirementsVersion,
+        // coursePlans ,coursePlanColumns, comments,commentColumns} = this.state;
+
+
         return (
             <div id="viewStudentFormBackground">
                 <div id="viewStudentForm">
@@ -59,7 +106,7 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.id} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.sid} disabled/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
