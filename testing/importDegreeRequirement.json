@@ -1,0 +1,13 @@
+{
+		"requirementID": 123456,
+		"departID": "CSE",
+		"track": "N/A",
+		"versionSemester": "Fall",
+		"versionYear": "2021",
+		"totalCredit": 50,
+		"project": "TBD",
+		"thesis": "TBD",
+		"timeLimit": 1,
+		"finalRecommended": 10,
+		"minGPA": 3
+}

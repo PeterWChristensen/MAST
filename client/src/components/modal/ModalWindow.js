@@ -6,6 +6,7 @@ import StudentService from "../../services/student.service";
 import CoursePlanService from "../../services/coursePlan.service";
 import CourseService from "../../services/course.service";
 import PrerequisiteService from "../../services/prerequisite.service";
+import DegreeRequirementService from "../../services/degreeRequirement.service";
 
 const papaparseOptions = {
   header: true,
@@ -34,7 +35,8 @@ class ModalWindow extends React.Component {
             departmentToParse: "AMS, BMI, CSE, ESE",
             departmentToParseSemester: "Fall",
             departmentToParseYear: "2021",
-            courseInfoFile: null
+            courseInfoFile: null,
+            degreeRequirementsFile: null
         }
         this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
         this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
@@ -79,8 +81,55 @@ class ModalWindow extends React.Component {
     
 
     /* Following functions upload data to the database */
+
+    onDegreeFileChange = event => {
+        this.setState({degreeRequirementsFile: event.target.files[0]});
+    }
+
     handleImportDegreeRequirements(){
-    
+        var content = " ";
+        let fileReader = new FileReader();
+        fileReader.readAsText(this.state.degreeRequirementsFile);
+        fileReader.onloadend = function(e) {
+            content = fileReader.result;
+            var obj = JSON.parse(content);
+            console.log(obj)
+            var data_temp = {
+                requirementID: obj.requirementID,
+                departID: obj.departID,
+                track: obj.track,
+                versionSemester: obj.versionSemester,
+                versionYear: obj.versionYear,
+                totalCredit: obj.totalCredit,
+                project: obj.project,
+                thesis: obj.thesis,
+                timeLimit: obj.timeLimit,
+                finalRecommended: obj.finalRecommended,
+                minGPA: obj.minGPA
+            };
+            console.log(data_temp)
+            DegreeRequirementService.create(data_temp)
+            .then(response => {
+                this.setState({
+                    requirementID: response.data_temp.requirementID,
+                    departID: response.data_temp.departID,
+                    track: response.data_temp.track,
+                    versionSemester: response.data_temp.versionSemester,
+                    versionYear: response.data_temp.versionYear,
+                    totalCredit: response.data_temp.totalCredit,
+                    project: response.data_temp.project,
+                    thesis: response.data_temp.thesis,
+                    timeLimit: response.data_temp.timeLimit,
+                    finalRecommended: response.data_temp.finalRecommended,
+                    minGPA: response.data_temp.minGPA
+                });
+                console.log(response.data_temp);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+        this.props.hideModalDialogPopUp();
     }
 
     onFileChange = event => {
@@ -172,13 +221,13 @@ class ModalWindow extends React.Component {
                                 prerequisiteID: response.prereqData.prerequisiteID
                             });
                             console.log(response.data);
-                        }) 
+                        })
                         .catch(e => {
                             console.log(e);
                         });
                     });
                 });
-            }); 
+            });
         }
         this.props.hideModalDialogPopUp();
     }
@@ -373,10 +422,14 @@ class ModalWindow extends React.Component {
             modalContents =
             <div className="modal" id="import" header="Import" >
                 <p id="modalDialogMessage">
+                    <br></br>
+                    Choose .json file to import:</p>
+                    <br></br>
+                    <input type="file" accept=".json" id="scrapeDegreeReqiormentsFileButton" onChange={this.onDegreeFileChange}/>
                     <br></br><br></br>
                     
-                <br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportDegreeRequirements, this.props.hideModalDialogPopUp} >Import</button></Link>
+                <br></br>
+                <Link to="/"><button className="modalButton" onClick={this.handleImportDegreeRequirements} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
