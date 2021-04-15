@@ -74,21 +74,17 @@ class App extends Component{
                     Home
                   </Link>
                 )}
-
+{/* 
+                //it's for testing.
                 {currentUser && (
                   <Link to={"/profile"} className="navBarButtons">
                     Profile
                   </Link>
-                )}
+                )} */}
                 
                 {showStudentcomponent && currentUser && (
                   <Link to={"/student"} className="navBarButtons">
-                    view
-                  </Link>
-                )}            
-                {showStudentcomponent && currentUser && (
-                  <Link to={"/student/edit"} className="navBarButtons">
-                    edit
+                    Profile
                   </Link>
                 )}            
 

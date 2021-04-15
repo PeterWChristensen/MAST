@@ -235,15 +235,20 @@ class ModalWindow extends React.Component {
                 firstName: data[i].first_name,
                 lastName: data[i].last_name,
                 email: data[i].email,
-                department: data[i].department,
+                departmentID: data[i].department,
                 track: data[i].track,
                 entrySemester: data[i].entry_semester,
                 entryYear: data[i].entry_year,
                 requirementVersionSemester: data[i].requirement_version_semester,
                 requirementVersionYear: data[i].requirement_version_year,
-                graduationSemester: data[i].graduation_semester,
-                graduationYear: data[i].graduation_year,
-                password: data[i].password
+                gradSemester: data[i].graduation_semester,
+                gradYear: data[i].graduation_year,
+                password: data[i].password,
+                gpa: null,
+                totalCredits: null,
+                projectOption: null,
+                advisor: null,
+                hasGraduated: null
             };
             console.log(data_temp)
             StudentService.create(data_temp)
@@ -253,15 +258,20 @@ class ModalWindow extends React.Component {
                     firstName: response.data_temp.firstName,
                     lastName: response.data_temp.lastName,
                     email: response.data_temp.email,
-                    department: response.data_temp.department,
+                    departmentID: response.data_temp.departmentID,
                     track: response.data_temp.track,
                     entrySemester: response.data_temp.entrySemester,
                     entryYear: response.data_temp.entryYear,
                     requirementVersionSemester: response.data_temp.requirementVersionSemester,
                     requirementVersionYear: response.data_temp.requirementVersionYear,
-                    graduationSemester: response.data_temp.graduationSemester,
-                    graduationYear: response.data_temp.graduationYear,
-                    password: response.data_temp.password
+                    gradSemester: response.data_temp.gradSemester,
+                    gradYear: response.data_temp.gradYear,
+                    password: response.data_temp.password,
+                    gpa: response.data_temp.gpa,
+                    totalCredits: response.data_temp.totalCredits,
+                    projectOption: response.data_temp.projectOption,
+                    advisor: response.data_temp.advisor,
+                    hasGraduated: response.data_temp.hasGraduated
                 });
                 console.log(response.data_temp);
             })
