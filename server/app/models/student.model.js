@@ -45,7 +45,7 @@ const Student = sequelize.define("Student", {
         type: Sequelize.STRING
     },
     hasGraduated: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
     },
     email: {
         type: Sequelize.STRING

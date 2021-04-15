@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
-import { forwardRef } from 'react';
+import { Redirect } from "react-router-dom";
+
+
+import AuthService from "../../services/auth.service";
+import MSStudentService from "../../services/msStudent.service";
+
 
 class EditStudentScreen extends Component {
     constructor(props){
         super(props)
-        this.state = {    
+        this.state = {
+            currentUser: AuthService.getCurrentUser(),    
             showModalDialogPopup: false,
             modalType: "none",
             courseToEdit: "none",
@@ -60,6 +65,43 @@ class EditStudentScreen extends Component {
         }    
     }
 
+
+
+    async componentDidMount(){
+        console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+        await MSStudentService.getinfo(this.props.location.state.email);
+ 
+        var stuInfo= await MSStudentService.getStudentInfo();
+        console.log(stuInfo);
+            
+        this.setState({
+            firstName: stuInfo.firstName,
+            lastName: stuInfo.lastName,
+            sid: stuInfo.studentID,
+            hasGraduated: stuInfo.hasGraduated,
+            email: stuInfo.email,
+            gpa: stuInfo.gpa,
+            entrySemester: stuInfo.entrySemester,
+            //entryYear: stuInfo.entryYear,
+            //gradSemester: stuInfo.gradSemester,
+            expectedGraduation: stuInfo.gradYear,
+            nSemestersInProgram: stuInfo.nSemestersInProgram,
+            //totalCredits: stuInfo.totalCredits,
+            projectOption: stuInfo.projectOption,
+            advisor: stuInfo.advisor,
+            hasGraduated: stuInfo.hasGraduated,
+            department: stuInfo.departmentID,
+            track:stuInfo.track,
+            requirementsVersion: stuInfo.requirementsVersion           
+        });    
+        <Redirect to="/viewStudent" />
+
+    }
+     
+
+
+
+
     //Displays or Hides the Modal Dialog PopUp 
     showModalDialogPopUp = (type) => {
         this.setState({modalType: type, showModalDialogPopup: true});
@@ -90,18 +132,26 @@ class EditStudentScreen extends Component {
         this.setState({coursePlans: courseArr, showModalDialogPopup: false})
     }
 
+    //add service here.
     editStudent() {
         var data = {
-            studentID: this.state.id,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             department: this.state.department,
             advisor: this.state.advisor,
             track: this.state.track,
+            hasGraduated: this.state.hasGraduated,
             entrySemester: this.state.entrySemester,
             expectedGraduation: this.state.expectedGraduation,
-            gpa: this.state.gpa
+            gpa: this.state.gpa,
+            projectOption: this.state.projectOption,
+            requirementsVersion: this.state.requirementsVersion,
+            nSemestersInProgram: this.state.nSemestersInProgram
         };
+
+        MSStudentService.updateinfo( this.state.email ,data).then( ()=>{
+            <Redirect to= '/viewStudent' />
+        });
     }
 
     render() {

@@ -26,9 +26,14 @@ class MSStudentService {
             }).catch(err => console.error(err));
         }
 
+      logout() {
+        localStorage.removeItem("info");
+      }
+      
+      
     
       getStudentInfo() {
-        return JSON.parse(localStorage.getItem('info'));;
+        return JSON.parse(localStorage.getItem('info'));
       }
 
 }   

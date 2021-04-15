@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import UserService from "../../services/user.service";
+import MSStudentService from "../../services/msStudent.service";
 
 export default class Home extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    MSStudentService.logout();
+
     UserService.getPublicContent().then(
       response => {
         this.setState({
