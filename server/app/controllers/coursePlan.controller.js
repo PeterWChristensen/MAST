@@ -16,6 +16,8 @@ exports.create = (req, res) => {
     const coursePlan = {
       studentID: req.body.studentID,
       courseOfferingID: req.body.courseOfferingID,
+      courseName: req.body.courseName,
+      semester: req.body.semester,
       grade: req.body.grade
     };
   

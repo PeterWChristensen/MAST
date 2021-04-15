@@ -11,6 +11,12 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         allowNull: false  
       },
+      courseName: {
+        type: Sequelize.STRING
+      },
+      semester: {
+        type: Sequelize.STRING
+      },
       grade: {
         type: Sequelize.STRING
       }

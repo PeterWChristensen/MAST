@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MaterialTable from "material-table";
-
-import AuthService from "../../services/auth.service";
-import MSStudentService from "../../services/msStudent.service";
-
-
 
 class ViewStudentScreen extends Component {
     constructor(props){
-        super(props);
+        super(props)
         this.state = {    
-            currentUser: AuthService.getCurrentUser(),
             showModalDialogPopup: false,
             modalType: "none",
             student: [],
@@ -34,7 +28,7 @@ class ViewStudentScreen extends Component {
             projectOption: "",
             requirementsVersion: "",
             requirementVersionSemester: "",
-            coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
+            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -45,7 +39,7 @@ class ViewStudentScreen extends Component {
                     field: "grade"
                 }
             ],
-            comments: [{date: "4/13/21", comment: "Great job!"}],
+            comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
             commentColumns: [
                 {
                     title: "Date",
@@ -97,13 +91,65 @@ class ViewStudentScreen extends Component {
     }
      
 
-
-
     render() {
-        // const { firstName, lastName, email,sid,password,gpa,entrySemester,expectedGraduation,
-        //     hasGraduated,department,track,nSemestersInProgram,advisor,projectOption,requirementsVersion,
-        // coursePlans ,coursePlanColumns, comments,commentColumns} = this.state;
+        var courseTable = [];
+        var semester = new Map(); //map semester with course
 
+        const createCourseEntry = (course) => {
+            var divId = "course" + course.index;
+            return <div id={divId}>
+            <input className="coursePlan" value={course.courseName} disabled/>
+            <input className="coursePlan" value={course.grade} disabled/>
+            </div>;
+        }
+
+        const createCourseTables = () => {  
+            var course = this.state.coursePlans;
+            //Get Semesters and courses 
+            for (let i = 0; i < course.length; i++){
+                if (semester.has(course[i].semester) == false){
+                    semester.set(course[i].semester, [{courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i}]);
+                }
+                else{
+                    let courseArr = semester.get(course[i].semester);
+                    courseArr.push({courseOfferingID: course[i].courseOfferingID, courseName: course[i].courseName, semester: course[i].semester, grade: course[i].grade, index: i});
+                    semester.set(course[i].semester, courseArr);
+                }
+            }
+            let semestersSorted = new Map([...semester].sort((a, b) => String(a[0]).localeCompare(b[0])));
+            //Note: Create new sort method to display semesters in correct order
+            semestersSorted.forEach( function(courseArray, semester){
+                courseTable.push(<div>
+                <input className="semesterTableHeader" value={semester} disabled/>
+                </div>)
+                for(let i = 0; i < courseArray.length; i++){
+                    courseTable.push(createCourseEntry(courseArray[i]));
+                }
+                courseTable.push(<br></br>);
+            });
+            return courseTable;
+        }
+
+        var commentTable = [];
+        const createEntry = (comment) => {
+            var divId = "comment" + comment.index;
+            return <div id={divId}>
+                <input className="comments" value={comment.date} disabled/>
+                <input className="comments" value={comment.comment} disabled/>
+            </div>;
+        }
+        const createCommentTable = () =>{
+            commentTable.push(<div id="commentTableHeader">
+                <input className="comments" value="Date" disabled/>
+                <input className="comments" value="Comment" disabled/>
+                </div>)
+            var comments = this.state.comments;
+            for (let i = 0; i < comments.length; i++){ //Add index to each comment for editing
+                comments[i] = {date: comments[i].date, comment: comments[i].comment, index: i}
+                commentTable.push(createEntry(comments[i]));
+            }
+            return commentTable;
+        }
 
         return (
             <div id="viewStudentFormBackground">
@@ -115,7 +161,7 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.sid} disabled/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.id} disabled/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
@@ -141,6 +187,10 @@ class ViewStudentScreen extends Component {
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} disabled/>
                         <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementsVersion} disabled/>
                         </p>
+                        <br></br>
+                        <p className="viewStudent_prompt">Total Credits: 
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} disabled/>
+                        </p>
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
                         <br></br>
@@ -153,11 +203,7 @@ class ViewStudentScreen extends Component {
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-                            <MaterialTable title="Semester"  
-                                options={{toolbar: false, paging: false, sorting:false, headerStyle: {backgroundColor: '#000000',color: '#FFF'}, cellStyle: {width: 20, maxWidth: 20},
-                                zIndex:0, maxBodyHeight: '500px', search:true, headerSelectionProps: {color: "primary"}}}
-                                columns={this.state.coursePlanColumns} data={this.state.coursePlans}
-                            />
+                        {createCourseTables()}
                         </div>
                         <br></br>
                         <br></br>
@@ -165,11 +211,7 @@ class ViewStudentScreen extends Component {
                         <h2 id="viewStudentFormHeader">Comments</h2>     
                         <br></br>
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-                            <MaterialTable title="Comments"  
-                                options={{toolbar: false, paging: false, sorting:false, headerStyle: {backgroundColor: '#000000',color: '#FFF'}, cellStyle: {width: 20, maxWidth: 20},
-                                zIndex:0, maxBodyHeight: '500px', search:true, headerSelectionProps: {color: "primary"}}}
-                                columns={this.state.commentColumns} data={this.state.comments}
-                            />
+                        {createCommentTable()}
                         </div>                   
                         <br></br>
                         <Link to={{pathname: '/editStudent', state: {studentID: this.props.studentID}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>

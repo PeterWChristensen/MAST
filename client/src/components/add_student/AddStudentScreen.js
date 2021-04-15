@@ -22,6 +22,7 @@ class AddStudentScreen extends Component {
             advisor: null,
             hasGraduated: "False",
             email: null,
+            passwor: null,
             departmentID: "AMS",
             track: "Computational Applied Mathematics",
             requirementVersionSemester: "Fall",
@@ -54,6 +55,7 @@ class AddStudentScreen extends Component {
             advisor: this.state.advisor,
             hasGraduated: this.state.hasGraduated,
             email: this.state.email,
+            password: this.state.password,
             departmentID: this.state.departmentID,
             track: this.state.track,
             requirementVersionSemester: this.state.requirementVersionSemester,
@@ -76,6 +78,7 @@ class AddStudentScreen extends Component {
                     advisor: response.data.advisor,
                     hasGraduated: response.data.hasGraduated,
                     email: response.data.email,
+                    password: response.data.password,
                     departmentID: response.data.departmentID,
                     track: response.data.track,
                     requirementVersionSemester: response.data.requirementVersionSemester,
@@ -92,7 +95,19 @@ class AddStudentScreen extends Component {
 
         // Function that will set different values to state variable based on department selected
         const changeDepartmentOptionHandler = (event) => { 
-            this.setState({departmentID: event.target.value}); 
+            var track = null
+            switch(event.target.value){
+                case "AMS":
+                    track = AMS[0]
+                    break;
+                case "BMI":
+                    track = BMI[0]
+                    break;
+                default:
+                    track = "None"
+                    break;
+            }
+            this.setState({departmentID: event.target.value, track: track}); 
         }; 
         
         const changeFirstNameHandler = (event) => { 
@@ -165,11 +180,11 @@ class AddStudentScreen extends Component {
         }; 
 
         // Different arrays for different dropdowns 
-        const ams = [ "Computational Applied Mathematics", "Computational Biology", 
+        const AMS = [ "Computational Applied Mathematics", "Computational Biology", 
             "Operations Research", "Statistics", "Quantitative Finance"]; 
-        const bmi = ["Clinical Informatics", "Imaging Informatics", "Translational Bioinformatics"]; 
-        const ese = ["None"]; 
-        const cse = ["None"]; 
+        const BMI = ["Clinical Informatics", "Imaging Informatics", "Translational Bioinformatics"]; 
+        const ESE = ["None"]; 
+        const CSE = ["None"]; 
         
         // Type variable to store different array for different dropdown
         let type = null; 
@@ -179,13 +194,13 @@ class AddStudentScreen extends Component {
         
         // Setting Type variable according to dropdown
         if (this.state.departmentID === "AMS") { 
-            type = ams; 
+            type = AMS; 
         } else if (this.state.departmentID === "BMI") { 
-            type =bmi; 
+            type =BMI; 
         } else if (this.state.departmentID === "ESE") { 
-            type = ese; 
+            type = ESE; 
         } else if (this.state.departmentID === "CSE") { 
-            type = cse; 
+            type = CSE; 
         } 
         
         // If "Type" is null or undefined then options will be null, otherwise it will create a options iterable based on our array 
@@ -264,7 +279,7 @@ class AddStudentScreen extends Component {
                         </select>
                         <select id="gradYearSelect" className="dropdownSelectYear" onChange={changeExpectedGraduationYearOptionHandler}>
                             <option value="2025">2025</option>
-                            <option value="2022">2024</option>
+                            <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
@@ -332,7 +347,7 @@ class AddStudentScreen extends Component {
                         </select>
                         <select id="reqYearSelect" className="dropdownSelectYear" onChange={changeReqVersionYearOptionHandler}>
                             <option value="2025">2025</option>
-                            <option value="2022">2024</option>
+                            <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
