@@ -9,20 +9,25 @@ class ViewStudentScreen extends Component {
             showModalDialogPopup: false,
             modalType: "none",
             student: [],
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            gpa: "",
-            entrySemester: "",
-            expectedGraduation: "",
-            hasGraduated: "",
-            department: "",
-            track : "",
-            nSemestersInProgram: "", 
-            advisor: "",
-            projectOption: "",
-            requirementsVersion: "",
+            firstName: null,
+            lastName: null,
+            sid: null,
+            email: null,
+            password: null,
+            gpa: null,
+            totalCredits: null,
+            entrySemester: null,
+            entryYear: null,
+            gradSemester: null,
+            gradYear: null,
+            hasGraduated: null,
+            department: null,
+            track : null,
+            nSemestersInProgram: null, 
+            advisor: null,
+            projectOption: null,
+            requirementVersionSemester: null,
+            requirementVersionYear: null,
             coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
             coursePlanColumns: [
                 {
@@ -34,7 +39,7 @@ class ViewStudentScreen extends Component {
                     field: "grade"
                 }
             ],
-            comments: [{date: "4/13/21", comment: "Great job!"}],
+            comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
             commentColumns: [
                 {
                     title: "Date",
@@ -49,6 +54,27 @@ class ViewStudentScreen extends Component {
     }
 
     render() {
+        var commentTable = [];
+        const createEntry = (comment) => {
+            var divId = "comment" + comment.index;
+            return <div id={divId}>
+                <input className="comments" value={comment.date} disabled/>
+                <input className="comments" value={comment.comment} disabled/>
+            </div>;
+        }
+        const createCommentTable = () =>{
+            commentTable.push(<div id="commentTableHeader">
+                <input className="comments" value="Date" disabled/>
+                <input className="comments" value="Comment" disabled/>
+                </div>)
+            var comments = this.state.comments;
+            for (let i = 0; i < comments.length; i++){ //Add index to each comment for editing
+                comments[i] = {date: comments[i].date, comment: comments[i].comment, index: i}
+                commentTable.push(createEntry(comments[i]));
+            }
+            return commentTable;
+        }
+
         return (
             <div id="viewStudentFormBackground">
                 <div id="viewStudentForm">
@@ -85,6 +111,10 @@ class ViewStudentScreen extends Component {
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} disabled/>
                         <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementsVersion} disabled/>
                         </p>
+                        <br></br>
+                        <p className="viewStudent_prompt">Total Credits: 
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} disabled/>
+                        </p>
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
                         <br></br>
@@ -97,11 +127,7 @@ class ViewStudentScreen extends Component {
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-                            <MaterialTable title="Semester"  
-                                options={{toolbar: false, paging: false, sorting:false, headerStyle: {backgroundColor: '#000000',color: '#FFF'}, cellStyle: {width: 20, maxWidth: 20},
-                                zIndex:0, maxBodyHeight: '500px', search:true, headerSelectionProps: {color: "primary"}}}
-                                columns={this.state.coursePlanColumns} data={this.state.coursePlans}
-                            />
+                            
                         </div>
                         <br></br>
                         <br></br>
@@ -109,11 +135,7 @@ class ViewStudentScreen extends Component {
                         <h2 id="viewStudentFormHeader">Comments</h2>     
                         <br></br>
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
-                            <MaterialTable title="Comments"  
-                                options={{toolbar: false, paging: false, sorting:false, headerStyle: {backgroundColor: '#000000',color: '#FFF'}, cellStyle: {width: 20, maxWidth: 20},
-                                zIndex:0, maxBodyHeight: '500px', search:true, headerSelectionProps: {color: "primary"}}}
-                                columns={this.state.commentColumns} data={this.state.comments}
-                            />
+                        {createCommentTable()}
                         </div>                   
                         <br></br>
                         <Link to={{pathname: '/editStudent', state: {studentID: this.props.studentID}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>

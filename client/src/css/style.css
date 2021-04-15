@@ -34,7 +34,7 @@
   .navBarButtons{
     position: relative;
     top: -42px;
-    left: 80%;
+    left: 85%;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     background-color: transparent;
@@ -42,7 +42,6 @@
     margin-right: 2%;
     font-weight: bolder;
     color: #000000;
-    text-decoration: none;
   }
 
   .navBarButtons:hover{
@@ -52,8 +51,8 @@
 /*LOGIN SCREEN */
 #loginBanner{
   position: relative;
-  top: 0%;
-  left: 0%;
+  top: -6%;
+  left: -0.3%;
   text-align: center;
   font-size: 40px;
   height: 50px;
@@ -71,8 +70,7 @@
 }
 
 #loginBox{
-  position: relative;
-  margin: auto;
+  position: absolute;
   left: 5%;
   top: 15%;
   width: 50%;
@@ -146,7 +144,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 2.3%;  
+    left: 71.3%;  
     top: 1%;
   }
   
@@ -188,7 +186,7 @@ background-color: #343434;
   .GPDHomepageButton{
     position: relative;
     top: 1%;
-    left: 2.59%;
+    left: 71.6%;
     margin-right: 0.3%;
   }
 
@@ -198,7 +196,7 @@ background-color: #343434;
   left: 15%;
   top: 6%;
   width: 69%;
-  height: 80%;
+  height: 90%;
   background: rgb(239, 239, 239);
   z-index: -1;
   font: black;
@@ -253,11 +251,22 @@ background-color: #343434;
   position: relative;
   grid-column: 1 / 2;
   margin-top: 1%;
-  margin-inline-end: 33px;
+  margin-inline-end: 3px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;  
   text-align:left;
-  width: 40%;
+  width: 12%;
+}
+
+.dropdownSelectYear{
+  position: relative;
+  grid-column: 1 / 2;
+  margin-top: 1%;
+  margin-inline-end: 55px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;  
+  text-align:left;
+  width: 12%;
 }
 
   /*VIEW STUDENT SCREEN  */
@@ -337,6 +346,17 @@ background-color: #343434;
     padding: 10px;
   }
 
+  .comment{
+    position: relative;
+    grid-column: 1 / 2;
+    margin-top: 1%;
+    margin-inline-end: 3px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;  
+    text-align:left;
+    width: 12%;
+  }
+  
   /* EDIT STUDENT SCREEN */
 #departmentSelectEditStudent, #trackSelectEditStudent{
   width: 27%
