@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
 
+import AuthService from "../../services/auth.service";
+import MSStudentService from "../../services/msStudent.service";
 class EditStudentScreen extends Component {
     constructor(props){
         super(props)
@@ -22,7 +24,7 @@ class EditStudentScreen extends Component {
             entrySemester: "",
             entryYear: "",
             gradSemester: "",
-            expectedGraduation: "",
+            gradYear: "",
             totalCredits: "",
             hasGraduated: "",
             department: "",
@@ -30,7 +32,7 @@ class EditStudentScreen extends Component {
             nSemestersInProgram: "", 
             advisor: "",
             projectOption: "",
-            requirementsVersion: "",
+            requirementVersionYear: "",
             requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
@@ -67,9 +69,13 @@ class EditStudentScreen extends Component {
             await MSStudentService.getinfo(this.props.location.state.email);
         }
  
+        await MSStudentService.getStudentInfo();
+        await MSStudentService.getStudentInfo();
         var stuInfo= await MSStudentService.getStudentInfo();
+
         console.log(stuInfo);
-            
+
+        
         this.setState({
             firstName: stuInfo.firstName,
             lastName: stuInfo.lastName,
@@ -80,14 +86,14 @@ class EditStudentScreen extends Component {
             entrySemester: stuInfo.entrySemester,
             entryYear: stuInfo.entryYear,
             gradSemester: stuInfo.gradSemester,
-            expectedGraduation: stuInfo.gradYear,
+            gradYear: stuInfo.gradYear,
             nSemestersInProgram: stuInfo.nSemestersInProgram,
             totalCredits: stuInfo.totalCredits,
             projectOption: stuInfo.projectOption,
             advisor: stuInfo.advisor,
             department: stuInfo.departmentID,
             track:stuInfo.track,
-            requirementsVersion: stuInfo.requirementVersionYear,
+            requirementVersionYear: stuInfo.requirementVersionYear,
             requirementVersionSemester: stuInfo.requirementVersionSemester
            
         });    
@@ -139,14 +145,14 @@ class EditStudentScreen extends Component {
             entrySemester: this.state.entrySemester,
             entryYear: this.state.entryYear,
             gradSemester: this.state.gradSemester,
-            gradYear: this.state.expectedGraduation,
+            gradYear: this.state.gradYear,
             hasGraduated: this.state.hasGraduated,
             departmentID: this.state.department,
             track: this.state.track,
             nSemestersInProgram: this.state.nSemestersInProgram,
             advisor: this.state.advisor,
             projectOption: this.state.projectOption,
-            requirementVersionYear: this.state.requirementsVersion,
+            requirementVersionYear: this.state.requirementVersionYear,
             email: this.state.email,
             totalCredits: this.state.totalCredits,            
             requirementVersionSemester: this.state.requirementVersionSemester

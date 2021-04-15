@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MaterialTable from "material-table";
 
+import AuthService from "../../services/auth.service";
+import MSStudentService from "../../services/msStudent.service";
 class ViewStudentScreen extends Component {
     constructor(props){
         super(props)
@@ -18,7 +20,7 @@ class ViewStudentScreen extends Component {
             entrySemester: "",
             entryYear: "",
             gradSemester: "",
-            expectedGraduation: "",
+            gradYear: "",
             hasGraduated: "",
             department: "",
             track : "",
@@ -26,7 +28,7 @@ class ViewStudentScreen extends Component {
             advisor: "",
             totalCredits: "",
             projectOption: "",
-            requirementsVersion: "",
+            requirementsVersionYear: "",
             requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
@@ -83,7 +85,7 @@ class ViewStudentScreen extends Component {
             advisor: stuInfo.advisor,
             department: stuInfo.departmentID,
             track: stuInfo.track,
-            requirementsVersion: stuInfo.requirementVersionYear,
+            requirementVersionYear: stuInfo.requirementVersionYear,
             requirementVersionSemester: stuInfo.requirementVersionSemester,
             totalCredits: stuInfo.totalCredits
 
