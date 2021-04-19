@@ -420,7 +420,7 @@ class ModalWindow extends React.Component {
 
         if(this.props.modalType === "importDegreeRequirements"){
             modalContents =
-            <div className="modal" id="import" header="Import" >
+            <div className="modal" id="importDegreeReqModal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br>
                     Choose .json file to import:</p>
@@ -429,27 +429,27 @@ class ModalWindow extends React.Component {
                     <br></br><br></br>
                     
                 <br></br>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportDegreeRequirements} >Import</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.handleImportDegreeRequirements} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importCourseInformation"){
             modalContents =
-            <div id="modalCourseInfo" className="modal" header="Import" >
+            <div id="courseInfoModal" className="modal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br>
                     Choose .txt file to import:</p><br></br>
                     <input type="file" accept=".txt" id="scrapeCourseInfoFileButton" onChange={this.onFileChange}/>
                     <br></br><br></br>
-                    <p>Specify semester/year:
+                    <p>Specify semester/year: &nbsp;
                         <select id="semesterSelectCourseScrape" className="dropdownSelect" onChange={changeSemesterOptionHandler}>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
                             <option value="Summer">Summer1</option>
                             <option value="Summer">Summer2</option>
-                        </select>
+                        </select>&nbsp;
                         <select id="yearSelectCourseScrape" className="dropdownSelect" onChange={changeYearOptionHandler}>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
@@ -484,97 +484,103 @@ class ModalWindow extends React.Component {
                             <option value="1991">1991</option>
                             <option value="1990">1990</option>
                         </select>
-                    </p>
-                    <p>Select one or all departments to scrape: 
+                    </p><br></br>
+                    <p>Select one or all departments to scrape: &nbsp;
                     <select id="scrapeCourseInfoDepartmentSelection" className="dropdownSelect" onChange={selectDepartmentToParseCourseInfoHandler}>
                             {optionsForDepartment}
                     </select>
                     </p>
-                               
-                <br></br>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseInformation} >Import</button></Link>
+                <br></br><br></br>
+                <Link to="/gpd"><button className="modalButton" onClick={this.handleImportCourseInformation} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importCourseOfferings"){
             modalContents =
-            <div className="modal" id="import" header="Import" >
+            <div className="modal" id="importCourseOfferingsModal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
+                    Choose file to import: 
+                    <br></br><br></br>
                     <CSVReader
-                        label="Choose file to import: "
                         onFileLoaded={this.handleImportCourseOfferingsFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportCourseOfferings} >Import</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.handleImportCourseOfferings} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importStudentData"){
             modalContents =
-            <div className="modal" id="import" header="Import" >
+            <div className="modal" id="importStudentDataModal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
+                    Choose student profile file to import: 
+                    <br></br><br></br>
                     <CSVReader
-                        label="Choose student profile file to import: "
                         onFileLoaded={this.handleImportStudentDataFile}
                         parserOptions={papaparseOptions}/>
+                    <br></br>
+                    Choose student course plan file to import: 
+                    <br></br><br></br>
                     <CSVReader
-                        label="Choose student course plan file to import: "
                         onFileLoaded={this.handleImportStudentDataCoursePlansFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportStudentData} >Import</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.handleImportStudentData} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "importGrades"){
             modalContents =
-            <div className="modal" id="import" header="Import" >
+            <div className="modal" id="importGradesModal" header="Import" >
                 <p id="modalDialogMessage">
                     <br></br><br></br>
+                    Choose file to import: 
+                    <br></br><br></br>
                     <CSVReader
-                        label="Choose file to import: "
                         onFileLoaded={this.handleImportGradesFile}
                         parserOptions={papaparseOptions}/>
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.handleImportGrades} >Import</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.handleImportGrades} >Import</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >Cancel</button>    
             </div>;
         }
         else if(this.props.modalType === "addStudent"){
             modalContents =
-            <div className="modal" id="addStudent" header="Add" >
+            <div className="modal" id="addStudentModal" header="Add" >
                 <p id="modalDialogMessage">
+                    <br></br>
                 Do you want to add this student?
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.addStudent} >Yes</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.props.addStudent} >Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
             </div>;
         }
         else if(this.props.modalType === "cancelAddStudent"){
             modalContents =
-            <div className="modal" id="cancelAddStudent" header="Cancel"  >
-                <p id="modalDialogMessage">
+            <div className="modal" id="cancelAddStudentModal" header="Cancel"  >
+                <p id="modalDialogMessage"><br></br>
                 Cancel adding student?
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
         }
         else if(this.props.modalType === "deleteAllStudents"){
             modalContents =
-            <div className="modal" id="deleteAllStudents" header="Cancel"  >
+            <div className="modal" id="deleteAllStudentsModal" header="Cancel"  >
                 <p id="modalDialogMessage">
+                    <br></br>
                 Delete all students?
                 <br></br><br></br></p>
-                <Link to="/"><button className="modalButton" onClick={this.props.deleteAllStudents}>Yes</button></Link>
+                <Link to="/gpd"><button className="modalButton" onClick={this.props.deleteAllStudents}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>

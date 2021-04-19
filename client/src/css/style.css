@@ -23,7 +23,11 @@
   border-style: solid;
   border-radius: 10px;
   height: 40px;
-  width: 100%;
+  width: 1432px;
+  min-width: 1432px;
+  max-width: 1432px;
+  min-height: 40px;
+  max-height: 40px;
   }
 
   #logo{
@@ -62,8 +66,8 @@
   position: absolute;
   left: 5%;
   top: 6.5%;
-  width: 90%;
-  height: 90%;
+  width: 1291px;
+  height: 720px;
   background: rgb(255, 255, 255);
   font: black;
   z-index: -1;
@@ -109,8 +113,8 @@
 #loginButton{
   position: relative;
   font-size: 30px;
-  top: 130px;
-  left: 72.5%; 
+  top: 150px;
+  left: 70.5%; 
   background-color: #000000;
   color: white;
   padding: 10px;
@@ -123,11 +127,13 @@
   position: absolute;
   left: 5%;
   top: 6.5%;
-  width: 90%;
-  height: 100%;
+  width: 1296px;
+  height: 739px;
   background: rgb(255, 255, 255);
   font: black;
   z-index: -1;
+  min-width: 1296px;
+  max-width: 1296px;
 }
 
 /* Style The Dropdown Button */
@@ -195,11 +201,15 @@ background-color: #343434;
   position: absolute;
   left: 15%;
   top: 6%;
-  width: 69%;
-  height: 90%;
+  width: 993.59px;
+  height: 732.72px;
   background: rgb(239, 239, 239);
   z-index: -1;
   font: black;
+  min-width: 993.59px;
+  max-width: 993.59px;
+  min-height: 732.72px;
+  max-height: 732.72px;
 }
 
 #addStudentFormHeader{
@@ -386,10 +396,6 @@ background-color: #343434;
 
 .modal{
   position: absolute;
-  top: 29%;
-  left: 36%;
-  width: 370px; 
-  height: 250px; 
   z-index: 10;
   background-color: #ffffff;
   border: #000000;
@@ -397,7 +403,6 @@ background-color: #343434;
   border-style: solid;
   text-align: center;
   font-size: 20px;
-  padding-top: 20px;
 }
 
 .modalButton{
@@ -410,8 +415,108 @@ background-color: #343434;
   padding: 5px;
 }
 
-#modalCourseInfo{
-  width: 400px;
+#importDegreeReqModal{
+  top: 29%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 250px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+#courseInfoModal{
+  top: 27%;
+  left: 33%;
+  padding-top: 20px;
+  width: 500px;
+  height: 330px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 330px;
+  max-height: 330px;
+}
+
+#semesterSelectCourseScrape{
+  width: 100px
+}
+
+#scrapeCourseInfoDepartmentSelection{
+  width: 210px;
+}
+
+#importCourseOfferingsModal{
+  top: 29%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 250px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+#importStudentDataModal{
+  top: 27%;
+  left: 33%;
+  padding-top: 20px;
+  width: 500px;
+  height: 330px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 330px;
+  max-height: 330px;
+}
+
+#importGradesModal{
+  top: 29%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 250px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+#deleteAllStudentsModal{
+  top: 32%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 150px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 150px;
+  max-height: 150px;
+}
+
+#addStudentModal{
+  top: 38%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 150px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 150px;
+  max-height: 150px;
+}
+
+#cancelAddStudentModal{
+  top: 38%;
+  left: 36%;
+  padding-top: 20px;
+  width: 370px; 
+  height: 150px;
+  min-width: 370px;
+  max-width: 370px;
+  min-height: 150px;
+  max-height: 150px;
 }
 
 #fileToImport{
@@ -427,3 +532,4 @@ background-color: #343434;
   width: 370px; 
   height: 150px; 
 }
+
