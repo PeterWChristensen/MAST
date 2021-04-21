@@ -59,6 +59,43 @@
     color:#797979
   }
 
+/*Homepage*/
+
+#homepageDescription{
+  position: relative;
+  margin-top: 8%;
+  left: 8%;
+  width: 80%;
+}
+
+#mastheader{
+  color:#b70404;
+  font-size: 100px;
+}
+
+#mastheader2{
+  color:#b70404;
+  font-size: 100px;
+}
+
+#programDescription{
+  color: rgb(234, 232, 232);
+  font-size: 30px;
+}
+
+#homepageLoginButton{
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  top: 100px;
+  left: 90%; 
+  background-image: linear-gradient(to bottom,         
+  #ff0000, #940404);
+  padding: 10px;
+  border: none;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 /*LOGIN SCREEN */
 #loginBanner{
   position: relative;

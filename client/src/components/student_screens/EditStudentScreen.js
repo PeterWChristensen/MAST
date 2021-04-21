@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import AuthService from "../../services/auth.service";
 import MSStudentService from "../../services/msStudent.service";
@@ -11,6 +12,7 @@ class EditStudentScreen extends Component {
         this.state = {    
             showModalDialogPopup: false,
             modalType: "none",
+            redirect: false,
             addComment: false,
             commentToAddDate: null,
             commentToAddComment: null,
@@ -159,7 +161,8 @@ class EditStudentScreen extends Component {
         console.log("this is editstudent() at EditStudentScreen");
         console.log("update info");
         console.log("states");
-        console.log(await MSStudentService.getinfo(this.state.email));               
+        console.log(await MSStudentService.getinfo(this.state.email));
+        this.setState({ redirect: true });            
     }
 
 
@@ -610,6 +613,7 @@ class EditStudentScreen extends Component {
                         <button id="viewStudentForm_return_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("cancelEditStudent")}>Cancel</button>
                         </div>
                         {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
+                        { this.state.redirect ? (<Redirect push to="/viewStudent"/>) : null }
                 </div>
             </div>
         )
