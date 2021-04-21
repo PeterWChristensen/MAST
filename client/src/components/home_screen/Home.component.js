@@ -2,18 +2,22 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import UserService from "../../services/user.service";
 import MSStudentService from "../../services/msStudent.service";
+import AuthService from '../../services/auth.service';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      
+      currentUser: undefined,
       content: ""
     };
   }
 
   componentDidMount() {
     MSStudentService.removeInfo();
+    const user = AuthService.getCurrentUser();
 
     UserService.getPublicContent().then(
       response => {
@@ -30,9 +34,17 @@ export default class Home extends Component {
         });
       }
     );
+    
+    if (user) {
+      this.setState({
+        currentUser: user,
+      });
+    }
   }
 
   render() {
+    const { currentUser } = this.state;
+
     return (
       <div className="container">
         <header>
@@ -53,7 +65,14 @@ export default class Home extends Component {
             </p>
           </div>
           <br></br>
-          <Link to="/login"><button id="homepageLoginButton">Login</button></Link>
+
+          {!currentUser && (
+                    <Link to="/login">
+                      <button id="homepageLoginButton">Login</button>
+                    </Link>
+                )}    
+
+          
         </div>
       </div>
     );

@@ -157,10 +157,10 @@ class EditStudentScreen extends Component {
             .then(response => {
                 console.log("this from edit student");
               console.log(response.data);
+              this.setState({redirect: true});
               return response.data;
             }).catch(err => console.error(err));
     
-        this.setState({redirect: true});
     }
 
 
@@ -611,7 +611,7 @@ class EditStudentScreen extends Component {
                         <button id="viewStudentForm_return_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("cancelEditStudent")}>Cancel</button>
                         </div>
                         {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
-                        { this.state.redirect ? (<Redirect push to="/viewStudent"/>) : null }
+                        { this.state.redirect ? (<Redirect push to={{pathname:'/viewStudent', state: {email: this.state.email}}}/>) : null }
                 </div>
             </div>
         )
