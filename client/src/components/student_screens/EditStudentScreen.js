@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 
 class EditStudentScreen extends Component {
@@ -10,6 +11,7 @@ class EditStudentScreen extends Component {
         this.state = {    
             showModalDialogPopup: false,
             modalType: "none",
+            redirect: false,
             addComment: false,
             commentToAddDate: null,
             commentToAddComment: null,
@@ -157,6 +159,8 @@ class EditStudentScreen extends Component {
               console.log(response.data);
               return response.data;
             }).catch(err => console.error(err));
+    
+        this.setState({redirect: true});
     }
 
 
@@ -606,7 +610,8 @@ class EditStudentScreen extends Component {
                         <button id="viewStudentForm_edit_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("editStudent")}>Save</button>
                         <button id="viewStudentForm_return_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("cancelEditStudent")}>Cancel</button>
                         </div>
-                        {this.state.showModalDialogPopup ? <ModalDialog editStudent={this.editStudent.bind(this)} modalType={this.state.modalType} email={this.state.email} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} /> : null}
+                        {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
+                        { this.state.redirect ? (<Redirect push to="/viewStudent"/>) : null }
                 </div>
             </div>
         )
