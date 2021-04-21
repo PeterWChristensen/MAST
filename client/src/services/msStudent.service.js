@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const retVal="";
 
 class MSStudentService {
     getinfo(username) {
@@ -10,6 +9,7 @@ class MSStudentService {
           })
           .then(response => {
             localStorage.setItem("info", JSON.stringify(response.data));
+            this.setState({events: response.data})
             return response.data;
           }).catch(err => console.error(err));
       }
@@ -27,7 +27,7 @@ class MSStudentService {
         }
 
       removeInfo() {
-        localStorage.removeItem("info");
+        localStorage.removeItem("username");
       }
       
       

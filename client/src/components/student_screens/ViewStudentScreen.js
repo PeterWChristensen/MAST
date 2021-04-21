@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MaterialTable from "material-table";
-
+import axios from "axios";
 import AuthService from "../../services/auth.service";
 import MSStudentService from "../../services/msStudent.service";
+
 class ViewStudentScreen extends Component {
     constructor(props){
         super(props)
@@ -54,47 +55,87 @@ class ViewStudentScreen extends Component {
             ]
         }    
     }
-
-    async componentDidMount(){
+    componentDidMount(){
 
         console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+        console.log(this.props);
 
-        var stuInfo;
-        if(localStorage.getItem('info')){
-            console.log("if at view");
-            await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
-            stuInfo= await MSStudentService.getStudentInfo();
-        }else{
-            console.log("else at view");
-            await MSStudentService.getinfo(this.props.location.state.email);
-            stuInfo= await MSStudentService.getStudentInfo();
-        }
+        var username=this.props.location.state.email;
+        
 
-        console.log(stuInfo);
-            
-        this.setState({
-            firstName: stuInfo.firstName,
-            lastName: stuInfo.lastName,
-            studentID: stuInfo.studentID,
-            hasGraduated: stuInfo.hasGraduated,
-            email: stuInfo.email,
-            gpa: stuInfo.gpa,
-            entrySemester: stuInfo.entrySemester,
-            entryYear: stuInfo.entryYear,
-            gradSemester: stuInfo.gradSemester,
-            gradYear: stuInfo.gradYear,
-            nSemestersInProgram: stuInfo.nSemestersInProgram,
-            projectOption: stuInfo.projectOption,
-            advisor: stuInfo.advisor,
-            departmentID: stuInfo.departmentID,
-            track: stuInfo.track,
-            requirementVersionYear: stuInfo.requirementVersionYear,
-            requirementVersionSemester: stuInfo.requirementVersionSemester,
-            totalCredits: stuInfo.totalCredits
-
-        });    
+        axios.post("/getinfo", {
+            username
+          })
+          .then(response => {
+            this.setState({
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                studentID: response.data.studentID,
+                hasGraduated: response.data.hasGraduated,
+                email: response.data.email,
+                gpa: response.data.gpa,
+                entrySemester: response.data.entrySemester,
+                entryYear: response.data.entryYear,
+                gradSemester: response.data.gradSemester,
+                gradYear: response.data.gradYear,
+                nSemestersInProgram: response.data.nSemestersInProgram,
+                projectOption: response.data.projectOption,
+                advisor: response.data.advisor,
+                departmentID: response.data.departmentID,
+                track: response.data.track,
+                requirementVersionYear: response.data.requirementVersionYear,
+                requirementVersionSemester: response.data.requirementVersionSemester,
+                totalCredits: response.data.totalCredits})
+                console.log("this is from view student");
+                console.log(response.data);
+                return response.data;
+          }).catch(err => console.error(err));
+     
     }
+     
+  
     
+    // async componentDidMount(){
+
+    //     console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
+
+    //     var stuInfo;
+    //     if(localStorage.getItem('info')){
+    //         console.log("if at view");
+    //         await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
+    //         stuInfo= await MSStudentService.getStudentInfo();
+    //     }else{
+    //         console.log("else at view");
+    //         await MSStudentService.getinfo(this.props.location.state.email);
+    //         stuInfo= await MSStudentService.getStudentInfo();
+    //     }
+
+    //     console.log(stuInfo);
+            
+    //     this.setState({
+    //         firstName: stuInfo.firstName,
+    //         lastName: stuInfo.lastName,
+    //         studentID: stuInfo.studentID,
+    //         hasGraduated: stuInfo.hasGraduated,
+    //         email: stuInfo.email,
+    //         gpa: stuInfo.gpa,
+    //         entrySemester: stuInfo.entrySemester,
+    //         entryYear: stuInfo.entryYear,
+    //         gradSemester: stuInfo.gradSemester,
+    //         gradYear: stuInfo.gradYear,
+    //         nSemestersInProgram: stuInfo.nSemestersInProgram,
+    //         projectOption: stuInfo.projectOption,
+    //         advisor: stuInfo.advisor,
+    //         departmentID: stuInfo.departmentID,
+    //         track: stuInfo.track,
+    //         requirementVersionYear: stuInfo.requirementVersionYear,
+    //         requirementVersionSemester: stuInfo.requirementVersionSemester,
+    //         totalCredits: stuInfo.totalCredits
+
+    //     });    
+    // }
+     
+
     render() {
         var courseTable = [];
         var semester = new Map(); //map semester with course
@@ -218,8 +259,8 @@ class ViewStudentScreen extends Component {
                         {createCommentTable()}
                         </div>                   
                         <br></br>
-                        <Link to={{pathname: '/editStudent', state: {studentID: this.props.studentID}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
-                        <Link to="/gpd"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
+                        <Link to={{pathname: '/editStudent', state: {email: this.state.email}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
+                        <Link to="/"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
                         </div>
                 </div>
             </div>
