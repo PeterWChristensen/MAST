@@ -5,13 +5,24 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../../services/auth.service";
 
+
 //I will add meterialize css later. 
 
-const required = value => {
+const requiredUser = value => {
   if (!value) {
     return (
-      <div role="alert">
-        This field is required!
+      <div class="validAlert" role="alert">
+        <strong >Username is required!</strong>
+      </div>
+    );
+  }
+};
+
+const requiredPW = value => {
+  if (!value) {
+    return (
+      <div class="validAlert" role="alert">
+        <strong >Password is required!</strong>
       </div>
     );
   }
@@ -98,14 +109,14 @@ render() {
             <label htmlFor="username" className="loginBoxText">Username: </label>
             <Input className="active" className="loginInput" type="text"
              name="username" value={this.state.username} onChange={this.onChangeUsername}
-             validations={[required]} />
+             validations={[requiredUser]} />
           </div>
           
           <div className="input-field">
             <label htmlFor="password" className="loginBoxText">Password: </label>
             <Input className="active"  className="loginInput" type="password" 
             name="password" value={this.state.password} onChange={this.onChangePassword} 
-            validations= {[required]} />
+            validations= {[requiredPW]} />
           </div>
 
           <div className="input-field">
@@ -115,7 +126,7 @@ render() {
            
           {this.state.message && (
             <div>
-              <div role="alert">
+              <div class="validAlert" role="alert">
                 {this.state.message}
               </div>
             </div>

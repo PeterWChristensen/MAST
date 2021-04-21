@@ -28,6 +28,15 @@
   width: 100%;
   }
 
+  .validAlert{
+    position: absolute;
+    padding: 20px;
+    background-color: #940404;
+    color: white;
+    left: 30%;
+    border: 3px solid #000000;
+  }
+
   #logo{
     position: relative;
     left: 15px;
