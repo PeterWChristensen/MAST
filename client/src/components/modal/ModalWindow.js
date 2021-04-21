@@ -591,7 +591,7 @@ class ModalWindow extends React.Component {
                 <p id="modalDialogMessage"><br></br>
                 Confirm edits to student?
                 <br></br><br></br></p>
-                <Link to="/viewStudent"><button className="modalButton" onClick={this.props.editStudent} >Yes</button></Link>
+                <Link to={{pathname:'/viewStudent', state: {email: this.props.email}}}><button className="modalButton" onClick={this.props.editStudent} >Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
             </div>;
@@ -602,10 +602,12 @@ class ModalWindow extends React.Component {
                 <p id="modalDialogMessage"> <br></br>
                 Cancel editing student?
                 <br></br><br></br></p>
-                <Link to="/viewStudent"><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
+                <Link to={{pathname:'/viewStudent', state: {email: this.props.email}}}><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
+            console.log("this is from MODAL for this.props");
+            console.log(this.props);
         }
 
         return (  

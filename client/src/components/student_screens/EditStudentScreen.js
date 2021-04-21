@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
+import axios from "axios";
 
 import AuthService from "../../services/auth.service";
 import MSStudentService from "../../services/msStudent.service";
@@ -60,45 +61,38 @@ class EditStudentScreen extends Component {
     }
 
 
-
-    async componentDidMount(){
+    componentDidMount(){
         console.log("componentDidMount at Student_screens/EditStudentScreen.js");
-        var stuInfo;
-        if(localStorage.getItem('info')){
-            console.log("this is working IF.");
-            await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
-            stuInfo= await MSStudentService.getStudentInfo();
+        console.log(this.props);
+        var username=this.props.location.state.email;
+        axios.post("/getinfo", {
+            username
+          })
+          .then(response => {
+            this.setState({
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                studentID: response.data.studentID,
+                hasGraduated: response.data.hasGraduated,
+                email: response.data.email,
+                gpa: response.data.gpa,
+                entrySemester: response.data.entrySemester,
+                entryYear: response.data.entryYear,
+                gradSemester: response.data.gradSemester,
+                gradYear: response.data.gradYear,
+                nSemestersInProgram: response.data.nSemestersInProgram,
+                projectOption: response.data.projectOption,
+                advisor: response.data.advisor,
+                departmentID: response.data.departmentID,
+                track: response.data.track,
+                requirementVersionYear: response.data.requirementVersionYear,
+                requirementVersionSemester: response.data.requirementVersionSemester,
+                totalCredits: response.data.totalCredits})
+                console.log(response.data);
 
-        }else{
-            console.log("this is working ELSE.");
-            await MSStudentService.getinfo(this.props.location.state.email);
-            stuInfo= await MSStudentService.getStudentInfo();
-
-        }
-        console.log(stuInfo);
-
-        
-        this.setState({
-            firstName: stuInfo.firstName,
-            lastName: stuInfo.lastName,
-            studentID: stuInfo.studentID,
-            hasGraduated: stuInfo.hasGraduated,
-            email: stuInfo.email,
-            gpa: stuInfo.gpa,
-            entrySemester: stuInfo.entrySemester,
-            entryYear: stuInfo.entryYear,
-            gradSemester: stuInfo.gradSemester,
-            gradYear: stuInfo.gradYear,
-            nSemestersInProgram: stuInfo.nSemestersInProgram,
-            totalCredits: stuInfo.totalCredits,
-            projectOption: stuInfo.projectOption,
-            advisor: stuInfo.advisor,
-            departmentID: stuInfo.departmentID,
-            track:stuInfo.track,
-            requirementVersionYear: stuInfo.requirementVersionYear,
-            requirementVersionSemester: stuInfo.requirementVersionSemester
-           
-        });    
+                return response.data;
+          }).catch(err => console.error(err));
+     
     }
      
 
@@ -133,7 +127,7 @@ class EditStudentScreen extends Component {
         this.setState({coursePlans: courseArr, showModalDialogPopup: false})
     }
 
-    async editStudent() {
+    editStudent() {
         var data = {
             studentID: this.state.studentID,
             firstName: this.state.firstName,
@@ -154,12 +148,17 @@ class EditStudentScreen extends Component {
             totalCredits: this.state.totalCredits,            
             requirementVersionSemester: this.state.requirementVersionSemester
         };
-        await MSStudentService.updateinfo( this.state.email ,data);
-        await MSStudentService.getinfo(this.state.email);
-        console.log("this is editstudent() at EditStudentScreen");
-        console.log("update info");
-        console.log("states");
-        console.log(await MSStudentService.getinfo(this.state.email));               
+        var username=data.email;
+
+        axios.put("/updateinfo", {
+                username,
+                data
+            })
+            .then(response => {
+                console.log("this from edit student");
+              console.log(response.data);
+              return response.data;
+            }).catch(err => console.error(err));
     }
 
 
@@ -609,7 +608,7 @@ class EditStudentScreen extends Component {
                         <button id="viewStudentForm_edit_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("editStudent")}>Save</button>
                         <button id="viewStudentForm_return_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("cancelEditStudent")}>Cancel</button>
                         </div>
-                        {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
+                        {this.state.showModalDialogPopup ? <ModalDialog editStudent={this.editStudent.bind(this)} modalType={this.state.modalType} email={this.state.email} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} /> : null}
                 </div>
             </div>
         )
