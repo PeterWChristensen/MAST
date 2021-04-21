@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MaterialTable from "material-table";
 import axios from "axios";
-import AuthService from "../../services/auth.service";
-import MSStudentService from "../../services/msStudent.service";
 
 class ViewStudentScreen extends Component {
     constructor(props){
@@ -92,49 +90,6 @@ class ViewStudentScreen extends Component {
           }).catch(err => console.error(err));
      
     }
-     
-  
-    
-    // async componentDidMount(){
-
-    //     console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-
-    //     var stuInfo;
-    //     if(localStorage.getItem('info')){
-    //         console.log("if at view");
-    //         await MSStudentService.getinfo( await MSStudentService.getStudentInfo().email);
-    //         stuInfo= await MSStudentService.getStudentInfo();
-    //     }else{
-    //         console.log("else at view");
-    //         await MSStudentService.getinfo(this.props.location.state.email);
-    //         stuInfo= await MSStudentService.getStudentInfo();
-    //     }
-
-    //     console.log(stuInfo);
-            
-    //     this.setState({
-    //         firstName: stuInfo.firstName,
-    //         lastName: stuInfo.lastName,
-    //         studentID: stuInfo.studentID,
-    //         hasGraduated: stuInfo.hasGraduated,
-    //         email: stuInfo.email,
-    //         gpa: stuInfo.gpa,
-    //         entrySemester: stuInfo.entrySemester,
-    //         entryYear: stuInfo.entryYear,
-    //         gradSemester: stuInfo.gradSemester,
-    //         gradYear: stuInfo.gradYear,
-    //         nSemestersInProgram: stuInfo.nSemestersInProgram,
-    //         projectOption: stuInfo.projectOption,
-    //         advisor: stuInfo.advisor,
-    //         departmentID: stuInfo.departmentID,
-    //         track: stuInfo.track,
-    //         requirementVersionYear: stuInfo.requirementVersionYear,
-    //         requirementVersionSemester: stuInfo.requirementVersionSemester,
-    //         totalCredits: stuInfo.totalCredits
-
-    //     });    
-    // }
-     
 
     render() {
         var courseTable = [];

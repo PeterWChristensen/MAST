@@ -4,8 +4,6 @@ import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
 import axios from "axios";
 
-import AuthService from "../../services/auth.service";
-import MSStudentService from "../../services/msStudent.service";
 class EditStudentScreen extends Component {
     constructor(props){
         super(props)
