@@ -363,9 +363,9 @@ class EditStudentScreen extends Component {
 
         const addNewComment = () => {
             return <div>
-                <input className="comments" defaultValue={this.state.commentToAddDate} onChange={changeCommentToAddDateHandler}/>
-                <input className="comments" defaultValue={this.state.commentToAddComment} onChange={changeCommentToAddCommentHandler}/>
-                <button className="commentButton" onClick={addCommentHandler}>Add</button>
+                <textarea className="commentsDate" defaultValue={this.state.commentToAddDate} onChange={changeCommentToAddDateHandler}/>
+                <textarea className="commentsComment" defaultValue={this.state.commentToAddComment} onChange={changeCommentToAddCommentHandler}/>
+                <button className="addCommentButton" onClick={addCommentHandler}>Add</button>
             </div>;
         }
 
@@ -381,15 +381,15 @@ class EditStudentScreen extends Component {
         const createEntry = (comment) => {
             var divId = "comment" + comment.index;
             return <div id={divId}>
-                <input className="comments" value={comment.date} disabled/>
-                <input className="comments" value={comment.comment} disabled/>
-                <button className="commentButton" value={comment.index} onClick={commentDeleteHandler}>Delete</button>
+                <textarea className="commentsDate" value={comment.date} readOnly/>
+                <textarea className="commentsComment" value={comment.comment} readOnly/>
+                <button className="deleteCommentButton" value={comment.index} onClick={commentDeleteHandler}>X</button>
             </div>;
         }
         const createCommentTable = () =>{
             commentTable.push(<div id="commentTableHeader">
-                <input className="comments" value="Date" disabled/>
-                <input className="comments" value="Comment" disabled/>
+                <input className="commentTableHeaderDate" value="Date" disabled/>
+                <input className="commentTableHeaderComment" value="Comment" disabled/>
                 </div>)
             var comments = this.state.comments;
             for (let i = 0; i < comments.length; i++){ //Add index to each comment for editing

@@ -388,7 +388,7 @@ class AddStudentScreen extends Component {
                         <p className="viewStudent_prompt">Total Credits: 
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} onChange={changeTotalCreditsHandler}/>
                         </p>
-                        <br></br><br></br><br></br>
+                        <br></br><br></br>
                         <button id="addStudentForm_submit_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("addStudent")}>Add Student</button>
                         <button id="addStudentForm_cancel_button" className="addStudent_button" onClick={() => this.showModalDialogPopUp("cancelAddStudent")}>Cancel</button>
                         </div>

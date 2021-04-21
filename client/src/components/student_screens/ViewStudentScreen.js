@@ -143,8 +143,8 @@ class ViewStudentScreen extends Component {
         const createCourseEntry = (course) => {
             var divId = "course" + course.index;
             return <div id={divId}>
-            <input className="coursePlan" value={course.courseName} disabled/>
-            <input className="coursePlan" value={course.grade} disabled/>
+            <input className="coursePlan" value={course.courseName} readOnly/>
+            <input className="coursePlan" value={course.grade} readOnly/>
             </div>;
         }
 
@@ -179,14 +179,14 @@ class ViewStudentScreen extends Component {
         const createEntry = (comment) => {
             var divId = "comment" + comment.index;
             return <div id={divId}>
-                <input className="comments" value={comment.date} disabled/>
-                <input className="comments" value={comment.comment} disabled/>
+                <textarea className="commentsDate" value={comment.date} readOnly/>
+                <textarea className="commentsComment" value={comment.comment} readOnly/>
             </div>;
         }
         const createCommentTable = () =>{
-            commentTable.push(<div id="commentTableHeader">
-                <input className="comments" value="Date" disabled/>
-                <input className="comments" value="Comment" disabled/>
+            commentTable.push(<div id="commentTableHeaders">
+                <input className="commentTableHeaderDate" value="Date" disabled/>
+                <input className="commentTableHeaderComment" value="Comment" disabled/>
                 </div>)
             var comments = this.state.comments;
             for (let i = 0; i < comments.length; i++){ //Add index to each comment for editing
@@ -204,37 +204,37 @@ class ViewStudentScreen extends Component {
                     <div>
                         <br></br><br></br>
                         <p className="viewStudent_prompt"> First Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Last Name: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&nbsp;  SBU ID: 
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.studentID} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.firstName} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.lastName} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.studentID} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.email} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.password} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.gpa} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.email} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.password} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.gpa} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Graduated:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester + " " + this.state.entryYear} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.gradSemester + " " + this.state.gradYear} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester + " " + this.state.entryYear} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.gradSemester + " " + this.state.gradYear} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated} readOnly/>
                         </p>                        
                         <br></br>                        
                         <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; # Semesters In Program:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.departmentID} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.departmentID} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Advisor:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Project: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Requirements Version:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} disabled/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} disabled/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementVersionSemester + " " + this.state.requirementVersionYear} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementVersionSemester + " " + this.state.requirementVersionYear} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Total Credits: 
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} disabled/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} readOnly/>
                         </p>
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
