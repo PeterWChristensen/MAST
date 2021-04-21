@@ -137,11 +137,11 @@ class GPDHomeScreen extends Component {
                     <Box class="dropdown">
                         <button class="dropbtn">Import</button>
                         <Box class="dropdown-content">
-                            <a href="#" onClick={() => this.showModalDialogPopUp("importDegreeRequirements")}>Degree Requirements</a>
-                            <a href="#" onClick={() => this.showModalDialogPopUp("importCourseInformation")}>Course Information</a>
-                            <a href="#" onClick={() => this.showModalDialogPopUp("importCourseOfferings")}>Course Offerings</a>
-                            <a href="#" onClick={() => this.showModalDialogPopUp("importStudentData")}>Student Data</a>
-                            <a href="#" onClick={() => this.showModalDialogPopUp("importGrades")}>Grades</a>
+                            <a onClick={() => this.showModalDialogPopUp("importDegreeRequirements")}>Degree Requirements</a>
+                            <a onClick={() => this.showModalDialogPopUp("importCourseInformation")}>Course Information</a>
+                            <a onClick={() => this.showModalDialogPopUp("importCourseOfferings")}>Course Offerings</a>
+                            <a onClick={() => this.showModalDialogPopUp("importStudentData")}>Student Data</a>
+                            <a onClick={() => this.showModalDialogPopUp("importGrades")}>Grades</a>
                         </Box>
                         </Box>
                             <a href='/addStudent'><Link to={{pathname: '/addStudent'}}><button className="GPDHomepageButton">Add Student</button></Link></a>

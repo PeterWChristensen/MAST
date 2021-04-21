@@ -5,6 +5,8 @@
 }
 
 .App{
+  display: block;
+  overflow:auto;
   position: absolute;
   background: #000000;
   width: 100%;
@@ -22,12 +24,8 @@
   border-width: 4px;
   border-style: solid;
   border-radius: 10px;
-  height: 40px;
-  width: 1432px;
-  min-width: 1432px;
-  max-width: 1432px;
-  min-height: 40px;
-  max-height: 40px;
+  height: 5%;
+  width: 100%;
   }
 
   #logo{
@@ -66,8 +64,8 @@
   position: absolute;
   left: 5%;
   top: 6.5%;
-  width: 1291px;
-  height: 720px;
+  width: 90%;
+  height: 90%;
   background: rgb(255, 255, 255);
   font: black;
   z-index: -1;
@@ -113,8 +111,8 @@
 #loginButton{
   position: relative;
   font-size: 30px;
-  top: 150px;
-  left: 70.5%; 
+  top: 130px;
+  left: 72.5%; 
   background-color: #000000;
   color: white;
   padding: 10px;
@@ -127,13 +125,11 @@
   position: absolute;
   left: 5%;
   top: 6.5%;
-  width: 1296px;
-  height: 739px;
+  width: 90%;
+  height: 90%;
   background: rgb(255, 255, 255);
   font: black;
   z-index: -1;
-  min-width: 1296px;
-  max-width: 1296px;
 }
 
 /* Style The Dropdown Button */
@@ -197,20 +193,16 @@ background-color: #343434;
   }
 
   /*ADD STUDENT SCREEN  */
-#addStudentForm {
-  position: absolute;
-  left: 15%;
-  top: 6%;
-  width: 993.59px;
-  height: 732.72px;
-  background: rgb(239, 239, 239);
-  z-index: -1;
-  font: black;
-  min-width: 993.59px;
-  max-width: 993.59px;
-  min-height: 732.72px;
-  max-height: 732.72px;
-}
+  #addStudentForm {
+    position: absolute;
+    left: 15%;
+    top: 6%;
+    width: 69%;
+    height: 90%;
+    background: rgb(239, 239, 239);
+    z-index: -1;
+    font: black;
+  }
 
 #addStudentFormHeader{
   position: relative;
@@ -280,24 +272,24 @@ background-color: #343434;
 }
 
   /*VIEW STUDENT SCREEN  */
-#viewStudentFormBackground{
-  position: absolute;
-  background: #000000;
-  width: 100%;
-  height: 160%;
-  z-index: -10;
-}
-
-  #viewStudentForm {
+  #viewStudentFormBackground{
     position: absolute;
-    left: 15%;
-    top: 6%;
-    width: 69%;
-    height: 90%;
-    background: rgb(239, 239, 239);
-    z-index: -1;
-    font: black;
+    background: #000000;
+    width: 100%;
+    z-index: -10;
   }
+  
+    #viewStudentForm {
+      display: block;
+      overflow:auto;
+      position: absolute;
+      left: 15%;
+      top: 6%;
+      width: 69%;
+      background: rgb(239, 239, 239);
+      z-index: -1;
+      font: black;
+    }
   
   #viewStudentFormHeader{
     position: relative;
@@ -356,17 +348,63 @@ background-color: #343434;
     padding: 10px;
   }
 
-  .comment{
+  .semesterTableHeader{
     position: relative;
-    grid-column: 1 / 2;
     margin-top: 1%;
-    margin-inline-end: 3px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;  
+    text-align:left;
+    width: 60.8%;
+    background-color: #000000;
+    color: white;
+  }
+
+  .coursePlan{
+    position: relative;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;  
     text-align:left;
-    width: 12%;
+    width: 30%;
   }
-  
+
+  .commentTableHeaderDate{
+    position: relative;
+    margin-top: 1%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;  
+    text-align:left;
+    width: 30%;
+    background-color: #000000;
+    color: white;
+  }
+
+  .commentTableHeaderComment{
+    position: relative;
+    margin-top: 1%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;  
+    text-align:left;
+    width: 59.3%;
+    background-color: #000000;
+    color: white;
+  }
+
+  .commentsDate{
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;  
+    text-align:left;
+    width: 30%;
+  }
+
+  .commentsComment{
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;  
+    text-align:left;
+    width: 60%;
+  }
+
   /* EDIT STUDENT SCREEN */
 #departmentSelectEditStudent, #trackSelectEditStudent{
   width: 27%
@@ -380,6 +418,28 @@ background-color: #343434;
   background-color: #000000;
   color: white;
   padding: 10px;
+}
+
+.deleteCommentButton{
+  position: relative;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  width: 5%;
+  height: 10%;
+  background-color: #000000;
+  color: white;
+  text-align: center;
+}
+
+.addCommentButton{
+  position: relative;
+  width: 10%;
+  height: 30px;
+  background-color: #000000;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  color: white;
+  text-align: center;
 }
 
 /* MODAL WINDOW */
@@ -419,24 +479,16 @@ background-color: #343434;
   top: 29%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 250px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 250px;
-  max-height: 250px;
+  width: 25%; 
+  height: 30%;
 }
 
 #courseInfoModal{
   top: 27%;
   left: 33%;
   padding-top: 20px;
-  width: 500px;
-  height: 330px;
-  min-width: 500px;
-  max-width: 500px;
-  min-height: 330px;
-  max-height: 330px;
+  width: 35%; 
+  height: 40%;
 }
 
 #semesterSelectCourseScrape{
@@ -451,72 +503,48 @@ background-color: #343434;
   top: 29%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 250px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 250px;
-  max-height: 250px;
+  width: 25%; 
+  height: 30%;
 }
 
 #importStudentDataModal{
   top: 27%;
   left: 33%;
   padding-top: 20px;
-  width: 500px;
-  height: 330px;
-  min-width: 500px;
-  max-width: 500px;
-  min-height: 330px;
-  max-height: 330px;
+  width: 35%; 
+  height: 40%;
 }
 
 #importGradesModal{
   top: 29%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 250px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 250px;
-  max-height: 250px;
+  width: 25%; 
+  height: 30%;
 }
 
 #deleteAllStudentsModal{
   top: 32%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 150px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 150px;
-  max-height: 150px;
+  width: 25%; 
+  height: 20%;
 }
 
 #addStudentModal{
   top: 38%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 150px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 150px;
-  max-height: 150px;
+  width: 25%; 
+  height: 20%;
 }
 
 #cancelAddStudentModal{
   top: 38%;
   left: 36%;
   padding-top: 20px;
-  width: 370px; 
-  height: 150px;
-  min-width: 370px;
-  max-width: 370px;
-  min-height: 150px;
-  max-height: 150px;
+  width: 25%; 
+  height: 20%;
 }
 
 #fileToImport{
@@ -529,7 +557,8 @@ background-color: #343434;
 
 #editStudent{
   top: 35%;
-  width: 370px; 
-  height: 150px; 
+  left: 36%;
+  width: 25%; 
+  height: 20%;
 }
 

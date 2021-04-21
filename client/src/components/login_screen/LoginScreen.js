@@ -93,9 +93,7 @@ render() {
             this.form = c;
           }} className="col s4 white">
 
-          <b id="loginTextHeading"></b>
-            <h5 className="loginBoxText">Login</h5>
-            
+            <h5 className="loginBoxText" >Login</h5>
           <div className="input-field">
             <label htmlFor="username" className="loginBoxText">Username: </label>
             <Input className="active" className="loginInput" type="text"
