@@ -31,6 +31,7 @@ require("./app/routes/prerequisite.routes")(app);
 require("./app/routes/department.routes")(app);
 require("./app/routes/course.routes")(app);
 require("./app/routes/degreeRequirement.routes")(app);
+require("./app/routes/comment.routes")(app);
 
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);

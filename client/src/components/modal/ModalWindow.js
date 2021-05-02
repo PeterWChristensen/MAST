@@ -602,6 +602,7 @@ class ModalWindow extends React.Component {
                 <p id="modalDialogMessage"> <br></br>
                 Cancel editing student?
                 <br></br><br></br></p>
+                {/* <button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button> */}
                 <Link to={{pathname:'/viewStudent', state: {email: this.props.email}}}><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
