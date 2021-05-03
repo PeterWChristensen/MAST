@@ -38,7 +38,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
   db.areaRequirement = require("./areaRequirement.model.js")(sequelize, Sequelize);
 
-  db.requiredCourse = require("./requiredCourse.model.js")(sequelize, Sequelize);
+  db.subAreaCourse = require("./subAreaCourse.model.js")(sequelize, Sequelize);
 
   db.coursePlan = require("./coursePlan.model.js")(sequelize, Sequelize);
 

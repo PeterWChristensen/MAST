@@ -1,10 +1,10 @@
 module.exports = app => {
-    const requiredCourse = require("../controllers/requiredCourse.controller.js");
+    const subAreaCourse = require("../controllers/subAreaCourse.controller.js");
   
     var router = require("express").Router();
   
     // Create a new degreeRequirement
-    router.post("/addRequiredCourse", requiredCourse.create);
+    router.post("/addSubAreaCourse", subAreaCourse.create);
   
     app.use('/', router);
   };

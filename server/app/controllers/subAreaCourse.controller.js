@@ -1,5 +1,5 @@
 const db = require("../models");
-const RequiredCourse = db.requiredCourse;
+const SubAreaCourse = db.subAreaCourse;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new DegreeRequirement
@@ -13,7 +13,7 @@ exports.create = (req, res) => {
       return;
     }
   
-    const requiredCourse = {
+    const subAreaCourse = {
       requirementID: req.body.requirementID,
       courseID:req.body.courseID,
       departmentID: req.body.departmentID,
@@ -23,11 +23,11 @@ exports.create = (req, res) => {
     };
   
     // Save degreeRequirement in the database
-    console.log("requiredCourse is==")
-    console.log(requiredCourse);
-    const newRequiredCourse = RequiredCourse.create(requiredCourse)
+    console.log("subAreaCourse is==")
+    console.log(subAreaCourse);
+    const newSubAreaCourse = SubAreaCourse.create(subAreaCourse)
       .then(data => {
-        res.send(newRequiredCourse);
+        res.send(newSubAreaCourse);
       })
       .catch(err => {
         res.status(500).send({

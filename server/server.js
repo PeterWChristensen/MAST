@@ -35,7 +35,7 @@ require("./app/routes/degreeRequirement.routes")(app);
 require("./app/routes/area.routes")(app);
 require("./app/routes/subArea.routes")(app);
 require("./app/routes/areaRequirement.routes")(app);
-require("./app/routes/requiredCourse.routes")(app);
+require("./app/routes/subAreaCourse.routes")(app);
 require("./app/routes/comment.routes")(app);
 
 require("./app/routes/auth.routes")(app);

@@ -10,7 +10,7 @@ import DegreeRequirementService from "../../services/degreeRequirement.service";
 import AreaService from "../../services/area.service";
 import SubAreaService from "../../services/subArea.service";
 import AreaRequirementService from "../../services/areaRequirement.service";
-import RequiredCourseService from "../../services/requiredCourse.service";
+import SubAreaCourseService from "../../services/subAreaCourse.service";
 
 const papaparseOptions = {
   header: true,
@@ -220,7 +220,7 @@ class ModalWindow extends React.Component {
                                 subAreaID: obj.area[i].subArea[j].subAreaID,
                             };
                             console.log(data_requiredCourse)
-                            RequiredCourseService.create(data_requiredCourse)
+                            SubAreaCourseService.create(data_requiredCourse)
                             .then(response =>{
                                 this.setState({
                                     requirementID: response.data_area.requirementID,

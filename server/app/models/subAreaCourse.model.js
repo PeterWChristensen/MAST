@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const RequiredCourse = sequelize.define("RequiredCourse", {
+    const SubAreaCourse = sequelize.define("SubAreaCourse", {
         requirementID: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -23,9 +23,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
         }
     }, { 
-        tableName: 'RequiredCourse',
+        tableName: 'SubAreaCourse',
         timestamps: false
     });
       
-        return RequiredCourse;
+        return SubAreaCourse;
     };
