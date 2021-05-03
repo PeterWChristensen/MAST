@@ -7,6 +7,7 @@ import CoursePlanService from "../../services/coursePlan.service";
 import CourseService from "../../services/course.service";
 import PrerequisiteService from "../../services/prerequisite.service";
 import DegreeRequirementService from "../../services/degreeRequirement.service";
+import AuthService from '../../services/auth.service';
 
 const papaparseOptions = {
   header: true,
@@ -327,6 +328,12 @@ class ModalWindow extends React.Component {
             .catch(e => {
                 console.log(e);
             });
+
+            var username=data_temp.email;
+            var userID=data_temp.studentID;
+            var password= data_temp.password;
+            AuthService.register(username,userID,password);
+
         }
 
         var plan = this.state.studentDataCoursePlans

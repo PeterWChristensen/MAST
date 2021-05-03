@@ -22,6 +22,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import PageView from '@material-ui/icons/Pageview';
 import { forwardRef } from 'react';
 import MSStudentService from "../../services/msStudent.service";
+import AuthService from "../../services/auth.service";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -112,6 +113,10 @@ class GPDHomeScreen extends Component {
         .catch(e => {
             console.log(e);
         });
+
+
+
+        AuthService.deleteAllStudent();
     }
 
     componentDidMount() {

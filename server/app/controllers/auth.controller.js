@@ -64,3 +64,21 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+
+exports.deleteUser = (req,res) => {
+  console.log("deleteUser at Controller.");  
+  User.destroy({
+        where: {
+          roles: "student"
+            }
+        })
+          .then(                    
+            res.status(200).send("students are deleted")
+        )
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Error has occured while deleting a comment"
+            });
+        });
+    };
