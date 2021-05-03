@@ -24,6 +24,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
   db.course = require("./course.model.js")(sequelize, Sequelize);
 
+  db.comment = require("./comment.model.js")(sequelize, Sequelize);
+
   db.department = require("./department.model.js")(sequelize, Sequelize);
   
   db.courseOffering = require("./courseOffering.model.js")(sequelize, Sequelize);
