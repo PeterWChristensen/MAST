@@ -698,7 +698,37 @@ background-color: #343434;
   height: 20%;
 }
 
-
 .dropdown-menu label {
   display: block;
+}
+
+/*SUGGEST COURSE PLAN*/
+.preferenceButton{
+  position: relative;
+  font-size: 18px;
+  background-color: #000000;
+  color: white;
+  padding: 6px;
+  margin-bottom: 10px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+  top: 2px;
+}
+
+.promptButton{
+  position: relative;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-inline-start: 5px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+  top: 2px;
+}
+
+.line-break {
+  white-space: pre-line;
+  font-size: 17px;
 }

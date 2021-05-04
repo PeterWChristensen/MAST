@@ -15,6 +15,7 @@ import MSViewStudentScreen from "./components/ms_student_screen/MSViewStudentScr
 import MSEditStudentScreen from "./components/ms_student_screen/MSEditStudentScreen.js";
 import ViewStudentScreen from './components/student_screens/ViewStudentScreen.js';
 import EditStudentScreen from './components/student_screens/EditStudentScreen.js';
+import SuggestCoursePlanScreen from './components/student_screens/SuggestCoursePlanScreen.js';
 import AuthService from './services/auth.service';
 
 
@@ -118,6 +119,7 @@ class App extends Component{
                 <Route exact path="/addStudent" component={AddStudentScreen} />
                 <Route exact path="/viewStudent" component={ViewStudentScreen} />
                 <Route exact path="/editStudent" component={EditStudentScreen} />
+                <Route exact path="/suggestCoursePlan" component={SuggestCoursePlanScreen} />
                 <Route exact path="/student" component={MSViewStudentScreen} /> 
                 <Route exact path="/student/edit" component={MSEditStudentScreen} /> 
               </Switch>
