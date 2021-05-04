@@ -257,7 +257,7 @@ If student has a track, check SubAreaCourse for it instead of just checking all 
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button>
+                        <Link to="/suggestCoursePlan"><button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>

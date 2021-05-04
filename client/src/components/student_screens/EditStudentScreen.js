@@ -524,8 +524,8 @@ class EditStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="entryYearSelect" className="dropdownSelectYear" defaultValue={this.state.entryYear} onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
@@ -565,8 +565,8 @@ class EditStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="gradYearSelect" className="dropdownSelectYear" defaultValue={this.state.gradYear} onChange={changeExpectedGraduationYearOptionHandler}>
                             <option value="2025">2025</option>
@@ -687,7 +687,7 @@ class EditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button>
+                        <Link to="/suggestCoursePlan"> <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
