@@ -29,7 +29,14 @@ class ViewStudentScreen extends Component {
             projectOption: "",
             requirementVersionYear: "",
             requirementVersionSemester: "",
-            degreeProgress: "",
+            
+            degreeRequirement: [],
+            area:[],
+            AreaReq:[],
+            subArea:[],
+            subAreaCourse:[],
+            
+            
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
@@ -105,6 +112,14 @@ class ViewStudentScreen extends Component {
                 return response.data;
           }).catch(err => console.error(err));
 
+
+
+
+
+
+
+
+
     }
 
     render() {
@@ -130,11 +145,12 @@ class ViewStudentScreen extends Component {
             var studentReqVersionYear= this.state.requirementVersionYear;
             
             //this will be an object and will have the same attributes as the database table.
-            var degreeRequirement="";
-            var area="";
-            var AreaReq="";
-            var subArea="";
-            var subAreaCourse="";
+            var degreeRequirement=this.state.degreeRequirement;
+            var area=this.state.area;
+            var AreaReq=this.state.AreaReq;
+            var subArea=this.state.subArea;
+            var subAreaCourse=this.state.subAreaCourse;
+            
             
             var displayText="Display testing";
             degreeProgressTable.push(
