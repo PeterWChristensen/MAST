@@ -6,6 +6,7 @@ class EnrollmentTrends extends Component {
         super(props)
         this.state = { 
             toggleDropDown: false,
+            departmentID: "ALL",
             startSemester: "Fall",
             startYear: 2021,
             endSemester: "Fall",
@@ -13,7 +14,7 @@ class EnrollmentTrends extends Component {
             numSelectedCourses: 0,
             coursesForGraph: [],
             semestersForGraph: ["Fall 2021", "Winter 2022", "Spring 2022"],            
-            courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BME500"}, {courseID: "BME502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "EST532"}, {courseID: "EST533"}],
+            courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BMI500"}, {courseID: "BMI502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "ESE532"}, {courseID: "ESE533"}],
             coursePlans: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
             {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""},
             {courseOfferingID: "CSE510Spring20221", courseName: "CSE 510", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE534Winter20221", courseName: "CSE 534", semester: "Winter 2022", grade: ""}, 
@@ -130,6 +131,11 @@ class EnrollmentTrends extends Component {
     }
 
     render() {
+        const changeDepartmentOptionHandler = (event) => { 
+            var toggleDropDownNew = this.state.toggleDropDown
+            this.setState({departmentID: event.target.value, toggleDropDown: !toggleDropDownNew}); 
+        }; 
+
         const changeStartSemesterOptionHandler = (event) => { 
             this.setState({startSemester: event.target.value}); 
         }; 
@@ -147,12 +153,57 @@ class EnrollmentTrends extends Component {
             this.setState({endYear: year}); 
         }; 
 
+        //Display Course List
         var options = <label/>
         if(this.state.toggleDropDown==true){
-            if (this.state.numSelectedCourses == 10){
-                options = this.state.courses.map((el) =><label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)} disabled/> {el.courseID} </label>); 
+            if (this.state.departmentID === "ALL"){
+                if (this.state.numSelectedCourses == 10){
+                    options = this.state.courses.map((el) =>{
+                        if (this.state.coursesForGraph.includes(el.courseID)){
+                            return <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)} defaultChecked disabled/> {el.courseID} </label>                
+                        }
+                        else{
+                            return <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)} disabled/> {el.courseID} </label>                
+                        }
+                    }); 
+                }else{
+                    options = this.state.courses.map((el) => {
+                        if (this.state.coursesForGraph.includes(el.courseID)){
+                            return <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)} defaultChecked/> {el.courseID} </label>                
+                        }
+                        else{
+                            return <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)}/> {el.courseID} </label>                
+                        }
+                    }); 
+                }
             }else{
-                options = this.state.courses.map((el) => <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)}/> {el.courseID} </label>);                 
+                var department = this.state.departmentID
+                var filteredCourses = []
+                //Get array of filtered courses
+                this.state.courses.forEach( function(course){
+                    if(course.courseID.substring(0, 3) === department){
+                        filteredCourses.push(course.courseID)
+                    }
+                });
+                if (this.state.numSelectedCourses == 10){//filteredCourses.map((el) =><label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)} disabled/> {el} </label>); 
+                    options = filteredCourses.map((el) =>{
+                        if (this.state.coursesForGraph.includes(el)){
+                            return <label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)} defaultChecked disabled/> {el} </label>                
+                        }
+                        else{
+                            return <label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)} disabled/> {el} </label>                
+                        }
+                    }); 
+                }else{
+                    options = filteredCourses.map((el) =>{
+                        if (this.state.coursesForGraph.includes(el)){
+                            return <label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)} defaultChecked/> {el} </label>                
+                        }
+                        else{
+                            return <label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)}/> {el} </label>                
+                        }
+                    }); 
+                }
             }
         }
 
@@ -167,11 +218,18 @@ class EnrollmentTrends extends Component {
                     <Graph data={this.state.dataForGraph} semesters={this.state.semestersForGraph} divID={"enrollmentTrendGraph"} />
                     </div>
                     <br></br><br></br><br></br>
-                    <text id="selectcoursetext">Select up to 10 courses</text>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Range of Semesters
+                    <text id="selectcoursetext">Select up to 10 courses</text>&emsp;&ensp;<text id="selectcoursetext">Department Filter</text>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<text id="selectcoursetext">Range of Semesters</text>
                     <br></br>
                     <button ctype="button" className="enrollmentTrendsButton" onClick={() => this.toggleDropDownState()}>
                         Select Courses
                     </button>
+                    <select id="departmentSelect" className="enrollmentTrendsYearDropdown" defaultValue={this.state.departmentID} onChange={changeDepartmentOptionHandler}>
+                            <option value="ALL">ALL</option>
+                            <option value="AMS">AMS</option>
+                            <option value="BMI">BMI</option>
+                            <option value="ESE">ESE</option>
+                            <option value="CSE">CSE</option>
+                    </select>
                     <select id="semesterSelect" className="enrollmentTrendsSemesterDropdown" defaultValue={this.state.startSemester} onChange={changeStartSemesterOptionHandler}>
                         <option value="Fall">Fall</option>
                         <option value="Winter">Winter</option>
@@ -257,14 +315,14 @@ class EnrollmentTrends extends Component {
                         <option value="1992">1992</option>
                         <option value="1991">1991</option>
                         <option value="1990">1990</option>
-                    </select> 
-                    <button ctype="button" className="enrollmentTrendsButton" onClick={() => this.processGraphData()}>
-                        Generate Graph
-                    </button>                        
-                    <form id="dropdownCourses" className="dropdown-menu" >
-                        <button id="enrollmentcourseresetbutton" className="enrollmentTrendsButton" onClick={() => this.resetCourseSelection()}>Reset Courses</button>
+                    </select>                       
+                    <form id="dropdownCourses" className="dropdown-menu" >                        
                         {options}
                     </form>  
+                    <button id="enrollmentcourseresetbutton" className="enrollmentTrendsButton" onClick={() => this.resetCourseSelection()}>Reset Courses</button>
+                    <button ctype="button" id="generateGraphButton" className="enrollmentTrendsButton" onClick={() => this.processGraphData()}>
+                        Generate Graph
+                    </button>  
                                 
                 </div>
             </div>

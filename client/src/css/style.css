@@ -416,7 +416,10 @@ background-color: #343434;
   margin-bottom: 10px;
   margin-inline-end: 20px;
   margin-top: 10px;
-  top: 2px;
+}
+
+#generateGraphButton{
+  left: 470px;
 }
 
 #selectcoursetext{
