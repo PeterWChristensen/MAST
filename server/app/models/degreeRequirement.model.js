@@ -7,15 +7,23 @@ module.exports = (sequelize, Sequelize) => {
         },
         departID: {
             type: Sequelize.STRING,
+            primaryKey: true,
+            allowNull: false,
         },
         track: {
             type: Sequelize.STRING,
+            primaryKey: true,
+            allowNull: false,
         },
         versionSemester: {
-            type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2')
+            type: Sequelize.ENUM('Fall','Winter','Spring','Summer1','Summer2'),
+            primaryKey: true,
+            allowNull: false,
         },
         versionYear: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            allowNull: false,
         },
         totalCredit: {
             type: Sequelize.INTEGER
