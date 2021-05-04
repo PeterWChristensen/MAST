@@ -37,6 +37,38 @@ exports.create = (req, res) => {
       });
   };
 
+  exports.getCourseInfo = (req, res) => {
+    console.log("getCourseInfo at Controller.");  
+    console.log(req.body);
+      Course.findOne({
+          where: {
+              credit: req.body.credit
+            }
+          })
+            .then(user => {
+              if (!user) {
+                  return res.status(404).send({ message: "Course Not found." });
+                }
+                      
+              const course = {
+                courseID: req.body.courseID,
+                departID: req.body.departID,
+                name: req.body.name,
+                description: req.body.description,
+                credits: req.body.credits,
+                semester: req.body.semester,
+                year: req.body.year
+              };  
+              console.log(course)
+              res.status(200).send(course);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding Course"
+              });
+          });
+  };
+
 // Retrieve all Course from the database.
 exports.findAll = (req, res) => {
     const courseID = req.query.courseID;

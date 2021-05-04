@@ -29,25 +29,32 @@
 						"name": "Theory",
 						"courses":[
 							{
-								"courseID": "CSE512"
+								"courseID": "CSE512",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE526"
+								"courseID": "CSE526",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE540"
+								"courseID": "CSE540",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE541"
+								"courseID": "CSE541",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE547"
+								"courseID": "CSE547",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE548"
+								"courseID": "CSE548",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE549"
+								"courseID": "CSE549",
+								"credit": 3
 							}
 						]
 					},
@@ -60,28 +67,36 @@
 						"name": "Systems",
 						"courses":[
 							{
-								"courseID": "CSE502"
+								"courseID": "CSE502",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE504"
+								"courseID": "CSE504",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE506"
+								"courseID": "CSE506",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE508"
+								"courseID": "CSE508",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE509"
+								"courseID": "CSE509",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE532"
+								"courseID": "CSE532",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE534"
+								"courseID": "CSE534",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE535"
+								"courseID": "CSE535",
+								"credit": 3
 							}
 						]
 					},
@@ -94,25 +109,32 @@
 						"name": "Information and Intelligent Systems",
 						"courses":[
 							{
-								"courseID": "CSE505"
+								"courseID": "CSE505",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE519"
+								"courseID": "CSE519",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE527"
+								"courseID": "CSE527",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE528"
+								"courseID": "CSE528",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE537"
+								"courseID": "CSE537",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE538"
+								"courseID": "CSE538",
+								"credit": 3
 							},
 							{
-								"courseID": "CSE564"
+								"courseID": "CSE564",
+								"credit": 3
 							}
 						]
 					}
@@ -150,37 +172,48 @@
 						"name": "Computational Applied Mathematics",
 						"courses":[
 							{
-								"courseID": "AMS501"
+								"courseID": "AMS501",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS503"
+								"courseID": "AMS503",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS510"
+								"courseID": "AMS510",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS526"
+								"courseID": "AMS526",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS527"
+								"courseID": "AMS527",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS528"
+								"courseID": "AMS528",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS595"
+								"courseID": "AMS595",
+								"credit": 1
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							}
 						]
 					},
@@ -193,46 +226,60 @@
 						"name": "Computational Biology",
 						"courses":[
 							{
-								"courseID": "AMS507"
+								"courseID": "AMS507",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS510"
+								"courseID": "AMS510",
+								"credit": 3
 							},
 							{
-								"courseID": "MCB520"
+								"courseID": "MCB520",
+								"credit": 3
 							},
 							{
-								"courseID": "CHE541"
+								"courseID": "CHE541",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS531"
+								"courseID": "AMS531",
+								"credit": 0
 							},
 							{
-								"courseID": "AMS532"
+								"courseID": "AMS532",
+								"credit": 0
 							},
 							{
-								"courseID": "AMS533"
+								"courseID": "AMS533",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS535"
+								"courseID": "AMS535",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS537"
+								"courseID": "AMS537",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS539"
+								"courseID": "AMS539",
+								"credit": 0
 							},
 							{
-								"courseID": "CSE549"
+								"courseID": "CSE549",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							}
 						]
 					},
@@ -245,37 +292,48 @@
 						"name": "Operations Research",
 						"courses":[
 							{
-								"courseID": "AMS510"
+								"courseID": "AMS510",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS507"
+								"courseID": "AMS507",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS540"
+								"courseID": "AMS540",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS550"
+								"courseID": "AMS550",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS553/CSE529"
+								"courseID": "AMS553/CSE529",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS595"
+								"courseID": "AMS595",
+								"credit": 1
 							},
 							{
-								"courseID": "AMS570-586"
+								"courseID": "AMS570-586",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							}
 						]
 					},
@@ -288,34 +346,44 @@
 						"name": "Statistics",
 						"courses":[
 							{
-								"courseID": "AMS510"
+								"courseID": "AMS510",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS507"
+								"courseID": "AMS507",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS570"
+								"courseID": "AMS570",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS572"
+								"courseID": "AMS572",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS573"
+								"courseID": "AMS573",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS578"
+								"courseID": "AMS578",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS582"
+								"courseID": "AMS582",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS597"
+								"courseID": "AMS597",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							}
 						]
 					},
@@ -328,40 +396,52 @@
 						"name": "Quantitative Finance",
 						"courses":[
 							{
-								"courseID": "AMS507"
+								"courseID": "AMS507",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS510"
+								"courseID": "AMS510",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS511"
+								"courseID": "AMS511",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS512"
+								"courseID": "AMS512",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS513"
+								"courseID": "AMS513",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS514"
+								"courseID": "AMS514",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS516"
+								"courseID": "AMS516",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS517"
+								"courseID": "AMS517",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS518"
+								"courseID": "AMS518",
+								"credit": 3
 							},
 							{
-								"courseID": "AMS572"
+								"courseID": "AMS572",
+								"credit": 3
 							},
 							{
-								"courseID": "FIN539"
+								"courseID": "FIN539",
+								"credit": 3
 							},
 							{
-								"courseID": "elective"
+								"courseID": "elective",
+								"credit": 3
 							}
 						]
 					}
@@ -376,28 +456,36 @@
 			"track": "II",
 			"requiredCourse":[
 				{
-					"courseID": "BMI501"
+					"courseID": "BMI501",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI502"
+					"courseID": "BMI502",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI503"
+					"courseID": "BMI503",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI511"
+					"courseID": "BMI511",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI512"
+					"courseID": "BMI512",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI513"
+					"courseID": "BMI513",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI540"
+					"courseID": "BMI540",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI592"
+					"courseID": "BMI592",
+					"credit": 1
 				}
 			],
 			"versionSemester": "Fall",
@@ -425,49 +513,64 @@
 							"name": "Imaging Informatics",
 							"courses":[
 								{
-									"courseID": "BMI501"
+									"courseID": "BMI501",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI502"
+									"courseID": "BMI502",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI503"
+									"courseID": "BMI503",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI513"
+									"courseID": "BMI513",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI514"
+									"courseID": "BMI514",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI520"
+									"courseID": "BMI520",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI530"
+									"courseID": "BMI530",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI540"
+									"courseID": "BMI540",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI592"
+									"courseID": "BMI592",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI692"
+									"courseID": "BMI692",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI697"
+									"courseID": "BMI697",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI698"
+									"courseID": "BMI698",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI699"
+									"courseID": "BMI699",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI700"
+									"courseID": "BMI700",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI701"
+									"courseID": "BMI701",
+									"credit": 1
 								}
 							]
 						}
@@ -481,28 +584,36 @@
 			"track": "CI",
 			"requiredCourse":[
 				{
-					"courseID": "BMI501"
+					"courseID": "BMI501",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI502"
+					"courseID": "BMI502",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI503"
+					"courseID": "BMI503",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI511"
+					"courseID": "BMI511",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI512"
+					"courseID": "BMI512",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI513"
+					"courseID": "BMI513",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI540"
+					"courseID": "BMI540",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI592"
+					"courseID": "BMI592",
+					"credit": 1
 				}
 			],
 			"versionSemester": "Fall",
@@ -530,46 +641,60 @@
 							"name": "Clinicla Informatics",
 							"courses":[
 								{
-									"courseID": "BMI501"
+									"courseID": "BMI501",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI502"
+									"courseID": "BMI502",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI503"
+									"courseID": "BMI503",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI512"
+									"courseID": "BMI512",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI540"
+									"courseID": "BMI540",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI550"
+									"courseID": "BMI550",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI551"
+									"courseID": "BMI551",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI592"
+									"courseID": "BMI592",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI692"
+									"courseID": "BMI692",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI697"
+									"courseID": "BMI697",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI698"
+									"courseID": "BMI698",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI699"
+									"courseID": "BMI699",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI700"
+									"courseID": "BMI700",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI701"
+									"courseID": "BMI701",
+									"credit": 1
 								}
 							]
 						}
@@ -584,28 +709,36 @@
 			"track": "TBI",
 			"requiredCourse":[
 				{
-					"courseID": "BMI501"
+					"courseID": "BMI501",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI502"
+					"courseID": "BMI502",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI503"
+					"courseID": "BMI503",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI511"
+					"courseID": "BMI511",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI512"
+					"courseID": "BMI512",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI513"
+					"courseID": "BMI513",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI540"
+					"courseID": "BMI540",
+					"credit": 3
 				},
 				{
-					"courseID": "BMI592"
+					"courseID": "BMI592",
+					"credit": 1
 				}
 			],
 			"versionSemester": "Fall",
@@ -633,46 +766,60 @@
 							"name": "Thanslational Bio-informatics",
 							"courses":[
 								{
-									"courseID": "BMI501"
+									"courseID": "BMI501",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI502"
+									"courseID": "BMI502",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI503"
+									"courseID": "BMI503",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI511"
+									"courseID": "BMI511",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI520"
+									"courseID": "BMI520",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI530"
+									"courseID": "BMI530",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI540"
+									"courseID": "BMI540",
+									"credit": 3
 								},
 								{
-									"courseID": "BMI592"
+									"courseID": "BMI592",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI692"
+									"courseID": "BMI692",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI697"
+									"courseID": "BMI697",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI698"
+									"courseID": "BMI698",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI699"
+									"courseID": "BMI699",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI700"
+									"courseID": "BMI700",
+									"credit": 1
 								},
 								{
-									"courseID": "BMI701"
+									"courseID": "BMI701",
+									"credit": 1
 								}
 							]
 						}
@@ -686,7 +833,8 @@
 			"track": "N/A",
 			"requiredCourse":[
 				{
-					"courseID": "ESE597"
+					"courseID": "ESE597",
+					"credit": 1
 				}
 			],
 			"versionSemester": "Fall",
@@ -714,49 +862,64 @@
 							"name": "core courses",
 							"courses":[
 								{
-									"courseID": "ESE502"
+									"courseID": "ESE502",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE503"
+									"courseID": "ESE503",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE511"
+									"courseID": "ESE511",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE538"
+									"courseID": "ESE538",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE516"
+									"courseID": "ESE516",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE520"
+									"courseID": "ESE520",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE528"
+									"courseID": "ESE528",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE532"
+									"courseID": "ESE532",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE505"
+									"courseID": "ESE505",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE545"
+									"courseID": "ESE545",
+									"credit": 4
 								},
 								{
-									"courseID": "ESE547"
+									"courseID": "ESE547",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE554"
+									"courseID": "ESE554",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE555"
+									"courseID": "ESE555",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE566"
+									"courseID": "ESE566",
+									"credit": 3
 								},
 								{
-									"courseID": "ESE587"
+									"courseID": "ESE587",
+									"credit": 3
 								}
 							]
 						}

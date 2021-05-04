@@ -19,7 +19,8 @@ exports.create = (req, res) => {
       departmentID: req.body.departmentID,
       track:req.body.track,
       areaID: req.body.areaID,
-      subAreaID: req.body.subAreaID
+      subAreaID: req.body.subAreaID,
+      credit: req.body.credit
     };
   
     // Save degreeRequirement in the database

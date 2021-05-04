@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import MaterialTable from "material-table";
 import axios from "axios";
 
 import AuthService from "../../services/auth.service";
@@ -17,7 +16,7 @@ class MSViewStudentScreen extends Component {
             lastName: "",
             email: "",
             studentID: "",
-            password: "",
+            password: "password",
             gpa: "",
             entrySemester: "",
             entryYear: "",
@@ -32,7 +31,15 @@ class MSViewStudentScreen extends Component {
             projectOption: "",
             requirementVersionYear: "",
             requirementVersionSemester: "",
-            coursePlans: [{courseOfferingID: "CSE 503", grade: "A"}, {courseOfferingID: "CSE 504", grade: "B"}],
+            
+            degreeRequirement: "",
+            area:"",
+            AreaReq:"",
+            subArea:[],
+            subAreaCourse:[],
+            
+            
+            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -43,6 +50,7 @@ class MSViewStudentScreen extends Component {
                     field: "grade"
                 }
             ],
+            // comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
             comments: [],
             commentColumns: [
                 {
@@ -89,7 +97,6 @@ class MSViewStudentScreen extends Component {
                 totalCredits: response.data.totalCredits})
                 return response.data;
           }).catch(err => console.error(err));
-
           var stu_username=username;
  
           axios.post("/getcmt", {
@@ -112,6 +119,7 @@ class MSViewStudentScreen extends Component {
     render() {
         var courseTable = [];
         var semester = new Map(); //map semester with course
+        var degreeProgressTable = [];
 
         const createCourseEntry = (course) => {
             var divId = "course" + course.index;
@@ -120,6 +128,54 @@ class MSViewStudentScreen extends Component {
             <input className="coursePlan" value={course.grade} readOnly/>
             </div>;
         }
+        const createDegreeProgressTables = () =>{
+            var degreeProgress= this.state.degreeProgress;
+            var studentID=this.state.studentID;
+            var studentTrack=this.state.track;
+            var studentTotalCredit=this.state.totalCredits;
+            var studentGPD= this.state.gpa;
+            var studentDepartmentID=this.state.departmentID;
+            var studentReqVersionSemester= this.state.requirementVersionSemester;
+            var studentReqVersionYear= this.state.requirementVersionYear;
+            
+                    
+          var departmentID=this.state.departmentID;
+          var track=this.state.track;
+          var requirementVersionSemester=this.state.requirementVersionSemester;
+          var requirementVersionYear=this.state.requirementVersionYear;
+
+
+            
+            
+            
+            //this will be an object and will have the same attributes as the database table.
+            var degreeRequirement=this.state.degreeRequirement;
+            var area=this.state.area;
+            var AreaReq=this.state.AreaReq;
+            var subArea=this.state.subArea;
+            var subAreaCourse=this.state.subAreaCourse;
+
+            console.log("DegreeRequirement");
+            console.log(degreeRequirement);
+            console.log("area");
+            console.log(area);
+            console.log("AreaReq");
+            console.log(AreaReq);
+            console.log("subArea");
+            console.log(subArea);
+            console.log("subAreaCourse");
+            console.log(subAreaCourse);
+            
+            
+            
+            var displayText="DisPlay Text";
+            degreeProgressTable.push(
+            <textarea className="commentsComment" value={displayText} readOnly/>
+            );
+
+            return degreeProgressTable;
+        }
+
 
         const createCourseTables = () => {  
             var course = this.state.coursePlans;
@@ -169,6 +225,8 @@ class MSViewStudentScreen extends Component {
             return commentTable;
         }
 
+
+
         return (
             <div id="viewStudentFormBackground">
                 <div id="viewStudentForm">
@@ -212,13 +270,17 @@ class MSViewStudentScreen extends Component {
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
                         <br></br>
-                        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Degree Requirements not available</p>
+                        <div style={{position: "relative", width: "50%", left: "8%"}}>
+                        {createDegreeProgressTables()}
+                        </div>
+                        
+                        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;</p>
                         
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
+                        <Link to="/suggestCoursePlan"><button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
                         </h2>  
-                        <a><Link to={{pathname: '/suggestcourseplan',state: {studentID: this.state.studentID}}}> <button id="viewStudent_suggestcourseplanbutton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                         {createCourseTables()}
@@ -232,7 +294,7 @@ class MSViewStudentScreen extends Component {
                         {createCommentTable()}
                         </div>                   
                         <br></br>
-                        <Link to={{pathname: '/editStudent', state: {email: this.state.email}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
+                        <Link to={{pathname: '/student/edit', state: {email: this.state.email}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
                         <Link to="/"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
                         </div>
                 </div>

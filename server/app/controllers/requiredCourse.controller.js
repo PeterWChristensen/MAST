@@ -16,7 +16,8 @@ exports.create = (req, res) => {
     const requiredCourse = {
       requirementID: req.body.requirementID,
       courseID:req.body.courseID,
-      departmentID: req.body.departmentID
+      departmentID: req.body.departmentID,
+      credit: req.body.credit
     };
   
     // Save degreeRequirement in the database

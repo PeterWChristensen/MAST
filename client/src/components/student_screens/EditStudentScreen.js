@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
-import { forwardRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from "axios";
 import CommentService from "../../services/comment.service";
-import { colors } from '@material-ui/core';
 
 class EditStudentScreen extends Component {
     constructor(props){
@@ -66,10 +63,6 @@ class EditStudentScreen extends Component {
 
 
     componentDidMount(){
-        console.log("componentDidMount at Student_screens/EditStudentScreen.js");
-        console.log("gpd username is ==")
-        console.log(this.state.gpdUserName);
-        console.log(this.props);
         var username=this.props.location.state.email;
         axios.post("/getinfo", {
             username

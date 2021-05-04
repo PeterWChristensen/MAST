@@ -13,6 +13,7 @@ import SubAreaService from "../../services/subArea.service";
 import AreaRequirementService from "../../services/areaRequirement.service";
 import SubAreaCourseService from "../../services/subAreaCourse.service";
 import RequiredCourseService from "../../services/requiredCourse.service";
+import axios from "axios";
 
 const papaparseOptions = {
   header: true,
@@ -42,7 +43,8 @@ class ModalWindow extends React.Component {
             departmentToParseSemester: "Fall",
             departmentToParseYear: "2021",
             courseInfoFile: null,
-            degreeRequirementsFile: null
+            degreeRequirementsFile: null,
+            credit: ""
         }
         this.handleImportDegreeRequirementsFile = this.handleImportDegreeRequirementsFile.bind(this);
         this.handleImportCourseInformationFile = this.handleImportCourseInformationFile.bind(this);
@@ -173,14 +175,14 @@ class ModalWindow extends React.Component {
                         SubAreaService.create(data_subArea)
                         .then(response =>{
                             this.setState({
-                                areaID: response.data_area.areaID,
-                                subAreaID: response.data_area.subAreaID,
-                                departmentID: response.data_area.departmentID,
-                                minCourses: response.data_area.minCourses,
-                                minCredit: response.data_area.minCredit,
-                                maxCredit: response.data_area.maxCredit,
-                                maxCourse: response.data_area.maxCourse,
-                                name: response.data_area.name
+                                areaID: response.data_subArea.areaID,
+                                subAreaID: response.data_subArea.subAreaID,
+                                departmentID: response.data_subArea.departmentID,
+                                minCourses: response.data_subArea.minCourses,
+                                minCredit: response.data_subArea.minCredit,
+                                maxCredit: response.data_subArea.maxCredit,
+                                maxCourse: response.data_subArea.maxCourse,
+                                name: response.data_subArea.name
                             });
                         })
                         .catch(e => {
@@ -200,11 +202,11 @@ class ModalWindow extends React.Component {
                     AreaRequirementService.create(data_areaRequirement)
                     .then(response =>{
                         this.setState({
-                            areaID: response.data_area.areaID,
-                            departmentID: response.data_area.departmentID,
-                            nSubAreas: response.data_area.nSubAreas,
-                            nCourses: response.data_area.nCourses,
-                            nCredits: response.data_area.nCredits
+                            areaID: response.data_areaRequirement.areaID,
+                            departmentID: response.data_areaRequirement.departmentID,
+                            nSubAreas: response.data_areaRequirement.nSubAreas,
+                            nCourses: response.data_areaRequirement.nCourses,
+                            nCredits: response.data_areaRequirement.nCredits
                         });
                     })
                     .catch(e => {
@@ -214,24 +216,38 @@ class ModalWindow extends React.Component {
                 for (var i = 0; i < obj[x].area.length; i++) {
                     for (var j = 0; j < obj[x].area[i].subArea.length; j++){
                         for (var k = 0; k < obj[x].area[i].subArea[j].courses.length; k++){
-                            var data_requiredCourse = {
+
+                            // var courseID = obj[x].area[i].subArea[j].courses[k].courseID
+                            // axios.post("/getCourseInfo", {
+                            //     courseID
+                            // })
+                            // .then(response => {
+                            //     this.setState({
+                            //         credit: response.data.credit})
+                            //         return response.data;
+                            // }).catch(err => console.error(err));
+                            // //console.log(this.state.credit)
+
+                            var data_subAreaCourse = {
                                     requirementID: obj[x].requirementID,
                                     courseID: obj[x].area[i].subArea[j].courses[k].courseID,
                                     departmentID: obj[x].departID,
                                     track: obj[x].track,
                                     areaID: obj[x].area[i].areaID,
                                     subAreaID: obj[x].area[i].subArea[j].subAreaID,
+                                    credit: obj[x].area[i].subArea[j].courses[k].credit
                                 };
-                                console.log(data_requiredCourse)
-                                SubAreaCourseService.create(data_requiredCourse)
+                                console.log(data_subAreaCourse)
+                                SubAreaCourseService.create(data_subAreaCourse)
                                 .then(response =>{
                                     this.setState({
-                                        requirementID: response.data_area.requirementID,
-                                        courseID: response.data_area.courseID,
-                                        departmentID: response.data_area.departmentID,
-                                        track: response.data_area.track,
-                                        areaID: response.data_area.areaID,
-                                        subAreaID: response.data_area.subAreaID
+                                        requirementID: response.data_subAreaCourse.requirementID,
+                                        courseID: response.data_subAreaCourse.courseID,
+                                        departmentID: response.data_subAreaCourse.departmentID,
+                                        track: response.data_subAreaCourse.track,
+                                        areaID: response.data_subAreaCourse.areaID,
+                                        subAreaID: response.data_subAreaCourse.subAreaID,
+                                        credit: response.data_subAreaCourse.credit
                                     });
                                 })
                                 .catch(e => {
@@ -244,15 +260,17 @@ class ModalWindow extends React.Component {
                     var data_requiredCourse = {
                         requirementID: obj[x].requirementID,
                         courseID: obj[x].requiredCourse[i].courseID,
-                        departmentID: obj[x].departID
+                        departmentID: obj[x].departID,
+                        credit: obj[x].requiredCourse[i].credit
                     };
                         console.log(data_requiredCourse)
                         RequiredCourseService.create(data_requiredCourse)
                         .then(response =>{
                             this.setState({
-                                requirementID: response.data_area.requirementID,
-                                courseID: response.data_area.courseID,
-                                departmentID: response.data_area.departmentID
+                                requirementID: response.data_requiredCourse.requirementID,
+                                courseID: response.data_requiredCourse.courseID,
+                                departmentID: response.data_requiredCourse.departmentID,
+                                credit: response.data_requiredCourse.credit
                             });
                         })
                         .catch(e => {
@@ -743,6 +761,31 @@ class ModalWindow extends React.Component {
                 <br></br><br></br></p>
                 {/* <button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button> */}
                 <Link to={{pathname:'/viewStudent', state: {email: this.props.email}}}><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
+            </div>
+            console.log("this is from MODAL for this.props");
+            console.log(this.props);
+        }
+        else if(this.props.modalType === "editMSStudent"){
+            modalContents =
+            <div className="modal" id="editStudent" header="Add" >
+                <p id="modalDialogMessage"><br></br>
+                Confirm edits to student?
+                <br></br><br></br></p>
+                <button className="modalButton" onClick={this.props.editStudent} >Yes</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp} >No</button>    
+            </div>;
+        }
+        else if(this.props.modalType === "cancelMSEditStudent"){
+            modalContents =
+            <div className="modal" id="editStudent" header="Cancel"  >
+                <p id="modalDialogMessage"> <br></br>
+                Cancel editing student?
+                <br></br><br></br></p>
+                {/* <button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button> */}
+                <Link to={{pathname:'/student', state: {email: this.props.email}}}><button className="modalButton" onClick={this.props.hideModalDialogPopUp}>Yes</button></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button className="modalButton" modal="close" onClick={this.props.hideModalDialogPopUp}>No</button> 
             </div>
