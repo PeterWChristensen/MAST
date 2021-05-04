@@ -73,7 +73,7 @@ class App extends Component{
                 
                 {showGPDcomponent && (
                   <Link to={"/gpd"} className="navBarButtons">
-                    TASK
+                    Home
                   </Link>
                 )}
 {/* 

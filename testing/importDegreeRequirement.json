@@ -9,5 +9,32 @@
 		"thesis": "TBD",
 		"timeLimit": 1,
 		"finalRecommended": 10,
-		"minGPA": 3
+		"minGPA": 3,
+		"area":[
+			{
+				"areaID": 321,
+				"name": "computing",
+				"nSubAreas": 1,
+				"nCourses": 30,
+				"nCredits": 90,
+				"subArea":[
+					{
+						"subAreaID": 3210,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "logic computing",
+						"courses":[
+							{
+								"courseID": "CSE593"
+							},
+							{
+								"courseID": "CSE600"
+							}
+						]
+					}
+				]
+			}
+		]
 }

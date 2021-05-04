@@ -20,8 +20,17 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
-    localStorage.removeItem("info");
   }
+
+
+  deleteAllStudent() 
+  {
+    return axios
+    .delete("/deletestu")
+        .then(response => {
+            return response.data;
+        }).catch(err => console.error(err));
+    }
 
 
     // Use it for addStudent later.

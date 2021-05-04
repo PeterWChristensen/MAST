@@ -40,7 +40,8 @@ class ViewStudentScreen extends Component {
                     field: "grade"
                 }
             ],
-            comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
+            // comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
+            comments: [],
             commentColumns: [
                 {
                     title: "Date",
@@ -53,10 +54,10 @@ class ViewStudentScreen extends Component {
             ]
         }    
     }
+
     componentDidMount(){
 
         console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        console.log(this.props);
 
         var username=this.props.location.state.email;
         
@@ -84,11 +85,26 @@ class ViewStudentScreen extends Component {
                 requirementVersionYear: response.data.requirementVersionYear,
                 requirementVersionSemester: response.data.requirementVersionSemester,
                 totalCredits: response.data.totalCredits})
-                console.log("this is from view student");
-                console.log(response.data);
                 return response.data;
           }).catch(err => console.error(err));
-     
+
+          var stu_username=username;
+ 
+          axios.post("/getcmt", {
+            stu_username
+          })
+          .then(response => {
+                console.log("this is getcmt at view student");
+                var tempList=[];
+                for(var i=0;response.data[i];i++){
+                    tempList.push({date: response.data[i].date, comment:response.data[i].comment})
+                }
+
+                this.setState({comments:tempList});
+                
+                return response.data;
+          }).catch(err => console.error(err));
+
     }
 
     render() {
@@ -167,29 +183,29 @@ class ViewStudentScreen extends Component {
                         <p className="viewStudent_prompt">Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Password: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; GPA:
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.email} readOnly/>
                         <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.password} readOnly/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.gpa} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.gpa?this.state.gpa: "NULL" } readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Entry Semester:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Expected Graduation: &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; Graduated:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.entrySemester + " " + this.state.entryYear} readOnly/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.gradSemester + " " + this.state.gradYear} readOnly/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated} readOnly/>
+                        <br></br><input className="viewStudent_input" type="input" value={this.state.entrySemester + " " + this.state.entryYear} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" value={this.state.gradSemester + " " + this.state.gradYear} readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.hasGraduated? this.state.hasGraduated: "False"} readOnly/>
                         </p>                        
                         <br></br>                        
                         <p className="viewStudent_prompt">Department:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Track: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; # Semesters In Program:
                         <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.departmentID} readOnly/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track} readOnly/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.track?this.state.track: "NULL" } readOnly/>
+                        <input  className="viewStudent_input" type="input" defaultValue={this.state.nSemestersInProgram?this.state.nSemestersInProgram:0} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Advisor:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Project: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Requirements Version:
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor} readOnly/>
-                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption} readOnly/>
-                        <input  className="viewStudent_input" type="input" defaultValue={this.state.requirementVersionSemester + " " + this.state.requirementVersionYear} readOnly/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.advisor? this.state.advisor: "NULL"} readOnly/>
+                        <input className="viewStudent_input" label="First Name" type="input" defaultValue={this.state.projectOption? this.state.projectOption: "NULL"} readOnly/>
+                        <input  className="viewStudent_input" type="input" value={this.state.requirementVersionSemester + " " + this.state.requirementVersionYear} readOnly/>
                         </p>
                         <br></br>
                         <p className="viewStudent_prompt">Total Credits: 
-                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits} readOnly/>
+                        <br></br><input className="viewStudent_input" type="input" defaultValue={this.state.totalCredits? this.state.totalCredits:0} readOnly/>
                         </p>
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>

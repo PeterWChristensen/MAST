@@ -4,6 +4,8 @@ import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+import CommentService from "../../services/comment.service";
+import { colors } from '@material-ui/core';
 
 class EditStudentScreen extends Component {
     constructor(props){
@@ -34,6 +36,7 @@ class EditStudentScreen extends Component {
             advisor: "",
             projectOption: "",
             requirementVersionYear: "",
+            gpdUserName: JSON.parse(localStorage.getItem('user')).username,
             requirementVersionSemester: "",
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
@@ -46,7 +49,8 @@ class EditStudentScreen extends Component {
                     field: "grade"
                 }
             ],
-            comments: [{date: "4/13/21", comment: "Great job!"}, {date: "4/1/21", comment: "Nice job!"}, {date: "3/23/21", comment: "Good job!"}],
+            oldcomments: [],
+            comments: [],
             commentColumns: [
                 {
                     title: "Date",
@@ -63,6 +67,8 @@ class EditStudentScreen extends Component {
 
     componentDidMount(){
         console.log("componentDidMount at Student_screens/EditStudentScreen.js");
+        console.log("gpd username is ==")
+        console.log(this.state.gpdUserName);
         console.log(this.props);
         var username=this.props.location.state.email;
         axios.post("/getinfo", {
@@ -92,7 +98,33 @@ class EditStudentScreen extends Component {
 
                 return response.data;
           }).catch(err => console.error(err));
-     
+
+          
+          var stu_username=username;
+ 
+          axios.post("/getcmt", {
+            stu_username
+          })
+          .then(response => {
+                console.log("this is getcmt at edit student");
+                var tempList=[];
+                var oldTempList=[];
+                
+                var obj={};
+                for(var i=0;response.data[i];i++){
+                    tempList.push({date: response.data[i].date, comment:response.data[i].comment})
+                    oldTempList.push({date: response.data[i].date, comment:response.data[i].comment})
+                }
+                console.log(tempList);
+                console.log(oldTempList);
+
+                this.setState({comments:tempList, oldcomments:oldTempList});
+                
+                return response.data;
+          }).catch(err => console.error(err));
+
+
+          
     }
      
 
@@ -150,17 +182,73 @@ class EditStudentScreen extends Component {
         };
         var username=data.email;
 
+        //cmp old and new if item in new is not in old than add.
+        //oldcomments
+        var oldCmt=this.state.oldcomments;
+        var newCmt=this.state.comments;
+        //add comments in db
+        console.log("oldCmt");
+        console.log(oldCmt);
+        console.log("newCmt");
+        console.log(newCmt);
+        
+        for(var i=0;newCmt[i];i++ ){
+        var addVali=true;
+            for(var j=0;oldCmt[j];j++){
+                if(newCmt[i].date == oldCmt[j].date){
+                    addVali=false;
+                }
+            }
+            console.log("addVali");
+            console.log(addVali);
+
+            if(addVali){
+                var stu_username=this.state.email;
+                var gpd_username=this.state.gpdUserName;
+                var date=newCmt[i].date;
+                var comment=newCmt[i].comment;
+                console.log("create a comment at editview")
+                console.log(comment);
+                console.log(date);
+                CommentService.create(stu_username,gpd_username,comment,date);
+            }
+        }
+
+        //delete comments in db
+        for(var i=0;oldCmt[i];i++ ){
+            var deleteVali=true;
+                for(var j=0;newCmt[j];j++){
+                    if(oldCmt[i].date == newCmt[j].date){
+                        deleteVali=false;
+                    }
+                }
+                console.log("deleteVali");
+                console.log(deleteVali);    
+
+                if(deleteVali){
+                    var stu_username=this.state.email;
+                    var date=oldCmt[i].date;
+                    console.log(stu_username);
+                    console.log(date);
+                    console.log("delete a comment at editview")
+                    CommentService.deleteComment(stu_username,date);
+                }
+            }
+
         axios.put("/updateinfo", {
-                username,
-                data
-            })
-            .then(response => {
-                console.log("this from edit student");
-              console.log(response.data);
-              this.setState({redirect: true});
-              return response.data;
-            }).catch(err => console.error(err));
-    
+            username,
+            data
+        })
+        .then(response => {
+            console.log("this from edit student");
+            console.log(response.data);
+            this.setState({redirect: true});
+            return response.data;
+        }).catch(err => console.error(err));
+
+
+
+   
     }
 
 
@@ -349,24 +437,31 @@ class EditStudentScreen extends Component {
         }
 
         const addCommentHandler = () => {
+            var d = new Date();
+            var dateTime= d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+ d.getMinutes()+ ":"+d.getSeconds();
+
+
+
             var newCommentArray = this.state.comments;
-            var newComment = {date: this.state.commentToAddDate, comment: this.state.commentToAddComment};
+            var newComment = {date: dateTime, comment: this.state.commentToAddComment};
             newCommentArray.push(newComment);
-            console.log(newCommentArray);
-            this.setState({comments: newCommentArray, addComment: false})  
+            this.setState({comments: newCommentArray, addComment: false, commentToAddDate: dateTime})  
+
+
+
         }
 
-        const changeCommentToAddDateHandler = (event) => { 
-            this.setState({commentToAddDate: event.target.value}); 
-        }; 
+        // const changeCommentToAddDateHandler = (event) => { 
+        //     this.setState({commentToAddDate: event.target.value}); 
+        // }; 
         const changeCommentToAddCommentHandler = (event) => { 
             this.setState({commentToAddComment: event.target.value}); 
         }; 
 
         const addNewComment = () => {
             return <div>
-                <textarea className="commentsDate" defaultValue={this.state.commentToAddDate} onChange={changeCommentToAddDateHandler}/>
-                <textarea className="commentsComment" defaultValue={this.state.commentToAddComment} onChange={changeCommentToAddCommentHandler}/>
+                <textarea className="commentsDate" defaultValue={"Current Time"}  readOnly/>
+                <textarea className="commentsComment" defaultValue={"Type here"} onChange={changeCommentToAddCommentHandler}/>
                 <button className="addCommentButton" onClick={addCommentHandler}>Add</button>
             </div>;
         }
@@ -377,7 +472,8 @@ class EditStudentScreen extends Component {
             var newCommentArray = this.state.comments;
             newCommentArray.splice(commentIndex, 1); 
             console.log(newCommentArray);
-            this.setState({comments: newCommentArray})            
+            this.setState({comments: newCommentArray})     
+
         }
 
         const createEntry = (comment) => {
@@ -610,7 +706,7 @@ class EditStudentScreen extends Component {
                         <button id="viewStudentForm_edit_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("editStudent")}>Save</button>
                         <button id="viewStudentForm_return_button" className="viewStudent_button" onClick={() => this.showModalDialogPopUp("cancelEditStudent")}>Cancel</button>
                         </div>
-                        {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
+                        {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} email={this.state.email} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} editStudent={this.editStudent.bind(this)}/> : null}
                         { this.state.redirect ? (<Redirect push to={{pathname:'/viewStudent', state: {email: this.state.email}}}/>) : null }
                 </div>
             </div>

@@ -24,11 +24,21 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
   db.course = require("./course.model.js")(sequelize, Sequelize);
 
+  db.comment = require("./comment.model.js")(sequelize, Sequelize);
+
   db.department = require("./department.model.js")(sequelize, Sequelize);
   
   db.courseOffering = require("./courseOffering.model.js")(sequelize, Sequelize);
 
   db.degreeRequirement = require("./degreeRequirement.model.js")(sequelize, Sequelize);
+
+  db.area = require("./area.model.js")(sequelize, Sequelize);
+
+  db.subArea = require("./subArea.model.js")(sequelize, Sequelize);
+
+  db.areaRequirement = require("./areaRequirement.model.js")(sequelize, Sequelize);
+
+  db.subAreaCourse = require("./subAreaCourse.model.js")(sequelize, Sequelize);
 
   db.coursePlan = require("./coursePlan.model.js")(sequelize, Sequelize);
 

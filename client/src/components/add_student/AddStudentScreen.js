@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ModalDialog from '../modal/ModalWindow'
 import StudentService from "../../services/student.service";
+import AuthService from "../../services/auth.service";
 
 class AddStudentScreen extends Component {
     constructor(props){
@@ -89,6 +90,12 @@ class AddStudentScreen extends Component {
             .catch(e => {
                 console.log(e);
             });
+
+            var username=data.email;
+            var userID=data.studentID;
+            var password= data.password;
+            AuthService.register(username,userID,password);
+
    }
 
     render() {
