@@ -12,6 +12,7 @@ import AreaService from "../../services/area.service";
 import SubAreaService from "../../services/subArea.service";
 import AreaRequirementService from "../../services/areaRequirement.service";
 import SubAreaCourseService from "../../services/subAreaCourse.service";
+import RequiredCourseService from "../../services/requiredCourse.service";
 
 const papaparseOptions = {
   header: true,
@@ -238,6 +239,25 @@ class ModalWindow extends React.Component {
                                 });
                         }
                     }
+                }
+                for (var i = 0; i < obj[x].requiredCourse.length; i++) {
+                    var data_requiredCourse = {
+                        requirementID: obj[x].requirementID,
+                        courseID: obj[x].requiredCourse[i].courseID,
+                        departmentID: obj[x].departID
+                    };
+                        console.log(data_requiredCourse)
+                        RequiredCourseService.create(data_requiredCourse)
+                        .then(response =>{
+                            this.setState({
+                                requirementID: response.data_area.requirementID,
+                                courseID: response.data_area.courseID,
+                                departmentID: response.data_area.departmentID
+                            });
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                 }
             }
 
