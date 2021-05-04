@@ -139,6 +139,7 @@ class GPDHomeScreen extends Component {
                 <Box>
                     {this.state.showModalDialogPopup ? <ModalDialog modalType={this.state.modalType} hideModalDialogPopUp={this.hideModalDialogPopUp.bind(this)} deleteAllStudents={this.deleteAllStudents.bind(this)}/> : null} 
                     <Box id="GPDHomepageScreen">
+                    <a href='/enrollment-trends'><Link to={{pathname: '/enrollment-trends'}}><button id="enrollmentTrendsPageButton" className="GPDHomepageButton">Enrollment Trends</button></Link></a>
                     <Box class="dropdown">
                         <button class="dropbtn">Import</button>
                         <Box class="dropdown-content">

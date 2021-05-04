@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Graph from './Graph.js';
+import CourseService from "../../services/course.service";
+import CoursePlanService from "../../services/coursePlan.service";
 
 class EnrollmentTrends extends Component {
     constructor(props){
@@ -23,6 +25,27 @@ class EnrollmentTrends extends Component {
             {course: "CSE 506", semester: "Fall 2021", frequency: 7}, {course: "CSE 506", semester: "Winter 2022", frequency: 6}, {course: "CSE 506", semester: "Spring 2022", frequency: 4}]
         }
     }
+
+    componentDidMount() {
+        CourseService.getAll()
+            .then(response => {
+                console.log(response.data);
+                this.setState({courses: response.data});
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        
+        CoursePlanService.getAll()
+        .then(response => {
+            console.log(response.data);
+            this.setState({coursePlans: response.data});
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+
     
     toggleDropDownState = () => {
         this.setState(({ toggleDropDown }) => ({ toggleDropDown: !toggleDropDown }));

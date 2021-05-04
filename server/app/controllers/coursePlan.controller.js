@@ -96,3 +96,17 @@ exports.update = (req, res) => {
         });
       });
   };
+
+   //Get all course plans
+   exports.getAll = (req, res) => {
+    CoursePlan.findAll()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "An error occurred while getting all courses"
+            });
+        });
+}

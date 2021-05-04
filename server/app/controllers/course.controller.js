@@ -68,3 +68,17 @@ exports.findOne = (req, res) => {
         });
       });
   };
+
+  //Get all courses
+  exports.getAll = (req, res) => {
+    Course.findAll()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "An error occurred while getting all courses"
+            });
+        });
+}
