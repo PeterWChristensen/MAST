@@ -233,8 +233,8 @@ class AddStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="entryYearSelect" className="dropdownSelectYear" onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
