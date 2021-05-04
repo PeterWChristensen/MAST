@@ -5,6 +5,8 @@ module.exports = app => {
   
     // Create a new degreeRequirement
     router.post("/addDegreeRequirement", degreeRequirement.create);
-  
+
+    router.post("/getDegreeRequirement", degreeRequirement.getDegreeRequirement);
+
     app.use('/', router);
   };

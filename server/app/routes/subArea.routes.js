@@ -5,6 +5,8 @@ module.exports = app => {
   
     // Create a new degreeRequirement
     router.post("/addSubArea", subArea.create);
+
+    router.post("/getSubArea", subArea.getSubArea);
   
     app.use('/', router);
   };
