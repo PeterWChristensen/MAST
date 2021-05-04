@@ -129,24 +129,14 @@ class ViewStudentScreen extends Component {
             var studentReqVersionSemester= this.state.requirementVersionSemester;
             var studentReqVersionYear= this.state.requirementVersionYear;
             
-
-            var degreeRequirementGPA="";
-            var degreeRequirementCredit="";
+            //this will be an object and will have the same attributes as the database table.
+            var degreeRequirement="";
+            var area="";
+            var AreaReq="";
+            var subArea="";
+            var subAreaCourse="";
             
-
-            /**
-2) Degree Requirements to check and keep track of gpa and total credit requirements
-3) Area to get areaID of the departmentID
-4) AreaRequirement to check number of subareas
-5) For each SubArea see minCourses/Credits and use SubAreaCourse to check if Student has taken the correct amount of courses and credits by comparing courseplan courses with C or above to get credit then status of complete, and if have course in courseplan with no grade then pending
-6) If Student has no courses in a subarea, then just display SubArea as Incomplete
-
-Like image above, first have total credits and gpa as separate rows with their statuses. Then go into each SubArea
-If student has a track, check SubAreaCourse for it instead of just checking all courses in that SubArea */
-            
-            //get student department, track,
-            //get gpa and total credit requirement at degree requirement data 
-
+            var displayText="Display testing";
             degreeProgressTable.push(
             <textarea className="commentsComment" value={displayText} readOnly/>
             );
