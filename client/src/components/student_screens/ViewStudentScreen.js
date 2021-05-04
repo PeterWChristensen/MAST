@@ -29,6 +29,14 @@ class ViewStudentScreen extends Component {
             projectOption: "",
             requirementVersionYear: "",
             requirementVersionSemester: "",
+            
+            degreeRequirement: "",
+            area:"",
+            AreaReq:"",
+            subArea:[],
+            subAreaCourse:[],
+            
+            
             coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
             coursePlanColumns: [
                 {
@@ -85,6 +93,152 @@ class ViewStudentScreen extends Component {
                 requirementVersionYear: response.data.requirementVersionYear,
                 requirementVersionSemester: response.data.requirementVersionSemester,
                 totalCredits: response.data.totalCredits})
+
+
+                        console.log("/getDegreeRequirement");
+                        var departmentID=response.data.departmentID;
+                        var track=response.data.track;
+                        var requirementVersionSemester=response.data.requirementVersionSemester;
+                        var requirementVersionYear=response.data.requirementVersionYear;
+                        axios.post("/getDegreeRequirement", {
+                            departmentID,track,requirementVersionSemester,requirementVersionYear
+                        })
+                        .then(responseDeg => {
+                            var tempDegreeReqList={
+                                requirementID: responseDeg.data.requirementID, 
+                                departID:responseDeg.data.departID,
+                                track:responseDeg.data.track,
+                                versionSemester:responseDeg.data.versionSemester, 
+                                versionYear:responseDeg.data.versionYear,
+                                totalCredit:responseDeg.data.totalCredit,
+                                project:responseDeg.data.project,
+                                thesis:responseDeg.data.thesis,
+                                timeLimit:responseDeg.data.timeLimit,
+                                finalRecommended:responseDeg.data.finalRecommended,
+                                minGPA:responseDeg.data.minGPA,
+                                };
+                            this.setState({degreeRequirement:tempDegreeReqList});
+                            
+                            
+                                    console.log("/getArea");
+                                    var requirementID=responseDeg.data.requirementID;
+                                    axios.post("/getArea", {
+                                        requirementID
+                                    }) 
+                                    .then(responseArea => {
+                                        var tempAreaList={
+                                                areaID: responseArea.data.areaID,
+                                                requirementID:responseArea.data.requirementID,
+                                                departmentID:responseArea.data.departmentID,
+                                                name:responseArea.data.name
+                                            
+                                        };
+                                        this.setState({area:tempAreaList});
+                                        
+                                        console.log("/getAreaRequirement");
+                                        var areaID=responseArea.data.areaID;
+                                        axios.post("/getAreaRequirement", {
+                                            areaID
+                                        })
+                                        .then(responseAR => {
+                                                var tempAreaReqList={
+                                                        areaID: responseAR.data.areaID, 
+                                                        departmentID:responseAR.data.departmentID,
+                                                        nSubAreas:responseAR.data.nSubAreas,
+                                                        nCourses:responseAR.data.nCourses,
+                                                        nCredits:responseAR.data.nCredits    
+                                                };
+
+                                                this.setState({AreaReq:tempAreaReqList});
+                                                
+
+                                                return response.data;
+                                        }).catch(err => console.error(err));
+
+                                        console.log("/getSubArea");
+                                        axios.post("/getSubArea", {
+                                            areaID
+                                        })
+                                        .then(responseSA => {
+                                                var tempsubAreaList=[];
+                                                for(var i=0;responseSA.data[i];i++){
+                                                    tempsubAreaList.push({
+                                                        areaID: responseSA.data[i].areaID, 
+                                                        subAreaID:responseSA.data[i].subAreaID,
+                                                        departmentID:responseSA.data[i].departmentID,
+                                                        minCourses:responseSA.data[i].minCourses,
+                                                        minCredit:responseSA.data[i].minCredit,
+                                                        maxCredit:responseSA.data[i].maxCredit,
+                                                        maxCourse:responseSA.data[i].maxCourse,
+                                                        name:responseSA.data[i].name
+                                                    })
+                                                        
+                                                    // var subAreaIDList=responseSA.subArea;
+                                                    // for(var j=0;responseSA.data[j];j++){
+                                                    //     var subAreaID=subAreaIDList[j].subAreaID;
+                                                        console.log("/getSubAreaCourse");
+                                                        var areaID= responseSA.data[i].areaID; 
+                                                        var subAreaID=responseSA.data[i].subAreaID;
+                                                        var tempSubAreaCourseList=[];
+                                                        
+                                                        axios.post("/getSubAreaCourse", {
+                                                            areaID,
+                                                            subAreaID
+                                                        })
+                                                        .then(responseSAC => {
+                                                                for(var j=0;responseSAC.data[j];j++){
+                                                                    tempSubAreaCourseList.push({
+                                                                        requirementID: responseSAC.data[j].requirementID,
+                                                                        courseID:responseSAC.data[j].courseID,
+                                                                        departmentID:responseSAC.data[j].departmentID,
+                                                                        track:responseSAC.data[j].track,
+                                                                        areaID:responseSAC.data[j].areaID,
+                                                                        subAreaID:responseSAC.data[j].subAreaID
+                                                                    })
+                                                                }
+                                            
+                                                                
+                                                                this.setState({subAreaCourse:tempSubAreaCourseList});
+                                                                
+                                                                return response.data;
+                                                        }).catch(err => console.error(err));
+
+
+
+
+
+                                                }
+
+                                                this.setState({subArea:tempsubAreaList});
+                                                
+                                                    /*
+                                                    //          subAreaID[ 0 ~2]
+                                                    //          subAreaCourse:[subAreaID][Course[]],
+                                                    //      first try 1D, then add when subAreaId is many.
+
+                                                    var subAreaIDList=this.state.subArea;
+                                                    for(var j=0;subAreaIDList[j];j++){
+                                                        var subAreaID=subAreaIDList[j].subAreaID;*/
+
+
+
+                                                return response.data;
+                                        }).catch(err => console.error(err));
+
+                                        
+                                        return response.data;
+                                    }).catch(err => console.error(err));
+
+                                
+                                return response.data;
+                        }).catch(err => console.error(err));
+
+
+
+
+
+
+
                 return response.data;
           }).catch(err => console.error(err));
 
@@ -94,7 +248,6 @@ class ViewStudentScreen extends Component {
             stu_username
           })
           .then(response => {
-                console.log("this is getcmt at view student");
                 var tempList=[];
                 for(var i=0;response.data[i];i++){
                     tempList.push({date: response.data[i].date, comment:response.data[i].comment})
@@ -105,11 +258,157 @@ class ViewStudentScreen extends Component {
                 return response.data;
           }).catch(err => console.error(err));
 
+
+        //   var departmentID=this.state.departmentID;
+        //   var track=this.state.track;
+        //   var requirementVersionSemester=this.state.requirementVersionSemester;
+        //   var requirementVersionYear=this.state.requirementVersionYear;
+
+        //   console.log("/getDegreeRequirement");
+        //   console.log(this.state.departmentID);
+        //   console.log(this.state.track);
+        //   console.log(requirementVersionSemester);
+        //   console.log(requirementVersionYear);
+
+
+        //   axios.post("/getDegreeRequirement", {
+        //     departmentID,track,requirementVersionSemester,requirementVersionYear
+        //   })
+        //   .then(response => {
+        //         var tempDegreeReqList=[];
+        //         for(var i=0;response.data[i];i++){
+        //             tempDegreeReqList.push({
+        //                 requirementID: response.data[i].requirementID, 
+        //                 departID:response.data[i].departID,
+        //                 track:response.data[i].track,
+        //                 versionSemester:response.data[i].versionSemester, 
+        //                 versionYear:response.data[i].versionYear,
+        //                 totalCredit:response.data[i].totalCredit,
+        //                 project:response.data[i].project,
+        //                 thesis:response.data[i].thesis,
+        //                 timeLimit:response.data[i].timeLimit,
+        //                 finalRecommended:response.data[i].finalRecommended,
+        //                 minGPA:response.data[i].minGPA,
+        //             })
+        //         }
+        //         this.setState({degreeRequirement:tempDegreeReqList});
+        //         return response.data;
+        //   }).catch(err => console.error(err));
+
+
+// //          area:[],
+//             var requirementID=this.state.degreeRequirement.requirementID;
+//             axios.post("/getArea", {
+//                 requirementID
+//             })
+//             .then(response => {
+//                     var tempAreaList=[];
+//                     for(var i=0;response.data[i];i++){
+//                         tempAreaList.push({
+//                             areaID: response.data[i].areaID,
+//                             requirementID:response.data[i].requirementID,
+//                             departmentID:response.data[i].departmentID,
+//                             name:response.data[i].name
+//                         })
+//                     }
+//                     this.setState({area:tempAreaList});
+//                     return response.data;
+//             }).catch(err => console.error(err));
+
+
+//             var areaID=this.state.area.areaID;
+// //          AreaReq:[],
+//             axios.post("/getAreaRequirement", {
+//                 areaID
+//             })
+//             .then(response => {
+//                     var tempAreaReqList=[];
+//                     for(var i=0;response.data[i];i++){
+//                         tempAreaReqList.push({
+//                             areaID: response.data[i].areaID, 
+//                             departmentID:response.data[i].departmentID,
+//                             nSubAreas:response.data[i].nSubAreas,
+//                             nCourses:response.data[i].nCourses,
+//                             nCredits:response.data[i].nCredits    
+                        
+//                         })
+//                     }
+
+//                     this.setState({AreaReq:tempAreaReqList});
+                    
+//                     return response.data;
+//             }).catch(err => console.error(err));
+
+
+// //          subArea:[],
+//             axios.post("/getSubArea", {
+//                 areaID
+//             })
+//             .then(response => {
+//                     var tempsubAreaList=[];
+//                     for(var i=0;response.data[i];i++){
+//                         tempsubAreaList.push({
+//                             areaID: response.data[i].areaID, 
+//                             subAreaID:response.data[i].subAreaID,
+//                             departmentID:response.data[i].departmentID,
+//                             minCourses:response.data[i].minCourses,
+//                             minCredit:response.data[i].minCredit,
+//                             maxCredit:response.data[i].maxCredit,
+//                             maxCourse:response.data[i].maxCourse,
+//                             name:response.data[i].name
+//                         })
+//                     }
+
+//                     this.setState({subArea:tempsubAreaList});
+                    
+//                     return response.data;
+//             }).catch(err => console.error(err));
+
+// /*
+// //          subAreaID[ 0 ~2]
+// //          subAreaCourse:[subAreaID][Course[]],
+// //      first try 1D, then add when subAreaId is many.
+
+//             var subAreaIDList=this.state.subArea;
+//             for(var j=0;subAreaIDList[j];j++){
+//                 var subAreaID=subAreaIDList[j].subAreaID;*/
+
+//                 var subAreaID=this.state.subArea.subAreaID;
+//                 axios.post("/getSubAreaCourse", {
+//                     areaID,
+//                     subAreaID
+//                 })
+//                 .then(response => {
+//                         var tempSubAreaCourseList=[];
+//                         for(var i=0;response.data[i];i++){
+//                             tempSubAreaCourseList.push({
+//                                 requirementID: response.data[i].requirementID,
+//                                 courseID:response.data[i].courseID,
+//                                 departmentID:response.data[i].departmentID,
+//                                 track:response.data[i].track,
+//                                 areaID:response.data[i].areaID,
+//                                 subAreaID:response.data[i].subAreaID
+//                             })
+//                         }
+    
+//                         this.setState({subAreaCourse:tempSubAreaCourseList});
+                        
+//                         return response.data;
+//                 }).catch(err => console.error(err));
+
+            
+
+
+
+
+
+
     }
 
     render() {
         var courseTable = [];
         var semester = new Map(); //map semester with course
+        var degreeProgressTable = [];
 
         const createCourseEntry = (course) => {
             var divId = "course" + course.index;
@@ -118,6 +417,54 @@ class ViewStudentScreen extends Component {
             <input className="coursePlan" value={course.grade} readOnly/>
             </div>;
         }
+        const createDegreeProgressTables = () =>{
+            var degreeProgress= this.state.degreeProgress;
+            var studentID=this.state.studentID;
+            var studentTrack=this.state.track;
+            var studentTotalCredit=this.state.totalCredits;
+            var studentGPD= this.state.gpa;
+            var studentDepartmentID=this.state.departmentID;
+            var studentReqVersionSemester= this.state.requirementVersionSemester;
+            var studentReqVersionYear= this.state.requirementVersionYear;
+            
+                    
+          var departmentID=this.state.departmentID;
+          var track=this.state.track;
+          var requirementVersionSemester=this.state.requirementVersionSemester;
+          var requirementVersionYear=this.state.requirementVersionYear;
+
+
+            
+            
+            
+            //this will be an object and will have the same attributes as the database table.
+            var degreeRequirement=this.state.degreeRequirement;
+            var area=this.state.area;
+            var AreaReq=this.state.AreaReq;
+            var subArea=this.state.subArea;
+            var subAreaCourse=this.state.subAreaCourse;
+
+            console.log("DegreeRequirement");
+            console.log(degreeRequirement);
+            console.log("area");
+            console.log(area);
+            console.log("AreaReq");
+            console.log(AreaReq);
+            console.log("subArea");
+            console.log(subArea);
+            console.log("subAreaCourse");
+            console.log(subAreaCourse);
+            
+            
+            
+            var displayText="DisPlay Text";
+            degreeProgressTable.push(
+            <textarea className="commentsComment" value={displayText} readOnly/>
+            );
+
+            return degreeProgressTable;
+        }
+
 
         const createCourseTables = () => {  
             var course = this.state.coursePlans;
@@ -167,6 +514,8 @@ class ViewStudentScreen extends Component {
             return commentTable;
         }
 
+
+
         return (
             <div id="viewStudentFormBackground">
                 <div id="viewStudentForm">
@@ -210,13 +559,17 @@ class ViewStudentScreen extends Component {
                         <br></br><br></br>
                         <h2 id="viewStudentFormHeader">Degree Progress</h2>
                         <br></br>
-                        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;Degree Requirements not available</p>
+                        <div style={{position: "relative", width: "50%", left: "8%"}}>
+                        {createDegreeProgressTables()}
+                        </div>
+                        
+                        <p>&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;</p>
                         
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        </h2> 
-                        <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a> 
+                        <Link to="/suggestCoursePlan"><button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
+                        </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                         {createCourseTables()}

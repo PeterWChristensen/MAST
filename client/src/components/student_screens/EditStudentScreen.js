@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom';
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from "axios";
 import CommentService from "../../services/comment.service";
 import { colors } from '@material-ui/core';
@@ -525,8 +525,8 @@ class EditStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="entryYearSelect" className="dropdownSelectYear" defaultValue={this.state.entryYear} onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>
@@ -566,8 +566,8 @@ class EditStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="gradYearSelect" className="dropdownSelectYear" defaultValue={this.state.gradYear} onChange={changeExpectedGraduationYearOptionHandler}>
                             <option value="2025">2025</option>
@@ -688,6 +688,7 @@ class EditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
+                        {/* <Link to="/suggestCoursePlan"> <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link> */}
                         </h2>  
                         <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      

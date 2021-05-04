@@ -14,7 +14,7 @@
   z-index: -10;
 }
 
-/* NAVBAR */
+/* NAVBAR */  /*  #08a054  */ 
 .banner {
   position: absolute;
   background-image: linear-gradient(to bottom,         
@@ -195,7 +195,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 71.3%;  
+    left: 59.2%;  
     top: 1%;
   }
   
@@ -237,12 +237,19 @@ background-color: #343434;
   .GPDHomepageButton{
     position: relative;
     top: 1%;
-    left: 71.6%;
-    margin-right: 0.3%;
+    left: 59.6%;
+    margin-right: 0.5%;
+  }
+
+  #enrollmentTrendsPageButton{
+    left: 3.2%;
+    margin-right: 0%;
   }
 
   /*ADD STUDENT SCREEN  */
   #addStudentForm {
+    display: block;
+    overflow:auto;
     position: absolute;
     left: 15%;
     top: 6%;
@@ -318,6 +325,110 @@ background-color: #343434;
   font-size: 20px;  
   text-align:left;
   width: 12%;
+}
+
+/*ENROLLMENT TRENDS SCREEN  */
+#enrollmentTrendsBackground{
+  position: absolute;
+  background: #000000;
+  width: 100%;
+  z-index: -10;
+}
+
+  #enrollmentTrendsForm {
+    display: block;
+    overflow:auto;
+    position: absolute;
+    left: 15%;
+    top: 6%;
+    width: 69%;
+    background: rgb(239, 239, 239);
+    z-index: -1;
+    font: black;
+  }
+
+#enrollmentTrendsHeader{
+  position: relative;
+  left: 9%;
+  top: 1%;
+}
+
+.enrollmentTrends_prompt{
+  position: relative;
+  grid-column: 1 / 2;
+  margin-left: 9%;
+  margin-top: 1%;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.enrollmentTrends_input {
+  position: relative;
+  grid-column: 1 / 2;
+  margin-top: 1%;
+  margin-inline-end: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;  
+  text-align:left;
+  width: 27%;
+}
+
+.enrollmentTrendsButton{
+  position: relative;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+  top: 2px;
+}
+
+.enrollmentTrendsSemesterDropdown{
+  position: relative;
+  grid-column: 1 / 2;
+  margin-inline-end: 3px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  text-align:left;
+  width: 12%;  
+}
+
+.enrollmentTrendsYearDropdown{
+  position: relative;
+  grid-column: 1 / 2;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  margin-inline-end: 25px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align:left;
+  width: 12%;
+}
+
+#enrollmentcourseresetbutton{
+  position: relative;
+  font-size: 16px;
+  background-color: #000000;
+  color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+}
+
+#generateGraphButton{
+  left: 470px;
+}
+
+#selectcoursetext{
+  font-size: 15px;
 }
 
   /*VIEW STUDENT SCREEN  */
@@ -611,30 +722,37 @@ background-color: #343434;
   height: 20%;
 }
 
-#SuggestCoursePlanButton{
-  text-align: center;
+.dropdown-menu label {
+  display: block;
+}
+
+/*SUGGEST COURSE PLAN*/
+.preferenceButton{
   position: relative;
   font-size: 18px;
-  height: 40px;
-  left: 77%;
   background-color: #000000;
   color: white;
-  padding: 10px;
-}
-
-#courseList{
-  position: relative;
-  font-size: 14px;
-  padding: 10px;
+  padding: 6px;
+  margin-bottom: 10px;
+  margin-inline-end: 20px;
   margin-top: 10px;
-  width: 10%;
-  list-style-type: none;
-  border-style: solid;
+  top: 2px;
 }
 
-#courseListTitle{
+.promptButton{
   position: relative;
-  font-size: 24px;
-  padding: 10px;
-  margin: 18px;
+  font-size: 12px;
+  background-color: #000000;
+  color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-inline-start: 5px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+  top: 2px;
+}
+
+.line-break {
+  white-space: pre-line;
+  font-size: 17px;
 }

@@ -12,6 +12,7 @@ import AreaService from "../../services/area.service";
 import SubAreaService from "../../services/subArea.service";
 import AreaRequirementService from "../../services/areaRequirement.service";
 import SubAreaCourseService from "../../services/subAreaCourse.service";
+import RequiredCourseService from "../../services/requiredCourse.service";
 
 const papaparseOptions = {
   header: true,
@@ -99,143 +100,164 @@ class ModalWindow extends React.Component {
             content = fileReader.result;
             var obj = JSON.parse(content);
             console.log(obj)
-            var data_temp = {
-                requirementID: obj.requirementID,
-                departID: obj.departID,
-                track: obj.track,
-                versionSemester: obj.versionSemester,
-                versionYear: obj.versionYear,
-                totalCredit: obj.totalCredit,
-                project: obj.project,
-                thesis: obj.thesis,
-                timeLimit: obj.timeLimit,
-                finalRecommended: obj.finalRecommended,
-                minGPA: obj.minGPA
-            };
-            console.log(data_temp)
-            DegreeRequirementService.create(data_temp)
-            .then(response => {
-                this.setState({
-                    requirementID: response.data_temp.requirementID,
-                    departID: response.data_temp.departID,
-                    track: response.data_temp.track,
-                    versionSemester: response.data_temp.versionSemester,
-                    versionYear: response.data_temp.versionYear,
-                    totalCredit: response.data_temp.totalCredit,
-                    project: response.data_temp.project,
-                    thesis: response.data_temp.thesis,
-                    timeLimit: response.data_temp.timeLimit,
-                    finalRecommended: response.data_temp.finalRecommended,
-                    minGPA: response.data_temp.minGPA
-                });
-                console.log(response.data_temp);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-            for (var i = 0; i < obj.area.length; i++) {
-                //console.log(obj.area.length)
-                var data_area = {
-                    areaID: obj.area[i].areaID,
-                    requirementID: obj.requirementID,
-                    departmentID: obj.departID,
-                    name: obj.area[i].name
+            for (var x = 0; x < obj.length; x++) {
+                var data_temp = {
+                    requirementID: obj[x].requirementID,
+                    departID: obj[x].departID,
+                    track: obj[x].track,
+                    versionSemester: obj[x].versionSemester,
+                    versionYear: obj[x].versionYear,
+                    totalCredit: obj[x].totalCredit,
+                    project: obj[x].project,
+                    thesis: obj[x].thesis,
+                    timeLimit: obj[x].timeLimit,
+                    finalRecommended: obj[x].finalRecommended,
+                    minGPA: obj[x].minGPA
                 };
-                console.log(data_area)
-                AreaService.create(data_area)
-                .then(response =>{
+                console.log(data_temp)
+                DegreeRequirementService.create(data_temp)
+                .then(response => {
                     this.setState({
-                        areaID: response.data_area.areaID,
-                        requirementID: response.data_area.requirementID,
-                        departmentID: response.data_area.departmentID,
-                        name: response.data_area.name,
+                        requirementID: response.data_temp.requirementID,
+                        departID: response.data_temp.departID,
+                        track: response.data_temp.track,
+                        versionSemester: response.data_temp.versionSemester,
+                        versionYear: response.data_temp.versionYear,
+                        totalCredit: response.data_temp.totalCredit,
+                        project: response.data_temp.project,
+                        thesis: response.data_temp.thesis,
+                        timeLimit: response.data_temp.timeLimit,
+                        finalRecommended: response.data_temp.finalRecommended,
+                        minGPA: response.data_temp.minGPA
                     });
+                    console.log(response.data_temp);
                 })
                 .catch(e => {
                     console.log(e);
                 });
-            }
-            for (var i = 0; i < obj.area.length; i++) {
-                for (var j = 0; j < obj.area[i].subArea.length; j++){
-                    var data_subArea = {
-                        areaID: obj.area[i].areaID,
-                        subAreaID: obj.area[i].subArea[j].subAreaID,
-                        departmentID: obj.departID,
-                        minCourses: obj.area[i].subArea[j].minCourses,
-                        minCredit: obj.area[i].subArea[j].minCredit,
-                        maxCredit: obj.area[i].subArea[j].maxCredit,
-                        maxCourse: obj.area[i].subArea[j].maxCourse,
-                        name: obj.area[i].subArea[j].name
+                for (var i = 0; i < obj[x].area.length; i++) {
+                    //console.log(obj.area.length)
+                    var data_area = {
+                        areaID: obj[x].area[i].areaID,
+                        requirementID: obj[x].requirementID,
+                        departmentID: obj[x].departID,
+                        name: obj[x].area[i].name
                     };
-                    console.log(data_subArea)
-                    SubAreaService.create(data_subArea)
+                    console.log(data_area)
+                    AreaService.create(data_area)
                     .then(response =>{
                         this.setState({
                             areaID: response.data_area.areaID,
-                            subAreaID: response.data_area.subAreaID,
+                            requirementID: response.data_area.requirementID,
                             departmentID: response.data_area.departmentID,
-                            minCourses: response.data_area.minCourses,
-                            minCredit: response.data_area.minCredit,
-                            maxCredit: response.data_area.maxCredit,
-                            maxCourse: response.data_area.maxCourse,
-                            name: response.data_area.name
+                            name: response.data_area.name,
                         });
                     })
                     .catch(e => {
                         console.log(e);
                     });
                 }
-            }
-            for (var i = 0; i < obj.area.length; i++) {
-                var data_areaRequirement = {
-                    areaID: obj.area[i].areaID,
-                    departmentID: obj.departID,
-                    nSubAreas: obj.area[i].nSubAreas,
-                    nCourses: obj.area[i].nCourses,
-                    nCredits: obj.area[i].nCredits
-                };
-                console.log(data_areaRequirement)
-                AreaRequirementService.create(data_areaRequirement)
-                .then(response =>{
-                    this.setState({
-                        areaID: response.data_area.areaID,
-                        departmentID: response.data_area.departmentID,
-                        nSubAreas: response.data_area.nSubAreas,
-                        nCourses: response.data_area.nCourses,
-                        nCredits: response.data_area.nCredits
-                    });
-                })
-                .catch(e => {
-                    console.log(e);
-                });
-            }
-            for (var i = 0; i < obj.area.length; i++) {
-                for (var j = 0; j < obj.area[i].subArea.length; j++){
-                    for (var k = 0; k < obj.area[i].subArea[j].courses.length; k++){
-                        var data_requiredCourse = {
-                                requirementID: obj.requirementID,
-                                courseID: obj.area[i].subArea[j].courses[k].courseID,
-                                departmentID: obj.departID,
-                                track: obj.track,
-                                areaID: obj.area[i].areaID,
-                                subAreaID: obj.area[i].subArea[j].subAreaID,
-                            };
-                            console.log(data_requiredCourse)
-                            SubAreaCourseService.create(data_requiredCourse)
-                            .then(response =>{
-                                this.setState({
-                                    requirementID: response.data_area.requirementID,
-                                    courseID: response.data_area.courseID,
-                                    departmentID: response.data_area.departmentID,
-                                    track: response.data_area.track,
-                                    areaID: response.data_area.areaID,
-                                    subAreaID: response.data_area.subAreaID
-                                });
-                            })
-                            .catch(e => {
-                                console.log(e);
+                for (var i = 0; i < obj[x].area.length; i++) {
+                    for (var j = 0; j < obj[x].area[i].subArea.length; j++){
+                        var data_subArea = {
+                            areaID: obj[x].area[i].areaID,
+                            subAreaID: obj[x].area[i].subArea[j].subAreaID,
+                            departmentID: obj[x].departID,
+                            minCourses: obj[x].area[i].subArea[j].minCourses,
+                            minCredit: obj[x].area[i].subArea[j].minCredit,
+                            maxCredit: obj[x].area[i].subArea[j].maxCredit,
+                            maxCourse: obj[x].area[i].subArea[j].maxCourse,
+                            name: obj[x].area[i].subArea[j].name
+                        };
+                        console.log(data_subArea)
+                        SubAreaService.create(data_subArea)
+                        .then(response =>{
+                            this.setState({
+                                areaID: response.data_area.areaID,
+                                subAreaID: response.data_area.subAreaID,
+                                departmentID: response.data_area.departmentID,
+                                minCourses: response.data_area.minCourses,
+                                minCredit: response.data_area.minCredit,
+                                maxCredit: response.data_area.maxCredit,
+                                maxCourse: response.data_area.maxCourse,
+                                name: response.data_area.name
                             });
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                     }
+                }
+                for (var i = 0; i < obj[x].area.length; i++) {
+                    var data_areaRequirement = {
+                        areaID: obj[x].area[i].areaID,
+                        departmentID: obj[x].departID,
+                        nSubAreas: obj[x].area[i].nSubAreas,
+                        nCourses: obj[x].area[i].nCourses,
+                        nCredits: obj[x].area[i].nCredits
+                    };
+                    console.log(data_areaRequirement)
+                    AreaRequirementService.create(data_areaRequirement)
+                    .then(response =>{
+                        this.setState({
+                            areaID: response.data_area.areaID,
+                            departmentID: response.data_area.departmentID,
+                            nSubAreas: response.data_area.nSubAreas,
+                            nCourses: response.data_area.nCourses,
+                            nCredits: response.data_area.nCredits
+                        });
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+                }
+                for (var i = 0; i < obj[x].area.length; i++) {
+                    for (var j = 0; j < obj[x].area[i].subArea.length; j++){
+                        for (var k = 0; k < obj[x].area[i].subArea[j].courses.length; k++){
+                            var data_requiredCourse = {
+                                    requirementID: obj[x].requirementID,
+                                    courseID: obj[x].area[i].subArea[j].courses[k].courseID,
+                                    departmentID: obj[x].departID,
+                                    track: obj[x].track,
+                                    areaID: obj[x].area[i].areaID,
+                                    subAreaID: obj[x].area[i].subArea[j].subAreaID,
+                                };
+                                console.log(data_requiredCourse)
+                                SubAreaCourseService.create(data_requiredCourse)
+                                .then(response =>{
+                                    this.setState({
+                                        requirementID: response.data_area.requirementID,
+                                        courseID: response.data_area.courseID,
+                                        departmentID: response.data_area.departmentID,
+                                        track: response.data_area.track,
+                                        areaID: response.data_area.areaID,
+                                        subAreaID: response.data_area.subAreaID
+                                    });
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                });
+                        }
+                    }
+                }
+                for (var i = 0; i < obj[x].requiredCourse.length; i++) {
+                    var data_requiredCourse = {
+                        requirementID: obj[x].requirementID,
+                        courseID: obj[x].requiredCourse[i].courseID,
+                        departmentID: obj[x].departID
+                    };
+                        console.log(data_requiredCourse)
+                        RequiredCourseService.create(data_requiredCourse)
+                        .then(response =>{
+                            this.setState({
+                                requirementID: response.data_area.requirementID,
+                                courseID: response.data_area.courseID,
+                                departmentID: response.data_area.departmentID
+                            });
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                 }
             }
 

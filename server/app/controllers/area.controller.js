@@ -34,3 +34,27 @@ exports.create = (req, res) => {
         });
       });
   };
+
+
+  
+
+
+  exports.getArea = (req, res) => {
+    console.log("getArea at Controller.");  
+    console.log(req.body);
+    Area.findOne({
+          where: {
+            requirementID: req.body.requirementID
+            // departmentID: req.body.departID
+            }
+          })
+            .then(data => {                    
+              res.status(200).send(data);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding Area"
+              });
+          });
+      };
+  

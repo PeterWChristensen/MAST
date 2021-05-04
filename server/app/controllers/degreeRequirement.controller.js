@@ -41,3 +41,27 @@ exports.create = (req, res) => {
         });
       });
   };
+
+
+
+
+exports.getDegreeRequirement = (req, res) => {
+  console.log("getDegreeRequirement at Controller.");  
+  console.log(req.body);
+  DegreeRequirement.findOne({
+        where: {
+          departID: req.body.departmentID,
+          track: req.body.track,
+          versionSemester:req.body.requirementVersionSemester,
+          versionYear:req.body.requirementVersionYear
+          }
+        })
+          .then(data => {                    
+            res.status(200).send(data);  
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Error has occured while finding degree requirement"
+            });
+        });
+    };

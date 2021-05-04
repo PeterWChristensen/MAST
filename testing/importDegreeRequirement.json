@@ -1,40 +1,767 @@
-{
+[
+	{
 		"requirementID": 123456,
 		"departID": "CSE",
+		"requiredCourse":[],
 		"track": "N/A",
 		"versionSemester": "Fall",
 		"versionYear": "2021",
-		"totalCredit": 50,
+		"totalCredit": 31,
 		"project": "TBD",
 		"thesis": "TBD",
-		"timeLimit": 1,
-		"finalRecommended": 10,
+		"timeLimit": 3,
+		"finalRecommended": 0,
 		"minGPA": 3,
 		"area":[
 			{
-				"areaID": 321,
-				"name": "computing",
-				"nSubAreas": 1,
-				"nCourses": 30,
-				"nCredits": 90,
+				"areaID": 123,
+				"name": "breadth",
+				"nSubAreas": 3,
+				"nCourses": 22,
+				"nCredits": 66,
 				"subArea":[
 					{
-						"subAreaID": 3210,
-						"minCourses": 10,
-						"minCredit": 30,
-						"maxCredit": 51,
-						"maxCourse": 17,
-						"name": "logic computing",
+						"subAreaID": 1,
+						"minCourses": 1,
+						"minCredit": 3,
+						"maxCredit": 21,
+						"maxCourse": 7,
+						"name": "Theory",
 						"courses":[
 							{
-								"courseID": "CSE593"
+								"courseID": "CSE512"
 							},
 							{
-								"courseID": "CSE600"
+								"courseID": "CSE526"
+							},
+							{
+								"courseID": "CSE540"
+							},
+							{
+								"courseID": "CSE541"
+							},
+							{
+								"courseID": "CSE547"
+							},
+							{
+								"courseID": "CSE548"
+							},
+							{
+								"courseID": "CSE549"
+							}
+						]
+					},
+					{
+						"subAreaID": 2,
+						"minCourses": 1,
+						"minCredit": 3,
+						"maxCredit": 24,
+						"maxCourse": 8,
+						"name": "Systems",
+						"courses":[
+							{
+								"courseID": "CSE502"
+							},
+							{
+								"courseID": "CSE504"
+							},
+							{
+								"courseID": "CSE506"
+							},
+							{
+								"courseID": "CSE508"
+							},
+							{
+								"courseID": "CSE509"
+							},
+							{
+								"courseID": "CSE532"
+							},
+							{
+								"courseID": "CSE534"
+							},
+							{
+								"courseID": "CSE535"
+							}
+						]
+					},
+					{
+						"subAreaID": 3,
+						"minCourses": 1,
+						"minCredit": 3,
+						"maxCredit": 24,
+						"maxCourse": 8,
+						"name": "Information and Intelligent Systems",
+						"courses":[
+							{
+								"courseID": "CSE505"
+							},
+							{
+								"courseID": "CSE519"
+							},
+							{
+								"courseID": "CSE527"
+							},
+							{
+								"courseID": "CSE528"
+							},
+							{
+								"courseID": "CSE537"
+							},
+							{
+								"courseID": "CSE538"
+							},
+							{
+								"courseID": "CSE564"
 							}
 						]
 					}
 				]
 			}
 		]
-}
+	},
+	{	
+		"requirementID": 123457,
+		"departID": "AMS",
+		"requiredCourse":[],
+		"track": "N/A",
+		"versionSemester": "Fall",
+		"versionYear": "2021",
+		"totalCredit": 30,
+		"project": "TBD",
+		"thesis": "TBD",
+		"timeLimit": 3,
+		"finalRecommended": 1,
+		"minGPA": 3,
+		"area":[
+			{
+				"areaID": 456,
+				"name": "specializations",
+				"nSubAreas": 5,
+				"nCourses": 44,
+				"nCredits": 132,
+				"subArea":[
+					{
+						"subAreaID": 4,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "Computational Applied Mathematics",
+						"courses":[
+							{
+								"courseID": "AMS501"
+							},
+							{
+								"courseID": "AMS503"
+							},
+							{
+								"courseID": "AMS510"
+							},
+							{
+								"courseID": "AMS526"
+							},
+							{
+								"courseID": "AMS527"
+							},
+							{
+								"courseID": "AMS528"
+							},
+							{
+								"courseID": "AMS595"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							}
+						]
+					},
+					{
+						"subAreaID": 5,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "Computational Biology",
+						"courses":[
+							{
+								"courseID": "AMS507"
+							},
+							{
+								"courseID": "AMS510"
+							},
+							{
+								"courseID": "MCB520"
+							},
+							{
+								"courseID": "CHE541"
+							},
+							{
+								"courseID": "AMS531"
+							},
+							{
+								"courseID": "AMS532"
+							},
+							{
+								"courseID": "AMS533"
+							},
+							{
+								"courseID": "AMS535"
+							},
+							{
+								"courseID": "AMS537"
+							},
+							{
+								"courseID": "AMS539"
+							},
+							{
+								"courseID": "CSE549"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							}
+						]
+					},
+					{
+						"subAreaID": 6,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "Operations Research",
+						"courses":[
+							{
+								"courseID": "AMS510"
+							},
+							{
+								"courseID": "AMS507"
+							},
+							{
+								"courseID": "AMS540"
+							},
+							{
+								"courseID": "AMS550"
+							},
+							{
+								"courseID": "AMS553/CSE529"
+							},
+							{
+								"courseID": "AMS595"
+							},
+							{
+								"courseID": "AMS570-586"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							}
+						]
+					},
+					{
+						"subAreaID": 7,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "Statistics",
+						"courses":[
+							{
+								"courseID": "AMS510"
+							},
+							{
+								"courseID": "AMS507"
+							},
+							{
+								"courseID": "AMS570"
+							},
+							{
+								"courseID": "AMS572"
+							},
+							{
+								"courseID": "AMS573"
+							},
+							{
+								"courseID": "AMS578"
+							},
+							{
+								"courseID": "AMS582"
+							},
+							{
+								"courseID": "AMS597"
+							},
+							{
+								"courseID": "elective"
+							},
+							{
+								"courseID": "elective"
+							}
+						]
+					},
+					{
+						"subAreaID": 8,
+						"minCourses": 10,
+						"minCredit": 30,
+						"maxCredit": 51,
+						"maxCourse": 17,
+						"name": "Quantitative Finance",
+						"courses":[
+							{
+								"courseID": "AMS507"
+							},
+							{
+								"courseID": "AMS510"
+							},
+							{
+								"courseID": "AMS511"
+							},
+							{
+								"courseID": "AMS512"
+							},
+							{
+								"courseID": "AMS513"
+							},
+							{
+								"courseID": "AMS514"
+							},
+							{
+								"courseID": "AMS516"
+							},
+							{
+								"courseID": "AMS517"
+							},
+							{
+								"courseID": "AMS518"
+							},
+							{
+								"courseID": "AMS572"
+							},
+							{
+								"courseID": "FIN539"
+							},
+							{
+								"courseID": "elective"
+							}
+						]
+					}
+				]
+			}
+		]
+	
+	},
+	{
+		"requirementID": 123458,
+			"departID": "BMI",
+			"track": "II",
+			"requiredCourse":[
+				{
+					"courseID": "BMI501"
+				},
+				{
+					"courseID": "BMI502"
+				},
+				{
+					"courseID": "BMI503"
+				},
+				{
+					"courseID": "BMI511"
+				},
+				{
+					"courseID": "BMI512"
+				},
+				{
+					"courseID": "BMI513"
+				},
+				{
+					"courseID": "BMI540"
+				},
+				{
+					"courseID": "BMI592"
+				}
+			],
+			"versionSemester": "Fall",
+			"versionYear": "2021",
+			"totalCredit": 36,
+			"project": "TBD",
+			"thesis": "TBD",
+			"timeLimit": 3,
+			"finalRecommended": 0,
+			"minGPA": 3,
+			"area":[
+				{
+					"areaID": 789,
+					"name": "BMI Track",
+					"nSubAreas": 1,
+					"nCourses": 15,
+					"nCredits": 45,
+					"subArea":[
+						{
+							"subAreaID": 11,
+							"minCourses": 12,
+							"minCredit": 36,
+							"maxCredit": 45,
+							"maxCourse": 15,
+							"name": "Imaging Informatics",
+							"courses":[
+								{
+									"courseID": "BMI501"
+								},
+								{
+									"courseID": "BMI502"
+								},
+								{
+									"courseID": "BMI503"
+								},
+								{
+									"courseID": "BMI513"
+								},
+								{
+									"courseID": "BMI514"
+								},
+								{
+									"courseID": "BMI520"
+								},
+								{
+									"courseID": "BMI530"
+								},
+								{
+									"courseID": "BMI540"
+								},
+								{
+									"courseID": "BMI592"
+								},
+								{
+									"courseID": "BMI692"
+								},
+								{
+									"courseID": "BMI697"
+								},
+								{
+									"courseID": "BMI698"
+								},
+								{
+									"courseID": "BMI699"
+								},
+								{
+									"courseID": "BMI700"
+								},
+								{
+									"courseID": "BMI701"
+								}
+							]
+						}
+					]
+				}
+			]
+	},
+	{
+		"requirementID": 123458,
+			"departID": "BMI",
+			"track": "CI",
+			"requiredCourse":[
+				{
+					"courseID": "BMI501"
+				},
+				{
+					"courseID": "BMI502"
+				},
+				{
+					"courseID": "BMI503"
+				},
+				{
+					"courseID": "BMI511"
+				},
+				{
+					"courseID": "BMI512"
+				},
+				{
+					"courseID": "BMI513"
+				},
+				{
+					"courseID": "BMI540"
+				},
+				{
+					"courseID": "BMI592"
+				}
+			],
+			"versionSemester": "Fall",
+			"versionYear": "2021",
+			"totalCredit": 36,
+			"project": "TBD",
+			"thesis": "TBD",
+			"timeLimit": 3,
+			"finalRecommended": 0,
+			"minGPA": 3,
+			"area":[
+				{
+					"areaID": 789,
+					"name": "BMI Track",
+					"nSubAreas": 1,
+					"nCourses": 14,
+					"nCredits": 42,
+					"subArea":[
+						{
+							"subAreaID": 12,
+							"minCourses": 11,
+							"minCredit": 33,
+							"maxCredit": 14,
+							"maxCourse": 42,
+							"name": "Clinicla Informatics",
+							"courses":[
+								{
+									"courseID": "BMI501"
+								},
+								{
+									"courseID": "BMI502"
+								},
+								{
+									"courseID": "BMI503"
+								},
+								{
+									"courseID": "BMI512"
+								},
+								{
+									"courseID": "BMI540"
+								},
+								{
+									"courseID": "BMI550"
+								},
+								{
+									"courseID": "BMI551"
+								},
+								{
+									"courseID": "BMI592"
+								},
+								{
+									"courseID": "BMI692"
+								},
+								{
+									"courseID": "BMI697"
+								},
+								{
+									"courseID": "BMI698"
+								},
+								{
+									"courseID": "BMI699"
+								},
+								{
+									"courseID": "BMI700"
+								},
+								{
+									"courseID": "BMI701"
+								}
+							]
+						}
+						
+					]
+				}
+			]
+	},
+	{
+		"requirementID": 123458,
+			"departID": "BMI",
+			"track": "TBI",
+			"requiredCourse":[
+				{
+					"courseID": "BMI501"
+				},
+				{
+					"courseID": "BMI502"
+				},
+				{
+					"courseID": "BMI503"
+				},
+				{
+					"courseID": "BMI511"
+				},
+				{
+					"courseID": "BMI512"
+				},
+				{
+					"courseID": "BMI513"
+				},
+				{
+					"courseID": "BMI540"
+				},
+				{
+					"courseID": "BMI592"
+				}
+			],
+			"versionSemester": "Fall",
+			"versionYear": "2021",
+			"totalCredit": 36,
+			"project": "TBD",
+			"thesis": "TBD",
+			"timeLimit": 3,
+			"finalRecommended": 0,
+			"minGPA": 3,
+			"area":[
+				{
+					"areaID": 789,
+					"name": "BMI Track",
+					"nSubAreas": 1,
+					"nCourses": 14,
+					"nCredits": 42,
+					"subArea":[
+						{
+							"subAreaID": 13,
+							"minCourses": 11,
+							"minCredit": 33,
+							"maxCredit": 14,
+							"maxCourse": 42,
+							"name": "Thanslational Bio-informatics",
+							"courses":[
+								{
+									"courseID": "BMI501"
+								},
+								{
+									"courseID": "BMI502"
+								},
+								{
+									"courseID": "BMI503"
+								},
+								{
+									"courseID": "BMI511"
+								},
+								{
+									"courseID": "BMI520"
+								},
+								{
+									"courseID": "BMI530"
+								},
+								{
+									"courseID": "BMI540"
+								},
+								{
+									"courseID": "BMI592"
+								},
+								{
+									"courseID": "BMI692"
+								},
+								{
+									"courseID": "BMI697"
+								},
+								{
+									"courseID": "BMI698"
+								},
+								{
+									"courseID": "BMI699"
+								},
+								{
+									"courseID": "BMI700"
+								},
+								{
+									"courseID": "BMI701"
+								}
+							]
+						}
+					]
+				}
+			]
+	},
+	{
+		"requirementID": 123459,
+			"departID": "ESE",
+			"track": "N/A",
+			"requiredCourse":[
+				{
+					"courseID": "ESE597"
+				}
+			],
+			"versionSemester": "Fall",
+			"versionYear": "2021",
+			"totalCredit": 30,
+			"project": "TBD",
+			"thesis": "TBD",
+			"timeLimit": 7,
+			"finalRecommended": 0,
+			"minGPA": 3,
+			"area":[
+				{
+					"areaID": 120,
+					"name": "regular courses",
+					"nSubAreas": 1,
+					"nCourses": 15,
+					"nCredits": 45,
+					"subArea":[
+						{
+							"subAreaID": 21,
+							"minCourses": 3,
+							"minCredit": 9,
+							"maxCredit": 45,
+							"maxCourse": 15,
+							"name": "core courses",
+							"courses":[
+								{
+									"courseID": "ESE502"
+								},
+								{
+									"courseID": "ESE503"
+								},
+								{
+									"courseID": "ESE511"
+								},
+								{
+									"courseID": "ESE538"
+								},
+								{
+									"courseID": "ESE516"
+								},
+								{
+									"courseID": "ESE520"
+								},
+								{
+									"courseID": "ESE528"
+								},
+								{
+									"courseID": "ESE532"
+								},
+								{
+									"courseID": "ESE505"
+								},
+								{
+									"courseID": "ESE545"
+								},
+								{
+									"courseID": "ESE547"
+								},
+								{
+									"courseID": "ESE554"
+								},
+								{
+									"courseID": "ESE555"
+								},
+								{
+									"courseID": "ESE566"
+								},
+								{
+									"courseID": "ESE587"
+								}
+							]
+						}
+					]
+				}
+			]
+	}
+]
