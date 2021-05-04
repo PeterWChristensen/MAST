@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import { Link } from 'react-router-dom';
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
