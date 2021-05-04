@@ -38,3 +38,27 @@ exports.create = (req, res) => {
         });
       });
   };
+
+  
+
+  
+
+  exports.getSubArea = (req, res) => {
+    console.log("getSubArea at Controller.");  
+    console.log(req.body);
+    SubArea.findAll({
+          where: {
+            areaID: req.body.areaID,
+            // departmentID:req.body.departmentID
+            }
+          })
+            .then(data => {                    
+              res.status(200).send(data);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding subArea"
+              });
+          });
+      };
+  

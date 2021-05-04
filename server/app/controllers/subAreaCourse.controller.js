@@ -36,3 +36,25 @@ exports.create = (req, res) => {
         });
       });
   };
+
+  
+
+  exports.getSubAreaCourse = (req, res) => {
+    console.log("getSubAreaCourse at Controller.");  
+    console.log(req.body);
+    SubAreaCourse.findAll({
+          where: {
+            areaID: req.body.areaID,
+            subAreaID:req.body.subAreaID
+            }
+          })
+            .then(data => {                    
+              res.status(200).send(data);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding SubAreaCourse"
+              });
+          });
+      };
+  

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from "axios";
 import CommentService from "../../services/comment.service";
 import { colors } from '@material-ui/core';
@@ -687,7 +687,7 @@ class EditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button>
+                        <Link to="/suggestCoursePlan"> <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>

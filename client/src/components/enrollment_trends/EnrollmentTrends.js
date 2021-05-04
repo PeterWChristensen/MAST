@@ -10,9 +10,10 @@ class EnrollmentTrends extends Component {
             startYear: 2021,
             endSemester: "Fall",
             endYear: 2025,
-            coursesForGraph: ["CSE 506", "CSE 508"],
+            numSelectedCourses: 0,
+            coursesForGraph: [],
             semestersForGraph: ["Fall 2021", "Winter 2022", "Spring 2022"],            
-            courses: ["AMS 503", "AMS 555", "BME 500", "BME 502", "CSE 506", "CSE 508", "CSE 510", "CSE 534", "EST 532", "EST 533"], //array of Courses.courseName
+            courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BME500"}, {courseID: "BME502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "EST532"}, {courseID: "EST533"}],
             coursePlans: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
             {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""},
             {courseOfferingID: "CSE510Spring20221", courseName: "CSE 510", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE534Winter20221", courseName: "CSE 534", semester: "Winter 2022", grade: ""}, 
@@ -28,17 +29,20 @@ class EnrollmentTrends extends Component {
 
     changeCourseToGraph = (event) => { 
         var courseArr = this.state.coursesForGraph
+        var numSelected = this.state.numSelectedCourses
         if (event.target.checked == true){
             if (courseArr.includes(event.target.value) == false){
                 courseArr.push(event.target.value)
-                this.setState({coursesForGraph: courseArr})
+                numSelected = numSelected + 1
+                this.setState({coursesForGraph: courseArr, numSelectedCourses: numSelected})
             }
         }else{ //If checked is false, then user unclicked so remove from array
             var index = courseArr.indexOf(event.target.value);
             if (index > -1) {
                 courseArr.splice(index, 1);
             }
-            this.setState({coursesForGraph: courseArr})
+            numSelected = numSelected - 1
+            this.setState({coursesForGraph: courseArr, numSelectedCourses: numSelected})
         }
     };
 
@@ -90,7 +94,7 @@ class EnrollmentTrends extends Component {
         this.state.coursesForGraph.forEach((course) => { //Go through each course in the list of courses to graph
             var semestersOfCourse = new Map();
             for(var c=0; c < courseplans.length; c++){ //Go through each courseplan for the specific course
-                if (courseplans[c].courseName===course){ //Course Found
+                if (courseplans[c].courseOfferingID.substring(0, 6)===course){ //Course Found
                     if (semesters.includes(courseplans[c].semester) == true){
                         if (semestersOfCourse.has(courseplans[c].semester) == false){ //Semester not in map so add it with frequency of 1
                             semestersOfCourse.set(courseplans[c].semester, 1);
@@ -119,8 +123,10 @@ class EnrollmentTrends extends Component {
         this.setState({dataForGraph: dataForGraphTemp, semestersForGraph: semesters})
     }
 
-    renderGraph = () => {
-
+    resetCourseSelection = () => {
+        var emptyArr = []
+        var toggleDropDownNew = this.state.toggleDropDown
+        this.setState({coursesForGraph: emptyArr, numSelectedCourses: 0, toggleDropDown: !toggleDropDownNew})
     }
 
     render() {
@@ -143,7 +149,11 @@ class EnrollmentTrends extends Component {
 
         var options = <label/>
         if(this.state.toggleDropDown==true){
-            options = this.state.courses.map((el) => <label key={el} style={{hidden: "true"}}> <input type="checkbox" value={el} onClick={(e) => this.changeCourseToGraph(e)}/> {el} </label>); 
+            if (this.state.numSelectedCourses == 10){
+                options = this.state.courses.map((el) =><label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)} disabled/> {el.courseID} </label>); 
+            }else{
+                options = this.state.courses.map((el) => <label key={el.courseID} style={{hidden: "true"}}> <input type="checkbox" value={el.courseID} onClick={(e) => this.changeCourseToGraph(e)}/> {el.courseID} </label>);                 
+            }
         }
 
     return (
@@ -157,7 +167,7 @@ class EnrollmentTrends extends Component {
                     <Graph data={this.state.dataForGraph} semesters={this.state.semestersForGraph} divID={"enrollmentTrendGraph"} />
                     </div>
                     <br></br><br></br><br></br>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Range of Semesters:
+                    <text id="selectcoursetext">Select up to 10 courses</text>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;Range of Semesters
                     <br></br>
                     <button ctype="button" className="enrollmentTrendsButton" onClick={() => this.toggleDropDownState()}>
                         Select Courses
@@ -252,6 +262,7 @@ class EnrollmentTrends extends Component {
                         Generate Graph
                     </button>                        
                     <form id="dropdownCourses" className="dropdown-menu" >
+                        <button id="enrollmentcourseresetbutton" className="enrollmentTrendsButton" onClick={() => this.resetCourseSelection()}>Reset Courses</button>
                         {options}
                     </form>  
                                 
