@@ -14,7 +14,7 @@
   z-index: -10;
 }
 
-/* NAVBAR */
+/* NAVBAR */  /*  #08a054  */ 
 .banner {
   position: absolute;
   background-image: linear-gradient(to bottom,         
@@ -243,6 +243,8 @@ background-color: #343434;
 
   /*ADD STUDENT SCREEN  */
   #addStudentForm {
+    display: block;
+    overflow:auto;
     position: absolute;
     left: 15%;
     top: 6%;
@@ -316,6 +318,91 @@ background-color: #343434;
   margin-inline-end: 55px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;  
+  text-align:left;
+  width: 12%;
+}
+
+/*ENROLLMENT TRENDS SCREEN  */
+#enrollmentTrendsBackground{
+  position: absolute;
+  background: #000000;
+  width: 100%;
+  z-index: -10;
+}
+
+  #enrollmentTrendsForm {
+    display: block;
+    overflow:auto;
+    position: absolute;
+    left: 15%;
+    top: 6%;
+    width: 69%;
+    background: rgb(239, 239, 239);
+    z-index: -1;
+    font: black;
+  }
+
+#enrollmentTrendsHeader{
+  position: relative;
+  left: 9%;
+  top: 1%;
+}
+
+.enrollmentTrends_prompt{
+  position: relative;
+  grid-column: 1 / 2;
+  margin-left: 9%;
+  margin-top: 1%;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.enrollmentTrends_input {
+  position: relative;
+  grid-column: 1 / 2;
+  margin-top: 1%;
+  margin-inline-end: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;  
+  text-align:left;
+  width: 27%;
+}
+
+.enrollmentTrendsButton{
+  position: relative;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-inline-end: 20px;
+  margin-top: 10px;
+  top: 2px;
+}
+
+.enrollmentTrendsSemesterDropdown{
+  position: relative;
+  grid-column: 1 / 2;
+  margin-inline-end: 3px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  text-align:left;
+  width: 12%;  
+}
+
+.enrollmentTrendsYearDropdown{
+  position: relative;
+  grid-column: 1 / 2;
+  font-size: 18px;
+  height: 40px;
+  background-color: #000000;
+  color: white;
+  margin-inline-end: 25px;
+  font-family: 'Times New Roman', Times, serif;
   text-align:left;
   width: 12%;
 }
@@ -611,3 +698,7 @@ background-color: #343434;
   height: 20%;
 }
 
+
+.dropdown-menu label {
+  display: block;
+}

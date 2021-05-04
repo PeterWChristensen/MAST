@@ -58,7 +58,6 @@ class ViewStudentScreen extends Component {
     componentDidMount(){
 
         console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
-        console.log(this.props);
 
         var username=this.props.location.state.email;
         
@@ -86,8 +85,6 @@ class ViewStudentScreen extends Component {
                 requirementVersionYear: response.data.requirementVersionYear,
                 requirementVersionSemester: response.data.requirementVersionSemester,
                 totalCredits: response.data.totalCredits})
-                console.log("this is from view student");
-                console.log(response.data);
                 return response.data;
           }).catch(err => console.error(err));
 
@@ -99,12 +96,10 @@ class ViewStudentScreen extends Component {
           .then(response => {
                 console.log("this is getcmt at view student");
                 var tempList=[];
-                var obj={};
                 for(var i=0;response.data[i];i++){
                     tempList.push({date: response.data[i].date, comment:response.data[i].comment})
                 }
 
-                console.log(tempList);
                 this.setState({comments:tempList});
                 
                 return response.data;

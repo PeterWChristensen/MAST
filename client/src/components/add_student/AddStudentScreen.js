@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ModalDialog from '../modal/ModalWindow'
 import StudentService from "../../services/student.service";
+import AuthService from "../../services/auth.service";
 
 class AddStudentScreen extends Component {
     constructor(props){
@@ -89,6 +90,12 @@ class AddStudentScreen extends Component {
             .catch(e => {
                 console.log(e);
             });
+
+            var username=data.email;
+            var userID=data.studentID;
+            var password= data.password;
+            AuthService.register(username,userID,password);
+
    }
 
     render() {
@@ -233,8 +240,8 @@ class AddStudentScreen extends Component {
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                             <option value="Spring">Spring</option>
-                            <option value="Summer">Summer1</option>
-                            <option value="Summer">Summer2</option>
+                            <option value="Summer1">Summer1</option>
+                            <option value="Summer2">Summer2</option>
                         </select>
                         <select id="entryYearSelect" className="dropdownSelectYear" onChange={changeEntryYearOptionHandler}>
                             <option value="2021">2021</option>

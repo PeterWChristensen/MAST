@@ -19,5 +19,9 @@ module.exports = function(app) {
     controller.signup
   );
 
+  app.delete("/deletestu", controller.deleteUser);
+
+
   app.post("/api/auth/signin", controller.signin);
+
 };

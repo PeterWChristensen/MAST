@@ -23,6 +23,16 @@ class AuthService {
   }
 
 
+  deleteAllStudent() 
+  {
+    return axios
+    .delete("/deletestu")
+        .then(response => {
+            return response.data;
+        }).catch(err => console.error(err));
+    }
+
+
     // Use it for addStudent later.
   register(username, userID, password) {
     return axios.post(API_URL + "signup", {
