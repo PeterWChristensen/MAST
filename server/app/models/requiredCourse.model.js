@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         departmentID: {
             type: Sequelize.STRING,
+        },
+        credit: {
+            type: Sequelize.INTEGER,
         }
     }, { 
         tableName: 'RequiredCourse',

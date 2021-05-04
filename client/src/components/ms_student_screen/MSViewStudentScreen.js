@@ -89,7 +89,6 @@ class MSViewStudentScreen extends Component {
                 totalCredits: response.data.totalCredits})
                 return response.data;
           }).catch(err => console.error(err));
-
           var stu_username=username;
  
           axios.post("/getcmt", {

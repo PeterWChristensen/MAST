@@ -21,6 +21,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         subAreaID: {
             type: Sequelize.INTEGER,
+        },
+        credit: {
+            type: Sequelize.INTEGER,
         }
     }, { 
         tableName: 'SubAreaCourse',
