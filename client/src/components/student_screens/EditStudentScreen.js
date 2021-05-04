@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom';
 import ModalDialog from '../modal/ModalWindow'
 import { forwardRef } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -687,8 +688,8 @@ class EditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button>
                         </h2>  
+                        <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                         {createCourseTables()}

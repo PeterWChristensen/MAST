@@ -611,3 +611,30 @@ background-color: #343434;
   height: 20%;
 }
 
+#SuggestCoursePlanButton{
+  text-align: center;
+  position: relative;
+  font-size: 18px;
+  height: 40px;
+  left: 77%;
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}
+
+#courseList{
+  position: relative;
+  font-size: 14px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 10%;
+  list-style-type: none;
+  border-style: solid;
+}
+
+#courseListTitle{
+  position: relative;
+  font-size: 24px;
+  padding: 10px;
+  margin: 18px;
+}

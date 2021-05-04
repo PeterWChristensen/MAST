@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MaterialTable from "material-table";
+import { Link } from 'react-router-dom';
 import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
 import ModalDialog from '../modal/ModalWindow'
@@ -285,8 +286,8 @@ class MSEditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button>
                         </h2>  
+                        <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                             <MaterialTable title="Semester" icons={tableIcons}
