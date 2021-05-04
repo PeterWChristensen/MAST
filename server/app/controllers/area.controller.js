@@ -42,7 +42,7 @@ exports.create = (req, res) => {
   exports.getArea = (req, res) => {
     console.log("getArea at Controller.");  
     console.log(req.body);
-    Area.findAll({
+    Area.findOne({
           where: {
             requirementID: req.body.requirementID
             // departmentID: req.body.departID
