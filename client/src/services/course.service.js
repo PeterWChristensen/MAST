@@ -6,17 +6,10 @@ class CourseService {
         return http.post("/addCourse", data);
     }
 
-    getCourseInfo(courseID) {
-        return axios
-        .post("/getCourseInfo", {
-                courseID
-            })
-            .then(response => {
-              localStorage.setItem("info", JSON.stringify(response.data));
-              this.setState({events: response.data})
-              return response.data;
-            }).catch(err => console.error(err));
-        }
+
+    getAll() {
+        return http.get("/getCourses");
+    }
 }
 
 export default new CourseService();

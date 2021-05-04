@@ -31,6 +31,8 @@ require("./app/routes/prerequisite.routes")(app);
 require("./app/routes/department.routes")(app);
 require("./app/routes/course.routes")(app);
 require("./app/routes/degreeRequirement.routes")(app);
+require("./app/routes/requiredStatus.routes")(app);
+require("./app/routes/electiveStatus.routes")(app);
 
 require("./app/routes/area.routes")(app);
 require("./app/routes/subArea.routes")(app);

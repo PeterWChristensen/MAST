@@ -195,7 +195,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 71.3%;  
+    left: 59.2%;  
     top: 1%;
   }
   
@@ -237,8 +237,13 @@ background-color: #343434;
   .GPDHomepageButton{
     position: relative;
     top: 1%;
-    left: 71.6%;
-    margin-right: 0.3%;
+    left: 59.6%;
+    margin-right: 0.5%;
+  }
+
+  #enrollmentTrendsPageButton{
+    left: 3.2%;
+    margin-right: 0%;
   }
 
   /*ADD STUDENT SCREEN  */
@@ -416,7 +421,10 @@ background-color: #343434;
   margin-bottom: 10px;
   margin-inline-end: 20px;
   margin-top: 10px;
-  top: 2px;
+}
+
+#generateGraphButton{
+  left: 470px;
 }
 
 #selectcoursetext{

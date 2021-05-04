@@ -687,8 +687,9 @@ class EditStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <Link to="/suggestCoursePlan"> <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link>
+                        {/* <Link to="/suggestCoursePlan"> <button id="viewStudent_suggestcourseplanbutton" className="viewStudent_button">Suggest Course Plan</button></Link> */}
                         </h2>  
+                        <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                         {createCourseTables()}

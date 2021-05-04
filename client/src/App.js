@@ -93,7 +93,7 @@ class App extends Component{
 
                 {currentUser ? (
                     <a href="/" className="navBarButtons" onClick={this.logOut}>
-                      LogOut
+                      Logout
                     </a>
                 ) : (
                     <Link to={"/login"} className="navBarButtons">
@@ -121,7 +121,7 @@ class App extends Component{
                 <Route exact path="/editStudent" component={EditStudentScreen} />
                 <Route exact path="/suggestCoursePlan" component={SuggestCoursePlanScreen} />
                 <Route exact path="/student" component={MSViewStudentScreen} /> 
-                <Route exact path="/student/edit" component={MSEditStudentScreen} /> 
+                <Route exact path="/student/edit" component={MSEditStudentScreen} />
               </Switch>
             </div>
        </div>

@@ -13,12 +13,18 @@ class SuggestCoursePlanScreen extends Component {
             timeslots: [],
             maxCoursesPerSemester: null,
             toggleAvoidCourseInput: false,
-            toggleTimeslotInput: false
+            toggleTimeslotInput: false,
+            isOrdered: true
         }
     }
 
     togglePrefferedCourseInput = () => {
         this.setState(({ togglePrefferedCourseInput }) => ({ togglePrefferedCourseInput: !togglePrefferedCourseInput }));
+    }
+
+    toggleOrdered = () => {
+        this.setState(({ isOrdered }) => ({ isOrdered: !isOrdered }));
+        console.log(this.state.isOrdered);
     }
 
     toggleAvoidCourseInput = () => {
@@ -69,12 +75,21 @@ class SuggestCoursePlanScreen extends Component {
         }
     }
 
+    deletePreferredCourses = () => {
+        this.setState({preferredCourses : []});
+    }
+
+    deleteAvoidedCourses = () => {
+        this.setState({avoidedCourses : []});
+    }
+
     render(){
         var preferredCourseInput = <label/>
         if(this.state.togglePrefferedCourseInput==true){
             preferredCourseInput = <label style={{hidden: "true"}}> 
             <input type="text" onChange={(e) => this.changePrefferedCourse(e)}/> 
             <button className="promptButton" onClick={() => this.addPreferredCourse()}>Add Course</button>
+            <button className="promptButton" onClick={() => this.deletePreferredCourses()}>Clear</button>
             <div className="line-break">
                 { this.state.preferredCourses.join('\n') }
             </div>
@@ -86,6 +101,7 @@ class SuggestCoursePlanScreen extends Component {
             avoidCourseInput = <label style={{hidden: "true"}}> 
             <input type="text" onChange={(e) => this.changeAvoidedCourse(e)}/> 
             <button className="promptButton" onClick={() => this.addAvoidedCourse()}>Add Course</button>
+            <button className="promptButton" onClick={() => this.deleteAvoidedCourses()}>Clear</button>
             <div className="line-break">
                 { this.state.avoidedCourses.join('\n') }
             </div>
@@ -113,7 +129,8 @@ class SuggestCoursePlanScreen extends Component {
                     <br></br> Enter Preferences: <br></br><br></br>
                     <text className="line-break">Max Courses Per Semester:</text><br></br>
                     <input type="number" onChange={(e) => this.changeMaxCoursePerSemester(e)}></input><br></br>
-                    <button className="preferenceButton" onClick={() => this.togglePrefferedCourseInput()}>Preffered Courses</button>
+                    <button className="preferenceButton" onClick={() => this.togglePrefferedCourseInput()}>Preffered Courses</button><br></br>
+                    <div><input type="checkbox" onChange={(e) => this.toggleOrdered()}/>Ordered</div>
                     <form>{preferredCourseInput}</form>                    
                     <button className="preferenceButton" onClick={() => this.toggleAvoidCourseInput()}>Avoid Courses</button>
                     <form>{avoidCourseInput}</form>
