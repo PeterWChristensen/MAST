@@ -5,5 +5,7 @@ module.exports = app => {
 
     router.post("/", courseOffering.create);
 
+    router.get("/getCourseOfferings", courseOffering.getAll);
+
     app.use('/', router);
 }

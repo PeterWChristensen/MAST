@@ -33,3 +33,22 @@ exports.create = (req, res) => {
         });
     
 };
+
+
+exports.getAll = (req, res) => {
+    console.log("getAll Course Offerings at Controller.");  
+    console.log(req.body);
+    CourseOffering.findAll({
+          where: {
+            courseID: req.body.courseID
+            }
+          })
+            .then(data => {                    
+              res.status(200).send(data);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding Course Offerings"
+              });
+          });
+      };

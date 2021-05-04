@@ -218,7 +218,7 @@ class MSViewStudentScreen extends Component {
                         
                         <h2 id="viewStudentFormHeader">Course Plan
                         </h2>  
-                        <a><Link to={"/suggestcourseplan"}> <button id="SuggestCoursePlanButton"> Suggest Course Plan </button></Link></a>
+                        <a><Link to={{pathname: '/suggestcourseplan',state: {studentID: this.state.studentID}}}> <button id="viewStudent_suggestcourseplanbutton"> Suggest Course Plan </button></Link></a>
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>
                         {createCourseTables()}

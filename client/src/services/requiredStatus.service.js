@@ -1,7 +1,7 @@
 import http from "../http-commons";
 
 class RequiredStatusService {
-    create(data) {
+    getAll(data) {
         return http.get("/getRequiredStatus", data);
     }
 }

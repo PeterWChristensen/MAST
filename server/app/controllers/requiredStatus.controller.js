@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 exports.getRequiredStatus = (req, res) => {
     console.log("getRequiredStatus at Controller.");  
     console.log(req.body);
-    RequiredSatus.findAll({
+    RequiredStatus.findAll({
           where: {
             studentID: req.body.studentID,
             status: "unsatisfied"

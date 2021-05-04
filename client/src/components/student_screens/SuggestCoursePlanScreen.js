@@ -1,20 +1,28 @@
 import React, {Component} from 'react';
+import RequiredStatusService from "../../services/requiredStatus.service";
+import ElectiveStatusService from "../../services/electiveStatus.service";
+import CourseOfferingsService from "../../services/courseOfferings.service";
 
 class SuggestCoursePlanScreen extends Component {
     constructor(props){
         super(props)
         this.state = { 
+            studentID: null,
             togglePrefferedCourseInput: false, 
             newPrefferedCourse: null,
             newAvoidedCourse: null,
-            newTimeslot: null,
+            timeslotStart: "",
+            timeslotEnd: "",
             preferredCourses: [],
             avoidedCourses: [],
-            timeslots: [],
             maxCoursesPerSemester: null,
             toggleAvoidCourseInput: false,
             toggleTimeslotInput: false,
-            isOrdered: true
+            isOrdered: false,
+            smartMode: false,
+            unsatisfiedRequiredCourses: [],
+            coursePlan: [],
+            courseOfferings: []
         }
     }
 
@@ -22,9 +30,12 @@ class SuggestCoursePlanScreen extends Component {
         this.setState(({ togglePrefferedCourseInput }) => ({ togglePrefferedCourseInput: !togglePrefferedCourseInput }));
     }
 
-    toggleOrdered = () => {
-        this.setState(({ isOrdered }) => ({ isOrdered: !isOrdered }));
-        console.log(this.state.isOrdered);
+    toggleOrdered = (e) => {
+        this.setState(({ isOrdered: e.target.checked }));
+    }
+
+    toggleSmartMode = (e) => {
+        this.setState(({ smartMode: e.target.checked }));
     }
 
     toggleAvoidCourseInput = () => {
@@ -47,8 +58,12 @@ class SuggestCoursePlanScreen extends Component {
         this.setState({newAvoidedCourse: e.target.value})
     }
 
-    changeTimeslot = (e) => {
-        this.setState({newTimeslot: e.target.value})
+    changeTimeslotStart = (e) => {
+        this.setState({timeslotStart: e.target.value})
+    }
+    
+    changeTimeslotEnd = (e) => {
+        this.setState({timeslotEnd: e.target.value})
     }
 
     addPreferredCourse = () => {
@@ -67,14 +82,6 @@ class SuggestCoursePlanScreen extends Component {
         }
     }
 
-    addTimeslot = () => {
-        var timeslotArr = this.state.timeslots
-        if (timeslotArr.includes(this.state.newTimeslot)==false){
-            timeslotArr.push(this.state.newTimeslot)
-            this.setState({timeslots: timeslotArr})
-        }
-    }
-
     deletePreferredCourses = () => {
         this.setState({preferredCourses : []});
     }
@@ -82,6 +89,40 @@ class SuggestCoursePlanScreen extends Component {
     deleteAvoidedCourses = () => {
         this.setState({avoidedCourses : []});
     }
+
+    generateCoursePlan = () => {
+        console.log(this.state.studentID);
+        if (!this.state.smartMode) {
+            RequiredStatusService.getAll(this.state.studentID)
+                .then(response => {
+                    console.log(response.data);
+                    this.setState({unsatisfiedRequiredCourses: response.data});
+                })
+                .catch(e => {
+                    console.log(e);
+            });
+
+            this.state.unsatisfiedRequiredCourses.forEach((value) => {
+                CourseOfferingsService.getAll(value.courseID)
+                    .then(response => {
+                        console.log(response.data);
+                        this.setState({courseOfferings: response.data});
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+                
+                let course = this.state.courseOfferings.find((value) => {
+                    // Apply constraints here    
+                });  
+
+                this.state.coursePlan.push(course);
+            });
+            console.log(this.state.coursePlan);
+        }
+        
+    }
+
 
     render(){
         var preferredCourseInput = <label/>
@@ -108,18 +149,6 @@ class SuggestCoursePlanScreen extends Component {
             </label>; 
         }
 
-        var timeslotInput = <label/>
-        if(this.state.toggleTimeslotInput==true){
-            timeslotInput = <label style={{hidden: "true"}}> 
-            <input type="text" onChange={(e) => this.changeTimeslot(e)}/> 
-            <button className="promptButton" onClick={() => this.addTimeslot()}>Add Timeslot</button>
-            <div className="line-break">
-                { this.state.timeslots.join('\n') }
-            </div>
-            </label>; 
-        }
-
-
         return (
         <div id="enrollmentTrendsBackground">
             <div id="enrollmentTrendsForm">
@@ -130,13 +159,15 @@ class SuggestCoursePlanScreen extends Component {
                     <text className="line-break">Max Courses Per Semester:</text><br></br>
                     <input type="number" onChange={(e) => this.changeMaxCoursePerSemester(e)}></input><br></br>
                     <button className="preferenceButton" onClick={() => this.togglePrefferedCourseInput()}>Preffered Courses</button><br></br>
-                    <div><input type="checkbox" onChange={(e) => this.toggleOrdered()}/>Ordered</div>
+                    <div><input type="checkbox" onClick={(e) => this.toggleOrdered(e)}/>Ordered</div>
                     <form>{preferredCourseInput}</form>                    
                     <button className="preferenceButton" onClick={() => this.toggleAvoidCourseInput()}>Avoid Courses</button>
                     <form>{avoidCourseInput}</form>
                     <button className="preferenceButton" onClick={() => this.toggleTimeslotInput()}>Add Scheduling Constraints</button>
-                    <form>{timeslotInput}</form>
-                    <button className="enrollmentTrendsButton">Generate Course Plan</button>
+                    <div><input type="text" placeholder="ex 9:30AM" onChange={(e) => this.changeTimeslotStart(e)}/><input type="text" placeholder="ex 6:00PM" onChange={(e) => this.changeTimeslotEnd(e)}/></div>
+                    <button className="promptButton" onClick={() => this.addAvoidedCourse()}>Add Time Constraint</button>
+                    <div><input type="checkbox" onClick={(e) => this.toggleSmartMode(e)}/>Smart Mode</div>
+                    <button className="enrollmentTrendsButton" onClick={() => this.generateCoursePlan()}>Generate Course Plan</button>
                 </div>
             </div>
         </div>);

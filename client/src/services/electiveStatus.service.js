@@ -1,7 +1,7 @@
 import http from "../http-commons";
 
 class ElectiveStatusService {
-    create(data) {
+    getAll(data) {
         return http.get("/getElectiveStatus", data);
     }
 }
