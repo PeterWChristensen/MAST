@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import MaterialTable from "material-table";
 import axios from "axios";
 
 class ViewStudentScreen extends Component {
@@ -584,7 +583,7 @@ class ViewStudentScreen extends Component {
                         </div>                   
                         <br></br>
                         <Link to={{pathname: '/editStudent', state: {email: this.state.email}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
-                        <Link to="/"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
+                        <Link to="/gpd"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
                         </div>
                 </div>
             </div>
