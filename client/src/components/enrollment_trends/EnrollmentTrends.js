@@ -17,6 +17,7 @@ class EnrollmentTrends extends Component {
             numSelectedCourses: 0,
             coursesForGraph: [],
             courses1: [],
+            coursePlans1:[],
             semestersForGraph: ["Fall 2021", "Winter 2022", "Spring 2022"],            
             courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BMI500"}, {courseID: "BMI502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "ESE532"}, {courseID: "ESE533"}],
             coursePlans: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
@@ -50,10 +51,19 @@ class EnrollmentTrends extends Component {
         axios.get("/getAllCourse")
             .then(response => {
                 this.setState({courses1: response.data});
-                console.log("===================CourseService.getAllCourse()");
-                console.log(response.data);
+                // console.log("===================CourseService.getAllCourse()");
+                // console.log(response.data);
                 return response.data;
             }).catch(err => console.error(err));
+
+        axios.get("/getAllCoursePlan")
+        .then(response => {
+            this.setState({coursePlans1: response.data});
+            console.log("===================CourseService.getAllCoursePlan()");
+            console.log(response.data);
+            return response.data;
+        }).catch(err => console.error(err));
+
         
     }
 
