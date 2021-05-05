@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
         status: {
-            type: Sequelize.STRING,
+            type: Sequelize.ENUM('Satisfied','Pending','Unsatisfied'),
         }
     }, { 
         tableName: 'ElectiveStatus',

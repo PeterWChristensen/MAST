@@ -593,7 +593,7 @@ class ViewStudentScreen extends Component {
                         <br></br>
                         
                         <h2 id="viewStudentFormHeader">Course Plan
-                        <a><Link to={{pathname: '/suggestcourseplan',state: {studentID: this.state.studentID}}}> <button id="viewStudent_suggestcourseplanbutton"> Suggest Course Plan </button></Link></a>
+                        <div><Link to={{pathname: '/suggestcourseplan',state: {studentID: this.state.studentID}}}> <button id="viewStudent_suggestcourseplanbutton"> Suggest Course Plan </button></Link></div>
                         </h2>  
                         <br></br>                      
                         <div style={{position: "relative", width: "50%", left: "8%"}}>

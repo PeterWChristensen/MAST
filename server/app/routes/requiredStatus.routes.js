@@ -3,7 +3,7 @@ module.exports = app => {
   
     var router = require("express").Router();
 
-    router.get("/getRequiredStatus", requiredStatus.getRequiredStatus);
+    router.post("/getRequiredStatus", requiredStatus.getRequiredStatus);
 
 
     app.use('/', router);

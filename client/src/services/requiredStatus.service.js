@@ -1,8 +1,9 @@
 import http from "../http-commons";
+import axios from "axios";
 
 class RequiredStatusService {
     getAll(data) {
-        return http.get("/getRequiredStatus", data);
+        return axios.post("/getRequiredStatus", {data});
     }
 }
 
