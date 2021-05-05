@@ -97,6 +97,8 @@ exports.update = (req, res) => {
       });
   };
 
+
+  
    //Get all course plans
    exports.getAll = (req, res) => {
     CoursePlan.findAll()
