@@ -16,7 +16,7 @@ class Graph extends Component {
       drawChart() {
         const data = this.props.data;
         const semesters = this.props.semesters;
-        var margin = {top: 10, right: 100, bottom: 30, left: 20},
+        var margin = {top: 10, right: 100, bottom: 30, left: 30},
         width = 700 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -70,16 +70,27 @@ class Graph extends Component {
                 (d.values)
             })
 
+        svg
+        .append("g")
+        .selectAll("dot")
+        .data(data)
+        .enter()
+        .append("circle")
+            .attr("cx", function(d) { return x(d.semester) } )
+            .attr("cy", function(d) { return y(d.frequency) } )
+            .attr("r", 3)
+            .attr("fill", "grey")
+
         var legendsvg = svgout.append("g")
         
-                                // Add one dot in the legend for each name.
-        var size = 20
+        // Add one dot in the legend for each name.
+        var size = 10
         legendsvg.selectAll("mydots")
         .data(sumstat)
         .enter()
         .append("rect")
-            .attr("x", 600)
-            .attr("y", function(d,i){ return 0 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("x", 610)
+            .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("width", size)
             .attr("height", size)
             .style("fill", function(d){ return color(d.key)})
@@ -89,8 +100,8 @@ class Graph extends Component {
         .data(sumstat)
         .enter()
         .append("text")
-            .attr("x", 600 + size*1.1)
-            .attr("y", function(d,i){ return 0 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("x", 610 + size*1.1)
+            .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", function(d){ return color(d.key)})
             .text(function(d){ return d.key})
             .attr("text-anchor", "left")

@@ -16,15 +16,16 @@ class EnrollmentTrends extends Component {
             endYear: 2025,
             numSelectedCourses: 0,
             coursesForGraph: [],
-            courses1: [],
-            coursePlans1:[],
+            courses: [],
+            coursePlans:[],
             semestersForGraph: ["Fall 2021", "Winter 2022", "Spring 2022"],            
-            courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BMI500"}, {courseID: "BMI502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "ESE532"}, {courseID: "ESE533"}],
-            coursePlans: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
+            coursesDemo: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BMI500"}, {courseID: "BMI502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "ESE532"}, {courseID: "ESE533"}],
+            coursePlansDemo: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
             {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE508Spring20221", courseName: "CSE 508", semester: "Spring 2022", grade: ""},
             {courseOfferingID: "CSE510Spring20221", courseName: "CSE 510", semester: "Spring 2022", grade: ""}, {courseOfferingID: "CSE534Winter20221", courseName: "CSE 534", semester: "Winter 2022", grade: ""}, 
             {courseOfferingID: "CSE508Winter20221", courseName: "CSE 534", semester: "Winter 2022", grade: ""}], //array of courseplans, having courseName and semester
-            dataForGraph: [{course: "CSE 508", semester: "Fall 2021", frequency: 2}, {course: "CSE 508", semester: "Winter 2022", frequency: 3}, {course: "CSE 508", semester: "Spring 2022", frequency: 8}, 
+            dataForGraph: [],
+            dataForGraphDemo: [{course: "CSE 508", semester: "Fall 2021", frequency: 2}, {course: "CSE 508", semester: "Winter 2022", frequency: 3}, {course: "CSE 508", semester: "Spring 2022", frequency: 8}, 
             {course: "CSE 506", semester: "Fall 2021", frequency: 7}, {course: "CSE 506", semester: "Winter 2022", frequency: 6}, {course: "CSE 506", semester: "Spring 2022", frequency: 4}]
         }
     }
@@ -50,7 +51,7 @@ class EnrollmentTrends extends Component {
 
         axios.get("/getAllCourse")
             .then(response => {
-                this.setState({courses1: response.data});
+                this.setState({courses: response.data});
                 // console.log("===================CourseService.getAllCourse()");
                 // console.log(response.data);
                 return response.data;
@@ -58,7 +59,7 @@ class EnrollmentTrends extends Component {
 
         axios.get("/getAllCoursePlan")
         .then(response => {
-            this.setState({coursePlans1: response.data});
+            this.setState({coursePlans: response.data});
             console.log("===================CourseService.getAllCoursePlan()");
             console.log(response.data);
             return response.data;
