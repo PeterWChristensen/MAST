@@ -7,7 +7,7 @@ class SuggestCoursePlanScreen extends Component {
     constructor(props){
         super(props)
         this.state = { 
-            studentID: null,
+            studentID: this.props.location.state.studentID,
             togglePrefferedCourseInput: false, 
             newPrefferedCourse: null,
             newAvoidedCourse: null,
@@ -92,33 +92,37 @@ class SuggestCoursePlanScreen extends Component {
 
     generateCoursePlan = () => {
         console.log(this.state.studentID);
+        let data = {studentID: this.state.studentID};
         if (!this.state.smartMode) {
-            RequiredStatusService.getAll(this.state.studentID)
+            RequiredStatusService.getAll(data)
                 .then(response => {
                     console.log(response.data);
                     this.setState({unsatisfiedRequiredCourses: response.data});
                 })
                 .catch(e => {
                     console.log(e);
-            });
-
-            this.state.unsatisfiedRequiredCourses.forEach((value) => {
-                CourseOfferingsService.getAll(value.courseID)
-                    .then(response => {
-                        console.log(response.data);
-                        this.setState({courseOfferings: response.data});
-                    })
-                    .catch(e => {
-                        console.log(e);
+            })
+            .then(
+                this.state.unsatisfiedRequiredCourses.forEach((value) => {
+                    data = {courseID: value.courseID};
+                    CourseOfferingsService.getAll(data)
+                        .then(response => {
+                            console.log(response.data);
+                            this.setState({courseOfferings: response.data});
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        })
+                    .then(() => {
+                        console.log(this.state.courseOfferings);
+                        this.state.courseOfferings.forEach((value) => {
+                            this.state.coursePlan.push(value);
+                        })
+                        console.log(this.state.coursePlan)
                     });
-                
-                let course = this.state.courseOfferings.find((value) => {
-                    // Apply constraints here    
-                });  
+                }) 
+            );
 
-                this.state.coursePlan.push(course);
-            });
-            console.log(this.state.coursePlan);
         }
         
     }
@@ -148,7 +152,7 @@ class SuggestCoursePlanScreen extends Component {
             </div>
             </label>; 
         }
-
+       
         return (
         <div id="enrollmentTrendsBackground">
             <div id="enrollmentTrendsForm">
@@ -168,6 +172,12 @@ class SuggestCoursePlanScreen extends Component {
                     <button className="promptButton" onClick={() => this.addAvoidedCourse()}>Add Time Constraint</button>
                     <div><input type="checkbox" onClick={(e) => this.toggleSmartMode(e)}/>Smart Mode</div>
                     <button className="enrollmentTrendsButton" onClick={() => this.generateCoursePlan()}>Generate Course Plan</button>
+                    <table style={{border: "solid"}}>
+                        <tr>
+                            <th scope="col"> CourseID </th><th scope="col"> Section </th><th scope="col"> Semester </th><th scope="col"> Year </th><th scope="col"> Day</th>
+                        </tr>
+                        {this.state.coursePlan.map((course, index) => <tr key={index}><td>{course.courseID}</td><td>{course.section}</td><td>{course.semester}</td><td>{course.year}</td><td>{course.day}</td></tr>)}
+                    </table>
                 </div>
             </div>
         </div>);

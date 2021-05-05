@@ -40,7 +40,7 @@ exports.getAll = (req, res) => {
     console.log(req.body);
     CourseOffering.findAll({
           where: {
-            courseID: req.body.courseID
+            courseID: req.body.data.courseID
             }
           })
             .then(data => {                    
