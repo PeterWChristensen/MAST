@@ -47,7 +47,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   db.prerequisite = require("./prerequisite.model.js")(sequelize, Sequelize);
 
   db.user = require("../models/user.model.js")(sequelize, Sequelize);
+
+  db.requiredStatus = require("../models/requiredStatus.model.js")(sequelize, Sequelize);
   
+  db.electiveStatus = require("../models/electiveStatus.model.js")(sequelize, Sequelize);
+
   db.ROLES = ["gpd", "student"];
 
 
