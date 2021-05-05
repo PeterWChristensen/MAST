@@ -1,5 +1,6 @@
+const coursePlan = require("../controllers/coursePlan.controller.js");
+
 module.exports = app => {
-    const coursePlan = require("../controllers/coursePlan.controller.js");
   
     var router = require("express").Router();
   
@@ -7,6 +8,8 @@ module.exports = app => {
     router.post("/addCoursePlan", coursePlan.create);
 
     router.get("/getAllCoursePlan", coursePlan.getAll);
+
+    router.post("/getStuCoursePlan", coursePlan.getStuCoursePlan);
 
 
   

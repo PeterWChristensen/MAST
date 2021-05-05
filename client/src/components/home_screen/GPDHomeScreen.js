@@ -57,7 +57,7 @@ class GPDHomeScreen extends Component {
                 {
                     title: "ID",
                     field: "studentID",
-                    render: rowData => <Link to={{pathname: '/viewStudent', state: {email: rowData.email}}}>{rowData.studentID}</Link>
+                    render: rowData => <Link to={{pathname: '/viewStudent', state: {email: rowData.email, studentID: rowData.studentID}}}>{rowData.studentID}</Link>
                 },
                 {
                     title: "First Name",

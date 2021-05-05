@@ -35,7 +35,8 @@ class EditStudentScreen extends Component {
             requirementVersionYear: "",
             gpdUserName: JSON.parse(localStorage.getItem('user')).username,
             requirementVersionSemester: "",
-            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
+            // coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
+            coursePlans:[],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -64,6 +65,8 @@ class EditStudentScreen extends Component {
 
     componentDidMount(){
         var username=this.props.location.state.email;
+        var studentID=this.props.location.state.studentID;
+        
         axios.post("/getinfo", {
             username
           })
@@ -116,6 +119,26 @@ class EditStudentScreen extends Component {
                 return response.data;
           }).catch(err => console.error(err));
 
+          
+          axios.post("/getStuCoursePlan", {
+            studentID
+          })
+          .then(response => {
+                var tempListCP=[];
+                for(var i=0;response.data[i];i++){
+                    tempListCP.push({
+                        courseOfferingID: response.data[i].courseOfferingID,
+                        courseName: response.data[i].courseName,
+                        semester: response.data[i].semester,
+                        grade: response.data[i].grade
+                    })
+                }
+                console.log("tempListCP======================================");
+                console.log(tempListCP);
+                this.setState({coursePlans:tempListCP});
+                
+                return response.data;
+          }).catch(err => console.error(err));
 
           
     }
@@ -240,6 +263,26 @@ class EditStudentScreen extends Component {
         }).catch(err => console.error(err));
 
 
+        var studentID= data.studentID;
+        axios.post("/getStuCoursePlan", {
+            studentID
+          })
+          .then(response => {
+                var tempListCP=[];
+                for(var i=0;response.data[i];i++){
+                    tempListCP.push({
+                        courseOfferingID: response.data[i].courseOfferingID,
+                        courseName: response.data[i].courseName,
+                        semester: response.data[i].semester,
+                        grade: response.data[i].grade
+                    })
+                }
+                console.log("tempListCP======================================");
+                console.log(tempListCP);
+                this.setState({coursePlans:tempListCP});
+                
+                return response.data;
+          }).catch(err => console.error(err));
 
    
     }

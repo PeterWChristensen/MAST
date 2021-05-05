@@ -98,6 +98,24 @@ exports.update = (req, res) => {
   };
 
 
+  exports.getStuCoursePlan = (req, res) => {
+    console.log("getStuCoursePlan at Controller.");  
+    console.log(req.body);
+    CoursePlan.findAll({
+          where: {
+            studentID: req.body.studentID
+            }
+          })
+            .then(data => {                    
+              res.status(200).send(data);  
+          })
+          .catch(err => {
+              res.status(500).send({
+                  message: err.message || "Error has occured while finding Student's Course Plan"
+              });
+          });
+      };
+  
   
    //Get all course plans
    exports.getAll = (req, res) => {

@@ -36,7 +36,7 @@ class ViewStudentScreen extends Component {
             subAreaCourse:[],
             
             
-            coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
+            coursePlans: [],
             coursePlanColumns: [
                 {
                     title: "Semester",
@@ -67,6 +67,7 @@ class ViewStudentScreen extends Component {
         console.log("componentDidMount at Student_screens/ViewStudentScreen.js");
 
         var username=this.props.location.state.email;
+        var studentID=this.props.location.state.studentID;
         
 
         axios.post("/getinfo", {
@@ -256,6 +257,31 @@ class ViewStudentScreen extends Component {
                 
                 return response.data;
           }).catch(err => console.error(err));
+
+            // coursePlans: [{courseOfferingID: "CSE504Fall20202", courseName: "CSE 504", semester: "Fall 2020", grade: "A"}, {courseOfferingID: "CSE564Spring20211", courseName: "CSE 564", semester: "Spring 2021", grade: ""}, {courseOfferingID: "CSE537Spring20211", courseName: "CSE 537", semester: "Spring 2021", grade: ""}],
+
+          axios.post("/getStuCoursePlan", {
+            studentID
+          })
+          .then(response => {
+                var tempListCP=[];
+                for(var i=0;response.data[i];i++){
+                    tempListCP.push({
+                        courseOfferingID: response.data[i].courseOfferingID,
+                        courseName: response.data[i].courseName,
+                        semester: response.data[i].semester,
+                        grade: response.data[i].grade
+                    })
+                }
+                console.log("tempListCP======================================");
+                console.log(tempListCP);
+                this.setState({coursePlans:tempListCP});
+                
+                return response.data;
+          }).catch(err => console.error(err));
+
+          //studentID
+
 
 
         //   var departmentID=this.state.departmentID;
@@ -582,7 +608,7 @@ class ViewStudentScreen extends Component {
                         {createCommentTable()}
                         </div>                   
                         <br></br>
-                        <Link to={{pathname: '/editStudent', state: {email: this.state.email}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
+                        <Link to={{pathname: '/editStudent', state: {email: this.state.email, studentID: this.state.studentID}}}><button id="viewStudentForm_edit_button" className="viewStudent_button">Edit</button></Link>
                         <Link to="/gpd"><button id="viewStudentForm_return_button" className="viewStudent_button">Return</button></Link>
                         </div>
                 </div>
