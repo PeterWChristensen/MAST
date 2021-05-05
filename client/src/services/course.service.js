@@ -10,6 +10,9 @@ class CourseService {
     getAll() {
         return http.get("/getCourses");
     }
+
+
+
 }
 
 export default new CourseService();

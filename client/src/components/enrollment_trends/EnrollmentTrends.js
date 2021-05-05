@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Graph from './Graph.js';
 import CourseService from "../../services/course.service";
 import CoursePlanService from "../../services/coursePlan.service";
+import axios from "axios";
 
 class EnrollmentTrends extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ class EnrollmentTrends extends Component {
             endYear: 2025,
             numSelectedCourses: 0,
             coursesForGraph: [],
+            courses1: [],
             semestersForGraph: ["Fall 2021", "Winter 2022", "Spring 2022"],            
             courses: [{courseID: "AMS503"}, {courseID: "AMS534"}, {courseID: "AMS555"}, {courseID: "BMI500"}, {courseID: "BMI502"}, {courseID: "CSE506"},{courseID:  "CSE508"}, {courseID: "CSE510"}, {courseID: "CSE534"}, {courseID: "ESE532"}, {courseID: "ESE533"}],
             coursePlans: [{courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, {courseOfferingID: "CSE508Fall20212", courseName: "CSE 508", semester: "Fall 2021", grade: "A"}, 
@@ -44,6 +46,15 @@ class EnrollmentTrends extends Component {
         .catch(e => {
             console.log(e);
         });
+
+        axios.get("/getAllCourse")
+            .then(response => {
+                this.setState({courses1: response.data});
+                console.log("===================CourseService.getAllCourse()");
+                console.log(response.data);
+                return response.data;
+            }).catch(err => console.error(err));
+        
     }
 
     
